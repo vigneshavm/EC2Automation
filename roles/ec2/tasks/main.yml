@@ -1,0 +1,132 @@
+- name:Add MongoDB depenencey
+  sudo: yes 
+  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+
+- name: MongoDB | Add  repository 
+  sudo: yes 
+  shell: 
+    echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+
+- name: Update system
+  sudo: yes 
+  command: apt-get update 
+
+- name: MongoDB Installation 
+  sudo: yes 
+  command: apt-get install -y mongodb-org
+
+
+- name: Node | Add  repository 
+  sudo: yes 
+  shell: 
+    echo "curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -"
+
+- name: Update system
+  sudo: yes 
+  command: apt-get update 
+
+- name: Node depenencey nodejs-legacy
+  sudo: yes 
+  command: apt-get --assume-yes install nodejs-legacy
+
+- name: Node Installation
+  sudo: yes 
+  command: apt-get --assume-yes install nodejs
+
+- name: NPM Installation
+  sudo: yes 
+  command: apt-get --assume-yes install npm
+
+- name: Build-essential Installation
+  sudo: yes 
+  command: apt-get --assume-yes install build-essential
+
+- name: GIT Installation
+  apt: name=git state=present
+
+- name: forever Installation
+  sudo: yes 
+  shell: 
+    echo "npm install forever --global"
+
+- name: Nginx Installation
+  sudo: yes 
+  command: apt-get --assume-yes install nginx
+
+- name: UPDATE
+  apt: update_cache=yes
+
+- name: DEPENDENCIES
+  apt: name={{ item }}
+  with_items:
+        - libpcre3 
+        - libpcre3-dev
+
+- name: Install The Nginx
+  apt: name=nginx state=present
+
+- name: Copy nginx configuration in place.
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
+
+- name: Ensure nginx is started and enabled to start at boot.
+  service: name=nginx state=started enabled=yes
+
+- name: Update cache
+  apt: name=curl
+
+- name: copy private file from template
+  template: src=ssh-key
+            dest=/home/ubuntu/.ssh/id_rsa
+            owner=root
+            group=root
+            mode=0600
+
+- name: Creates directory
+  file: path=/home/ubuntu/Project state=directory
+  file: path=/home/ubuntu/Project/Student-WebApp state=directory
+  file: path=/home/ubuntu/Project/Teacher-WebApp state=directory  
+  file: path=/home/ubuntu/Project/Principal-WebApp state=directory
+  file: path=/home/ubuntu/Project/Admin-WebApp state=directory
+  file: path=/home/ubuntu/Project/Board-WebApp state=directory
+
+- name: Clone Student-WebApp
+  git: repo=git@github.com:neolearning/Student-WebApp.git
+       dest=/home/ubuntu/Project/Student-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+- name: Clone Teacher-WebApp
+  git: repo=git@github.com:neolearning/Teacher-WebApp.git
+       dest=/home/ubuntu/Project/Teacher-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+
+- name: Clone Principal-WebApp
+  git: repo=git@github.com:neolearning/Principal-WebApp.git
+       dest=/home/ubuntu/Project/Principal-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+- name: Clone Admin-WebApp
+  git: repo=git@github.com:neolearning/Admin-WebApp.git
+       dest=/home/ubuntu/Project/Admin-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+- name: Clone Board-WebApp
+  git: repo=git@github.com:neolearning/Board-WebApp.git
+       dest=/home/ubuntu/Project/Board-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+
+
+
+
