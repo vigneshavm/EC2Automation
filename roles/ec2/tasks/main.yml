@@ -21,31 +21,37 @@
 - name: "mongo restore data"
   command: "mongorestore --port 27017 --db neo /home/ubuntu/EC2Automation/neo"
 
-
-- name: Node | Add  repository 
-  sudo: yes 
-  shell: 
-    echo "curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -"
-
 - name: Update system
-  sudo: yes 
-  command: apt-get update 
-
-- name: Node depenencey nodejs-legacy
-  sudo: yes 
-  command: apt-get --assume-yes install nodejs-legacy
+  sudo: yes
+  command: apt-get update
 
 - name: Node Installation
-  sudo: yes 
+  sudo: yes
   command: apt-get --assume-yes install nodejs
 
 - name: NPM Installation
-  sudo: yes 
+  sudo: yes
   command: apt-get --assume-yes install npm
+
+
+- name: Node | Add  repository
+  sudo: yes
+  shell:
+    echo "curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -"
+
+- name: Node Installation
+  sudo: yes
+  command: apt-get --assume-yes install nodejs
+
 
 - name: Build-essential Installation
   sudo: yes 
   command: apt-get --assume-yes install build-essential
+
+ 
+- name: Update system
+  sudo: yes 
+  command: apt-get update
 
 - name: GIT Installation
   apt: name=git state=present
@@ -58,8 +64,8 @@
   sudo: yes 
   command: apt-get --assume-yes install nginx
 
-
 - name: DEPENDENCIES
+  sudo: yes
   apt: name={{ item }}
   with_items:
         - libpcre3 
@@ -76,7 +82,12 @@
             dest=/home/ubuntu/.ssh/id_rsa
             mode=0600
 
-- name: copy private file from template
+- name: copy ssh file from template
+  template: src=ssh-key
+            dest=/home/ubuntu/.ssh/id_rsa.pub
+            mode=0600
+
+- name: copy authorized_keys file from template
   template: src=ssh-key
             dest=/home/ubuntu/.ssh/id_rsa.pub
             mode=0600
@@ -156,18 +167,6 @@
  
 - name: "Start Board-WebApp"
   command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
-
-- name: Copy nginx configuration in place.
-  template:
-    src: nginx.conf.j2
-    dest: /etc/nginx/nginx.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart nginx
-
-- name: Ensure nginx is started and enabled to start at boot.
-  service: name=nginx state=started enabled=yes
 
 
 
