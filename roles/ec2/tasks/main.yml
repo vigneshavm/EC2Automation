@@ -123,23 +123,23 @@
 
 
 - name: "Node: Student-WebApp app dependencies | package.json via npm."
-  npm: path="/home/ubuntu/project/Student-WebApp"
+  npm: path="/home/ubuntu/Project/Student-WebApp"
   ignore_errors: yes
 
 - name: "Node: Teacher-WebApp app dependencies | package.json via npm."
-  npm: path="/home/ubuntu/project/Teacher-WebApp"
+  npm: path="/home/ubuntu/Project/Teacher-WebApp"
   ignore_errors: yes
 
 - name: "Node: Principal-WebApp app dependencies | package.json via npm."
-  npm: path="/home/ubuntu/project/Principal-WebApp"
+  npm: path="/home/ubuntu/Project/Principal-WebApp"
   ignore_errors: yes
 
 - name: "Node: Admin-WebApp app dependencies | package.json via npm."
-  npm: path="/home/ubuntu/project/Admin-WebApp"
+  npm: path="/home/ubuntu/Project/Admin-WebApp"
   ignore_errors: yes
 
 - name: "Node: Board-WebApp app dependencies | package.json via npm."
-  npm: path="/home/ubuntu/project/Board-WebApp"
+  npm: path="/home/ubuntu/Project/Board-WebApp"
   ignore_errors: yes
 
 
