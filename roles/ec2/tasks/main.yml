@@ -50,10 +50,9 @@
 - name: GIT Installation
   apt: name=git state=present
 
-- name: forever Installation
-  sudo: yes 
-  shell: 
-    echo "npm install forever --global"
+- name: "Install forever (to run Node.js app)."
+  npm: name=forever global=yes state=present
+  sudo: yes
 
 - name: Nginx Installation
   sudo: yes 
