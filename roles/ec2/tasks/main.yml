@@ -59,8 +59,6 @@
   sudo: yes 
   command: apt-get --assume-yes install nginx
 
-- name: UPDATE
-  apt: update_cache=yes
 
 - name: DEPENDENCIES
   apt: name={{ item }}
@@ -75,10 +73,13 @@
   apt: name=curl
 
 - name: copy private file from template
-  template: src=ssh-key
+  template: src=private-key
             dest=/home/ubuntu/.ssh/id_rsa
-            owner=root
-            group=root
+            mode=0600
+
+- name: copy private file from template
+  template: src=ssh-key
+            dest=/home/ubuntu/.ssh/id_rsa.pub
             mode=0600
 
 - name: Creates directory
