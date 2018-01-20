@@ -1,3 +1,6 @@
+- name: Update cache
+  apt: name=curl
+
 - name: Add MongoDB depenencey
   sudo: yes 
   command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
@@ -25,19 +28,10 @@
   sudo: yes
   command: apt-get update
 
-- name: Node Installation
-  sudo: yes
-  command: apt-get --assume-yes install nodejs
-
-- name: NPM Installation
-  sudo: yes
-  command: apt-get --assume-yes install npm
-
-
 - name: Node | Add  repository
   sudo: yes
   shell:
-    echo "curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -"
+    echo "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
 
 - name: Node Installation
   sudo: yes
@@ -47,7 +41,6 @@
 - name: Build-essential Installation
   sudo: yes 
   command: apt-get --assume-yes install build-essential
-
  
 - name: Update system
   sudo: yes 
@@ -74,8 +67,6 @@
 - name: Install The Nginx
   apt: name=nginx state=present
 
-- name: Update cache
-  apt: name=curl
 
 - name: copy private file from template
   template: src=private-key
