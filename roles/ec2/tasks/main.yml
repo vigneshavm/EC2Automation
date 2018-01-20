@@ -16,10 +16,10 @@
   command: apt-get install -y mongodb-org
 
 - name: "mongo Extract "
-  command: "tar -xzvf /home/ubuntu/roles/ec2/DBbackup/neo.tar.gz"
+  command: "tar -xzvf /home/ubuntu/EC2Automation/roles/ec2/DBbackup/neo.tar.gz"
 
 - name: "mongo restore data"
-  command: "mongorestore --port 27017 --db neo /home/ubuntu/neo"
+  command: "mongorestore --port 27017 --db neo /home/ubuntu/EC2Automation/neo"
 
 
 - name: Node | Add  repository 
@@ -70,18 +70,6 @@
 
 - name: Install The Nginx
   apt: name=nginx state=present
-
-- name: Copy nginx configuration in place.
-  template:
-    src: nginx.conf.j2
-    dest: /etc/nginx/nginx.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart nginx
-
-- name: Ensure nginx is started and enabled to start at boot.
-  service: name=nginx state=started enabled=yes
 
 - name: Update cache
   apt: name=curl
@@ -168,9 +156,18 @@
  
 - name: "Start Board-WebApp"
   command: "forever start /home/ubuntu/project/Board-WebApp/server.js"
- 
 
+- name: Copy nginx configuration in place.
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
 
+- name: Ensure nginx is started and enabled to start at boot.
+  service: name=nginx state=started enabled=yes
 
 
 
