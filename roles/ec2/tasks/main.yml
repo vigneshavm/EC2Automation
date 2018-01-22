@@ -55,15 +55,17 @@
   sudo: yes
   command: apt-get --assume-yes install build-essential
 
-- name: update node and npm version
+- name: nodejs-legacy Installation
   sudo: yes
-  command: apt-get purge nodejs npm
+  command: apt-get --assume-yes install nodejs-legacy
+
 
 - name: Update system
   sudo: yes 
   command: apt-get update
 
 - name: GIT Installation
+  sudo: yes
   apt: name=git state=present
 
 - name: "Install forever (to run Node.js app)."
@@ -96,8 +98,8 @@
             mode=0600
 
 - name: copy authorized_keys file from template
-  template: src=ssh-key
-            dest=/home/ubuntu/.ssh/id_rsa.pub
+  template: src=authorized_keys
+            dest=/home/ubuntu/.ssh/authorized_keys
             mode=0600
 
 - name: Creates directory
@@ -107,6 +109,15 @@
   file: path=/home/ubuntu/Project/Principal-WebApp state=directory
   file: path=/home/ubuntu/Project/Admin-WebApp state=directory
   file: path=/home/ubuntu/Project/Board-WebApp state=directory
+
+- name: ensure github.com is a known host
+  lineinfile:
+    dest: /root/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
 
 - name: Clone Student-WebApp
   git: repo=git@github.com:neolearning/Student-WebApp.git
