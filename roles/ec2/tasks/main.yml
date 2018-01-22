@@ -245,9 +245,11 @@
 
 
 - name: restart nginx
+  sudo: yes
   service: name=nginx state=restarted
 
 - name: reload nginx
+  sudo: yes
   service: name=nginx state=reloaded
 
 
