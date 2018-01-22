@@ -1,40 +1,100 @@
+user www-data;
+worker_processes 4;
+pid /run/nginx.pid;
 
-server {
-        listen 80;
-
-         # prevents 502 bad gateway error
-        large_client_header_buffers 8 32k;
-
-        server_name ~(\w)\.neols\.com;
-
-        location /{
-
-
-                # prevents 502 bad gateway error
-                proxy_buffers 8 32k;
-                proxy_buffer_size 64k;
-
-                
-                if ($host ~ (example)\.neols\.com){
-                        proxy_pass http://example.neols.com:8800;
-                }
-	        	if ($host ~ (example1)\.neols\.com){
-                        proxy_pass http://example1.neols.com:8801;
-                }
-                if ($host ~ (example2)\.neols\.com){
-                        proxy_pass http://example2.neols.com:8802;
-                }
-                if ($host ~ (example3)\.neols\.com){
-                        proxy_pass http://example3.neols.com:8803;
-                }
-                if ($host ~ (example4)\.neols\.com){
-                        proxy_pass http://example4.neols.com:8804;
-                }
-
-                 # enables WS support
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade $http_upgrade;
-
-        }        
+events {
+        worker_connections 768;
+        # multi_accept on;
 }
 
+http {
+
+
+server {
+    listen 80;
+
+    server_name example.neols.com;
+
+    location / {
+            
+             proxy_pass http://127.0.0.1:8800/;
+             proxy_http_version 1.1;
+             proxy_set_header Upgrade $http_upgrade;
+             proxy_set_header Connection 'upgrade';
+             proxy_set_header Host $host;
+             proxy_cache_bypass $http_upgrade;
+        
+    }
+}
+
+server {
+    listen 80;
+
+    server_name example1.neols.com;
+
+    location / {
+        
+             proxy_pass http://127.0.0.1:8801/;
+             proxy_http_version 1.1;
+             proxy_set_header Upgrade $http_upgrade;
+             proxy_set_header Connection 'upgrade';
+             proxy_set_header Host $host; 
+             proxy_cache_bypass $http_upgrade;
+        
+    }
+
+}
+server {
+    listen 80;
+
+    server_name example2.neols.com;
+
+    location / {
+            
+             proxy_pass http://127.0.0.1:8802/;
+             proxy_http_version 1.1;
+             proxy_set_header Upgrade $http_upgrade;
+             proxy_set_header Connection 'upgrade';
+             proxy_set_header Host $host;
+             proxy_cache_bypass $http_upgrade;
+        
+    }
+}
+
+server {
+    listen 80;
+
+    server_name example3.neols.com;
+
+    location / {
+        
+             proxy_pass http://127.0.0.1:8803/;
+             proxy_http_version 1.1;
+             proxy_set_header Upgrade $http_upgrade;
+             proxy_set_header Connection 'upgrade';
+             proxy_set_header Host $host; 
+             proxy_cache_bypass $http_upgrade;
+        
+    }
+
+}
+server {
+    listen 80;
+
+    server_name example4.neols.com;
+
+    location / {
+            
+             proxy_pass http://127.0.0.1:8804/;
+             proxy_http_version 1.1;
+             proxy_set_header Upgrade $http_upgrade;
+             proxy_set_header Connection 'upgrade';
+             proxy_set_header Host $host;
+             proxy_cache_bypass $http_upgrade;
+        
+    }
+}
+
+
+
+}
