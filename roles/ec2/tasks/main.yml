@@ -187,6 +187,59 @@
 - name: "Start Board-WebApp"
   command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
 
+- name: copy Nginx from template
+  sudo: yes
+  template: src=nginx.conf.j2
+            dest=/etc/nginx/nginx.conf
+
+
+- name: "Curl AWS to get this instance's public IP address"
+  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: ec2_public_ip
+
+
+- route53:
+      command: create
+      zone: neols.com
+      record: example.neols.com
+      type: A
+      value: "{{ec2_public_ip.stdout}}"
+
+- route53:
+      command: create
+      zone: neols.com
+      record: example1.neols.com
+      type: A
+      value: "{{ec2_public_ip.stdout}}"
+
+- route53:
+      command: create
+      zone: neols.com
+      record: example2.neols.com
+      type: A
+      value: "{{ec2_public_ip.stdout}}"
+
+
+- route53:
+      command: create
+      zone: neols.com
+      record: example3.neols.com
+      type: A
+      value: "{{ec2_public_ip.stdout}}"
+
+
+- route53:
+      command: create
+      zone: neols.com
+      record: example4.neols.com
+      type: A
+      value: "{{ec2_public_ip.stdout}}"
+
+- name: restart nginx
+  service: name=nginx state=restarted
+
+- name: reload nginx
+  service: name=nginx state=reloaded
 
 
 

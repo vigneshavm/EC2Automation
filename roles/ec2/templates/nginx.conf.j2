@@ -1,110 +1,40 @@
-user www-data;
-worker_processes 4;
-pid /run/nginx.pid;
-
-events {
-        worker_connections 768;
-        # multi_accept on;
-}
-
-http {
 
 server {
-	listen 80 default_server;
-	root /opt/Website;
-	index index.html index.htm;
-	server_name stage.neols.com;
-}
+        listen 80;
+
+         # prevents 502 bad gateway error
+        large_client_header_buffers 8 32k;
+
+        server_name ~(\w)\.neols\.com;
+
+        location /{
 
 
-server {
-    listen 80;
+                # prevents 502 bad gateway error
+                proxy_buffers 8 32k;
+                proxy_buffer_size 64k;
 
-    server_name stageteachers.neols.com;
+                
+                if ($host ~ (example)\.neols\.com){
+                        proxy_pass http://example.neols.com:8800;
+                }
+	        	if ($host ~ (example1)\.neols\.com){
+                        proxy_pass http://example1.neols.com:8801;
+                }
+                if ($host ~ (example2)\.neols\.com){
+                        proxy_pass http://example2.neols.com:8802;
+                }
+                if ($host ~ (example3)\.neols\.com){
+                        proxy_pass http://example3.neols.com:8803;
+                }
+                if ($host ~ (example4)\.neols\.com){
+                        proxy_pass http://example4.neols.com:8804;
+                }
 
-    location / {
-             add_header Access-Control-Allow-Origin *;
-             proxy_pass http://10.0.0.26:81/;
-             proxy_http_version 1.1;
-             proxy_set_header Upgrade $http_upgrade;
-             proxy_set_header Connection 'upgrade';
-             proxy_set_header Host $host;
-             proxy_cache_bypass $http_upgrade;
-
-    }
-}
-
-server {
-    listen 80;
-
-    server_name stagestudents.neols.com;
-
-    location / {
-
-             proxy_pass http://10.0.0.26:82/;
-             proxy_http_version 1.1;
-             proxy_set_header Upgrade $http_upgrade;
-             proxy_set_header Connection 'upgrade';
-             proxy_set_header Host $host;
-             proxy_cache_bypass $http_upgrade;
-
-    }
-
-}
-
-server {
-    listen 80;
-
-    server_name stageprincipal.neols.com;
-
-    location / {
-
-             proxy_pass http://10.0.0.26:83/;
-             proxy_http_version 1.1;
-             proxy_set_header Upgrade $http_upgrade;
-             proxy_set_header Connection 'upgrade';
-             proxy_set_header Host $host;
-             proxy_cache_bypass $http_upgrade;
-
-    }
-
-}
-server {
-   listen 80;
-
-   server_name stageadmin.neols.com;
-
-   location / {
-
-          	proxy_pass http://10.0.0.26:84/;
-		proxy_http_version 1.1;
-		proxy_set_header Upgrade $http_upgrade;
-		proxy_set_header Connection 'upgrade';
-		proxy_set_header Host $host;
-		proxy_cache_bypass $http_upgrade;
-			
-	}
-
-}
-
-server {
-   listen 80;
-
-   server_name stageboard.neols.com;
-
-   location / {
-
-                proxy_pass http://10.0.0.26:85/;
+                 # enables WS support
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection 'upgrade';
-                proxy_set_header Host $host;
-                proxy_cache_bypass $http_upgrade;
 
-        }
-
-}
-
-
+        }        
 }
 
