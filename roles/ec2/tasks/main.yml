@@ -198,45 +198,51 @@
   register: ec2_public_ip
 
 
-- name: "R53 domain added for example"
-  command: create
-  module: route53
-  record: example.neols.com
-  type: A
-  value: "{{ec2_public_ip.stdout}}"
-  zone: neols.com
+- name: Create DNS records | example.neols.com
+  sudo: yes
+  route53:
+    command: create
+    record: example.neols.com
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    zone: neols.com
 
-- name: "R53 domain added for example"
-  command: create
-  module: route53
-  record: example1.neols.com
-  type: A
-  value: "{{ec2_public_ip.stdout}}"
-  zone: neols.com
+- name: Create DNS records | example1.neols.com
+  sudo: yes
+  route53:
+    command: create
+    record: example1.neols.com
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    zone: neols.com
 
-- name: "R53 domain added for example"
-  command: create
-  module: route53
-  record: example2.neols.com
-  type: A
-  value: "{{ec2_public_ip.stdout}}"
-  zone: neols.com
+- name: Create DNS records | example2.neols.com
+  sudo: yes
+  route53:
+    command: create
+    record: example2.neols.com
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    zone: neols.com
 
-- name: "R53 domain added for example"
-  command: create
-  module: route53
-  record: example3.neols.com
-  type: A
-  value: "{{ec2_public_ip.stdout}}"
-  zone: neols.com
+- name: Create DNS records | example3.neols.com
+  sudo: yes
+  route53:
+    command: create
+    record: example3.neols.com
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    zone: neols.com
 
-- name: "R53 domain added for example"
-  command: create
-  module: route53
-  record: example4.neols.com
-  type: A
-  value: "{{ec2_public_ip.stdout}}"
-  zone: neols.com
+- name: Create DNS records | example4.neols.com
+  sudo: yes
+  route53:
+    command: create
+    record: example4.neols.com
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    zone: neols.com
+
 
 - name: restart nginx
   service: name=nginx state=restarted
