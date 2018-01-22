@@ -6,8 +6,7 @@
 - name: MongoDB | Add  repository 
   sudo: yes 
   shell:
-    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
-
+    echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 - name: Update system
   sudo: yes 
@@ -15,15 +14,10 @@
 
 - name: MongoDB Installation 
   sudo: yes 
-  command: apt-get install -y mongodb-org
-
-
-
-- name: Update system
-  sudo: yes
-  command: apt-get update
+  command: apt-get --assume-yes install -y mongodb-org
 
 - name: copy private file from template
+  sudo: yes
   template: src=mongoFile
             dest=/etc/systemd/system/mongodb.service
             mode=0600
