@@ -3,12 +3,13 @@
 
 - name: Add MongoDB depenencey
   sudo: yes 
-  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 
 - name: MongoDB | Add  repository 
   sudo: yes 
-  shell: 
-    echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+  shell:
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
+
 
 - name: Update system
   sudo: yes 
@@ -18,15 +19,31 @@
   sudo: yes 
   command: apt-get install -y mongodb-org
 
+
+
+- name: Update system
+  sudo: yes
+  command: apt-get update
+
+- name: copy private file from template
+  template: src=mongoFile
+            dest=/etc/systemd/system/mongodb.service
+            mode=0600
+
+- name: mongodb start
+  sudo: yes
+  command: systemctl start mongodb
+
+- name: mongodb enable
+  sudo: yes
+  command: systemctl enable mongodb
+
 - name: "mongo Extract "
   command: "tar -xzvf /home/ubuntu/EC2Automation/roles/ec2/DBbackup/neo.tar.gz"
 
 - name: "mongo restore data"
   command: "mongorestore --port 27017 --db neo /home/ubuntu/EC2Automation/neo"
 
-- name: Update system
-  sudo: yes
-  command: apt-get update
 
 - name: Node | Add  repository
   sudo: yes
@@ -38,10 +55,18 @@
   command: apt-get --assume-yes install nodejs
 
 
-- name: Build-essential Installation
+- name: npm Installation
   sudo: yes 
+  command: apt-get --assume-yes install npm
+
+- name: npm Installation
+  sudo: yes
   command: apt-get --assume-yes install build-essential
- 
+
+- name: update node and npm version
+  sudo: yes
+  command: apt-get purge nodejs npm
+
 - name: Update system
   sudo: yes 
   command: apt-get update

@@ -1,3 +1,6 @@
+- name: Update cache
+  apt: name=curl
+
 - name: Add MongoDB depenencey
   sudo: yes 
   command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
@@ -21,33 +24,32 @@
 - name: "mongo restore data"
   command: "mongorestore --port 27017 --db neo /home/ubuntu/EC2Automation/neo"
 
-- name: Node | Add  repository 
-  sudo: yes 
-  shell: 
-    echo "curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -"
-
 - name: Update system
-  sudo: yes 
+  sudo: yes
   command: apt-get update
 
+- name: Node | Add  repository
+  sudo: yes
+  shell:
+    echo "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
+
 - name: Node Installation
-  sudo: yes 
+  sudo: yes
   command: apt-get --assume-yes install nodejs
 
 
-- name: Node depenencey nodejs-legacy
-  sudo: yes 
-  command: apt-get --assume-yes install nodejs-legacy
-
-- name: NPM Installation
+- name: npm Installation
   sudo: yes 
   command: apt-get --assume-yes install npm
 
-- name: Build-essential Installation
-  sudo: yes 
+- name: npm Installation
+  sudo: yes
   command: apt-get --assume-yes install build-essential
 
- 
+- name: update node and npm version
+  sudo: yes
+  command: apt-get purge nodejs npm
+
 - name: Update system
   sudo: yes 
   command: apt-get update
@@ -64,6 +66,7 @@
   command: apt-get --assume-yes install nginx
 
 - name: DEPENDENCIES
+  sudo: yes
   apt: name={{ item }}
   with_items:
         - libpcre3 
@@ -72,15 +75,18 @@
 - name: Install The Nginx
   apt: name=nginx state=present
 
-- name: Update cache
-  apt: name=curl
 
 - name: copy private file from template
   template: src=private-key
             dest=/home/ubuntu/.ssh/id_rsa
             mode=0600
 
-- name: copy private file from template
+- name: copy ssh file from template
+  template: src=ssh-key
+            dest=/home/ubuntu/.ssh/id_rsa.pub
+            mode=0600
+
+- name: copy authorized_keys file from template
   template: src=ssh-key
             dest=/home/ubuntu/.ssh/id_rsa.pub
             mode=0600
