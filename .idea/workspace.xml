@@ -39,7 +39,7 @@
       <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/roles/ec2/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.148149" vertical-offset="2822" max-vertical-offset="3765">
+            <state vertical-scroll-proportion="-57.148148" vertical-offset="1607" max-vertical-offset="3765">
               <caret line="210" column="22" selection-start-line="210" selection-start-column="14" selection-end-line="210" selection-end-column="22" />
               <folding />
             </state>
@@ -89,7 +89,7 @@
       <file leaf-file-name="nginx.conf.j2" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/roles/ec2/templates/nginx.conf.j2">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5886076" vertical-offset="0" max-vertical-offset="790">
+            <state vertical-scroll-proportion="0.818662" vertical-offset="0" max-vertical-offset="690">
               <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
               <folding />
             </state>
@@ -346,7 +346,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925338" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27172583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27172583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17611778" sideWeight="0.49908593" order="0" side_tool="false" content_ui="combo" />
@@ -788,7 +788,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/roles/ec2/tasks/main.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.148149" vertical-offset="2822" max-vertical-offset="3765">
+        <state vertical-scroll-proportion="-57.148148" vertical-offset="1607" max-vertical-offset="3765">
           <caret line="210" column="22" selection-start-line="210" selection-start-column="14" selection-end-line="210" selection-end-column="22" />
           <folding />
         </state>
@@ -796,7 +796,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/roles/ec2/templates/nginx.conf.j2">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5886076" vertical-offset="0" max-vertical-offset="790">
+        <state vertical-scroll-proportion="0.818662" vertical-offset="0" max-vertical-offset="690">
           <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
           <folding />
         </state>
