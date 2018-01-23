@@ -1,0 +1,10 @@
+---
+# Stage for create Instance in AWS - development
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: false
+  sudo: false
+  vars_files:
+      - environments/stage/group_vars/route53.yml
+  roles:
+    - ec2

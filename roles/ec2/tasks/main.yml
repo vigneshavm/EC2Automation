@@ -1,0 +1,261 @@
+
+- name: Add MongoDB depenencey
+  sudo: yes 
+  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+
+- name: MongoDB | Add  repository 
+  sudo: yes 
+  shell:
+    echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+- name: Update system
+  sudo: yes 
+  command: apt-get update 
+
+- name: MongoDB Installation 
+  sudo: yes 
+  command: apt-get --assume-yes install -y mongodb-org
+
+- name: copy private file from template
+  sudo: yes
+  template: src=mongoFile
+            dest=/etc/systemd/system/mongodb.service
+            mode=0600
+
+- name: mongodb start
+  sudo: yes
+  command: systemctl start mongodb
+
+- name: mongodb enable
+  sudo: yes
+  command: systemctl enable mongodb
+
+- name: "mongo Extract "
+  command: "tar -xzvf /home/ubuntu/EC2Automation/roles/ec2/DBbackup/neo.tar.gz"
+
+- name: "mongo restore data"
+  command: "mongorestore --port 27017 --db neo /home/ubuntu/EC2Automation/neo"
+
+
+- name: Node | Add  repository
+  sudo: yes
+  shell:
+    echo "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
+
+- name: Node Installation
+  sudo: yes
+  command: apt-get --assume-yes install nodejs
+
+
+- name: npm Installation
+  sudo: yes 
+  command: apt-get --assume-yes install npm
+
+- name: npm Installation
+  sudo: yes
+  command: apt-get --assume-yes install build-essential
+
+- name: nodejs-legacy Installation
+  sudo: yes
+  command: apt-get --assume-yes install nodejs-legacy
+
+
+- name: Update system
+  sudo: yes 
+  command: apt-get update
+
+- name: GIT Installation
+  sudo: yes
+  apt: name=git state=present
+
+- name: "Install forever (to run Node.js app)."
+  npm: name=forever global=yes state=present
+  sudo: yes
+
+- name: Nginx Installation
+  sudo: yes 
+  command: apt-get --assume-yes install nginx
+
+- name: DEPENDENCIES
+  sudo: yes
+  apt: name={{ item }}
+  with_items:
+        - libpcre3 
+        - libpcre3-dev
+
+- name: Install The Nginx
+  apt: name=nginx state=present
+
+
+- name: copy private file from template
+  template: src=private-key
+            dest=/home/ubuntu/.ssh/id_rsa
+            mode=0600
+
+- name: copy ssh file from template
+  template: src=ssh-key
+            dest=/home/ubuntu/.ssh/id_rsa.pub
+            mode=0600
+
+- name: copy authorized_keys file from template
+  template: src=authorized_keys
+            dest=/home/ubuntu/.ssh/authorized_keys
+            mode=0600
+
+- name: Creates directory
+  file: path=/home/ubuntu/Project state=directory
+  file: path=/home/ubuntu/Project/Student-WebApp state=directory
+  file: path=/home/ubuntu/Project/Teacher-WebApp state=directory  
+  file: path=/home/ubuntu/Project/Principal-WebApp state=directory
+  file: path=/home/ubuntu/Project/Admin-WebApp state=directory
+  file: path=/home/ubuntu/Project/Board-WebApp state=directory
+
+- name: ensure github.com is a known host
+  lineinfile:
+    dest: /home/ubuntu/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+
+- name: Clone Student-WebApp
+  git: repo=git@github.com:neolearning/Student-WebApp.git
+       dest=/home/ubuntu/Project/Student-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+- name: Clone Teacher-WebApp
+  git: repo=git@github.com:neolearning/Teacher-WebApp.git
+       dest=/home/ubuntu/Project/Teacher-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+
+- name: Clone Principal-WebApp
+  git: repo=git@github.com:neolearning/Principal-WebApp.git
+       dest=/home/ubuntu/Project/Principal-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+- name: Clone Admin-WebApp
+  git: repo=git@github.com:neolearning/Admin-WebApp.git
+       dest=/home/ubuntu/Project/Admin-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+- name: Clone Board-WebApp
+  git: repo=git@github.com:neolearning/Board-WebApp.git
+       dest=/home/ubuntu/Project/Board-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+
+
+- name: "Node: Student-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Student-WebApp"
+  ignore_errors: yes
+
+- name: "Node: Teacher-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Teacher-WebApp"
+  ignore_errors: yes
+
+- name: "Node: Principal-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Principal-WebApp"
+  ignore_errors: yes
+
+- name: "Node: Admin-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Admin-WebApp"
+  ignore_errors: yes
+
+- name: "Node: Board-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Board-WebApp"
+  ignore_errors: yes
+
+
+- name: "Start Board-WebApp"
+  command: "forever start /home/ubuntu/Project/Student-WebApp/server.js"
+
+- name: "Start Teacher-WebApp"
+  command: "forever start /home/ubuntu/Project/Teacher-WebApp/server.js"
+ 
+- name: "Start Principal-WebApp"
+  command: "forever start /home/ubuntu/Project/Principal-WebApp/server.js"
+ 
+- name: "Start Admin-WebApp"
+  command: "forever start /home/ubuntu/Project/Admin-WebApp/server.js"
+ 
+- name: "Start Board-WebApp"
+  command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
+
+- name: copy Nginx from template
+  sudo: yes
+  template: src=nginx.conf.j2
+            dest=/etc/nginx/nginx.conf
+
+
+- name: "Curl AWS to get this instance's public IP address"
+  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: ec2_public_ip
+
+
+- name: Create DNS records | student
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ student }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | teacher
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ teacher }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | principal
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ principal }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | admin
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ admin }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | board
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ board }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+
+- name: restart nginx
+  sudo: yes
+  service: name=nginx state=restarted
+
+- name: reload nginx
+  sudo: yes
+  service: name=nginx state=reloaded
+
+
+
