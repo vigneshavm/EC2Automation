@@ -4,3 +4,4 @@
   principal: examplestageprincipal.neols.com
   admin:  examplestageadmin.neols.com
   board: examplestageboard.neols.com
+  env: stage

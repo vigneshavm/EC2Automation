@@ -4,3 +4,4 @@
   principal: exampledevprincipal.neols.com
   admin:  exampledevadmin.neols.com
   board: exampledevboard.neols.com
+  env: development
