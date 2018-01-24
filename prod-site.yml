@@ -4,6 +4,10 @@
   connection: local
   gather_facts: false
   sudo: false
+  vars:
+        isDev: false
+        isStage: false
+        isProd: true
   vars_files:
       - environments/production/group_vars/route53.yml
   roles:
