@@ -3,6 +3,13 @@
   connection: local
   hosts: localhost
   name: "Provision an EC2 Instance"
+  vars:
+      count: 1
+      instance_type: t2.micro
+      keypair: stageNeols
+      region: ca-central-1
+      security_group: webserver
+
   tasks:
     -
       local_action:
@@ -39,10 +46,5 @@
         region: "{{ region }}"
         wait: true
       name: "Create a Instance"
-  vars:
-    count: 1
-    instance_type: t2.micro
-    keypair: stageNeols
-    region: ca-central-1
-    security_group: webserver
+
 
