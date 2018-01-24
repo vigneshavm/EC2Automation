@@ -1,0 +1,48 @@
+---
+-
+  connection: local
+  hosts: localhost
+  name: "Provision an EC2 Instance"
+  tasks:
+    -
+      local_action:
+        description: "Security Group for webserver Servers"
+        module: ec2_group
+        name: "{{ security_group }}"
+        region: ca-central-1
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 80
+            proto: tcp
+            to_port: 85
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: my_security_group
+
+    -
+      local_action:
+        count: 1
+        group_id: "{{ my_security_group.group_id }}"
+        image: ami-270e8b43
+        instance_type: "{{ instance_type }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+        region: "{{ region }}"
+        wait: true
+      name: "Create a Instance"
+  vars:
+    count: 1
+    instance_type: t2.micro
+    keypair: stageNeols
+    region: ca-central-1
+    security_group: webserver
+
