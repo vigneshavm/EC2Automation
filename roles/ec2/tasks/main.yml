@@ -1,3 +1,6 @@
+- name: sleep for a specified interval
+  sudo: yes
+  command: sleep 200
 
 - name: Add MongoDB depenencey
   sudo: yes 
@@ -10,7 +13,7 @@
 
 - name: Update system
   sudo: yes 
-  command: apt-get update 
+  command: apt-get update
 
 - name: MongoDB Installation 
   sudo: yes 
@@ -29,12 +32,6 @@
 - name: mongodb enable
   sudo: yes
   command: systemctl enable mongodb
-
-- name: "mongo Extract "
-  command: "tar -xzvf /home/ubuntu/EC2Automation/roles/ec2/DBbackup/neo.tar.gz"
-
-- name: "mongo restore data"
-  command: "mongorestore --port 27017 --db neo /home/ubuntu/EC2Automation/neo"
 
 
 - name: Node | Add  repository
@@ -58,7 +55,6 @@
 - name: nodejs-legacy Installation
   sudo: yes
   command: apt-get --assume-yes install nodejs-legacy
-
 
 - name: Update system
   sudo: yes 
@@ -104,6 +100,7 @@
 
 - name: Creates directory
   file: path=/home/ubuntu/Project state=directory
+  file: path=/home/ubuntu/Project/EC2Automation state=directory
   file: path=/home/ubuntu/Project/Student-WebApp state=directory
   file: path=/home/ubuntu/Project/Teacher-WebApp state=directory  
   file: path=/home/ubuntu/Project/Principal-WebApp state=directory
@@ -117,6 +114,16 @@
     state: present
     line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
     regexp: "^github\\.com"
+
+- name: Clone EC2Automation
+  git: repo=https://github.com/vigneshavm/EC2Automation.git
+       dest=/home/ubuntu/Project/EC2Automation
+
+- name: "mongo Extract "
+  command: "tar -xzvf /home/ubuntu/Project/EC2Automation/roles/ec2/DBbackup/neo.tar.gz"
+
+- name: "mongo restore data"
+  command: "mongorestore --port 27017 --db neo /home/ubuntu/neo"
 
 
 - name: Clone Student-WebApp
@@ -272,6 +279,5 @@
 - name: reload nginx
   sudo: yes
   service: name=nginx state=reloaded
-
 
 
