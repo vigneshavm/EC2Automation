@@ -40,7 +40,7 @@
         count: 1
         group_id: "{{ my_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
-        image: ami-04c24660
+        image: ami-270e8b43
         wait: true
         region: "{{ region }}"
         key_name: "{{ keypair }}"
