@@ -1,0 +1,102 @@
+
+- name: Update system
+  sudo: yes 
+  command: apt-get update
+
+- name: Nginx Installation
+  sudo: yes 
+  command: apt-get --assume-yes install nginx
+
+- name: DEPENDENCIES
+  sudo: yes
+  apt: name={{ item }}
+  with_items:
+        - libpcre3 
+        - libpcre3-dev
+
+- name: Install The Nginx
+  apt: name=nginx state=present
+
+
+- name: copy Nginx from template
+  sudo: yes
+  template: src=dev-nginx.j2
+            dest=/etc/nginx/nginx.conf
+  when: isDev == true
+
+- name: copy Nginx from template
+  sudo: yes
+  template: src=stage-nginx.j2
+            dest=/etc/nginx/nginx.conf
+  when: isStage == true
+
+- name: copy Nginx from template
+  sudo: yes
+  template: src=production-nginx.j2
+            dest=/etc/nginx/nginx.conf
+  when: isProd == true
+
+- name: "Curl AWS to get this instance's public IP address"
+  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: ec2_public_ip
+
+- name: Create DNS records | student
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ student }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | teacher
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ teacher }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | principal
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ principal }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | admin
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ admin }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | board
+  sudo: yes
+  route53:
+    command: create
+    record: "{{ board }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+
+- name: restart nginx
+  sudo: yes
+  service: name=nginx state=restarted
+
+- name: reload nginx
+  sudo: yes
+  service: name=nginx state=reloaded
+
+

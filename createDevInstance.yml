@@ -89,3 +89,6 @@
         - environments/development/group_vars/route53.yml
   roles:
       - ec2
+      - database
+      - startProject
+      - nginx
