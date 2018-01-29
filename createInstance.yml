@@ -9,6 +9,7 @@
       keypair: stageNeols
       region: ca-central-1
       security_group: webserver
+      imageID: ami-270e8b43
 
   tasks:
     -
@@ -37,10 +38,10 @@
 
     -
       local_action:
-        count: 1
+        count: "{{ count }}"
         group_id: "{{ my_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
-        image: ami-270e8b43
+        image: "{{ imageID }}"
         wait: true
         region: "{{ region }}"
         key_name: "{{ keypair }}"
