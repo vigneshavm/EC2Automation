@@ -1,0 +1,11 @@
+---
+  count: 1        //DB,NGINX,WEB in single system
+#  count: 3        //DB,NGINX,WEB in seperate system
+#  count: 3        //DB,NGINX in single system ,WEB in seperate system
+#  count: 3        //DB,WEB in single system ,NGINX in seperate system
+#  count: 3        //WEB,NGINX in single system ,DB in seperate system
+  instance_type: t2.micro
+  keypair: stageNeols
+  region: ca-central-1
+  security_group: webserver
+  imageID: ami-270e8b43

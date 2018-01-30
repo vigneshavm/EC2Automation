@@ -3,21 +3,15 @@
   connection: local
   hosts: localhost
   name: "Provision an EC2 Instance"
-  vars:
-      count: 1
-      instance_type: t2.micro
-      keypair: stageNeols
-      region: ca-central-1
-      security_group: webserver
-      imageID: ami-270e8b43
-
+  vars_files:
+        - conf/group_vars/conf.yml
   tasks:
     -
       local_action:
         description: "Security Group for webserver Servers"
         module: ec2_group
         name: "{{ security_group }}"
-        region: ca-central-1
+        region: "{{ region }}"
         rules:
           -
             cidr_ip: 0.0.0.0/0
