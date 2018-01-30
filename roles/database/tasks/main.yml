@@ -41,6 +41,9 @@
   git: repo=https://github.com/vigneshavm/EC2Automation.git
        dest=/home/ubuntu/Project/EC2Automation
 
+- name: Creates directory
+  file: path=/home/ubuntu/neo state=directory
+
 - name: "mongo Extract "
   command: "tar -xzvf /home/ubuntu/Project/EC2Automation/roles/ec2/DBbackup/neo.tar.gz /home/ubuntu/neo"
 
