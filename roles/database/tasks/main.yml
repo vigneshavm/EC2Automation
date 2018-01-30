@@ -42,7 +42,7 @@
        dest=/home/ubuntu/Project/EC2Automation
 
 - name: "mongo Extract "
-  command: "tar -xzvf /home/ubuntu/Project/EC2Automation/roles/ec2/DBbackup/neo.tar.gz"
+  command: "tar -xzvf /home/ubuntu/Project/EC2Automation/roles/ec2/DBbackup/neo.tar.gz /home/ubuntu/neo"
 
 - name: "mongo restore data"
   command: "mongorestore --port 27017 --db neo /home/ubuntu/neo"
