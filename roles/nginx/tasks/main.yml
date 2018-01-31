@@ -22,19 +22,19 @@
   sudo: yes
   template: src=dev-nginx.j2
             dest=/etc/nginx/nginx.conf
-  when: isDev == true
+  when: env == 'development'
 
 - name: copy Nginx from template
   sudo: yes
   template: src=stage-nginx.j2
             dest=/etc/nginx/nginx.conf
-  when: isStage == true
+  when: env == 'stage'
 
 - name: copy Nginx from template
   sudo: yes
   template: src=production-nginx.j2
             dest=/etc/nginx/nginx.conf
-  when: isProd == true
+  when: env == 'production'
 
 - name: "Curl AWS to get this instance's public IP address"
   command: curl http://169.254.169.254/latest/meta-data/public-ipv4
