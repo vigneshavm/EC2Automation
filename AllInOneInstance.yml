@@ -80,7 +80,7 @@
     isProd: false
 
   vars_files:
-      - environments/{{ keypair }}/group_vars/route53.yml
+      - environments/{{ env }}/group_vars/route53.yml
 
   roles:
       - instanceToReady
