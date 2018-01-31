@@ -66,6 +66,42 @@
         tags:
           Name: webInstance
 
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a Instance"
+      register: ec2
+
+    - name: Add new instance to host group
+      add_host: hostname={{ item.public_ip }} groupname=DBInstance
+      with_items: ec2.instances
+
+
+    - name: Wait for SSH to come up
+      local_action: wait_for
+                              host={{ item.public_ip }}
+                              port=22
+                              state=started
+      with_items: ec2.instances
+
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag
+                             resource={{ item.id }}
+                             region={{ region }}
+                             state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: DBInstance
+
 -
   hosts: webInstance
   name: "launched an EC2 Instance"
@@ -79,12 +115,20 @@
     isStage: false
     isProd: false
 
-  vars_files:
-      - environments/{{ keypair }}/group_vars/route53.yml
 
   roles:
       - instanceToReady
       - ec2
+
+-
+  hosts: DBInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  roles:
       - database
-      - startProject
-      - nginx
