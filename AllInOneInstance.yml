@@ -75,9 +75,6 @@
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-    isDev: true
-    isStage: false
-    isProd: false
 
   vars_files:
       - environments/{{ env }}/group_vars/route53.yml
