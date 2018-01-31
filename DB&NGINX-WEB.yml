@@ -101,6 +101,19 @@
       args:
         tags:
           Name: DB&&NGINXInstance
+-
+  hosts: DB&&NGINXInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  roles:
+      - instanceToReady
+      - database
 
 -
   hosts: webInstance
@@ -111,13 +124,8 @@
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-    isDev: true
-    isStage: false
-    isProd: false
-
 
   roles:
-      - instanceToReady
       - ec2
 
 -
@@ -130,5 +138,11 @@
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 
+  vars_files:
+
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+
   roles:
-      - database
+      - startProject
+      - nginx
