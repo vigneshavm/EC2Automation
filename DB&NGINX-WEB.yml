@@ -80,7 +80,7 @@
       register: ec2
 
     - name: Add new instance to host group
-      add_host: hostname={{ item.public_ip }} groupname=DBInstance
+      add_host: hostname={{ item.public_ip }} groupname=DB&&NGINXInstance
       with_items: ec2.instances
 
 
@@ -100,7 +100,7 @@
       with_items: ec2.instances
       args:
         tags:
-          Name: DBInstance
+          Name: DB&&NGINXInstance
 
 -
   hosts: webInstance
@@ -121,7 +121,7 @@
       - ec2
 
 -
-  hosts: DBInstance
+  hosts: DB&&NGINXInstance
   name: "launched an EC2 Instance"
   remote_user: ubuntu
   gather_facts: false

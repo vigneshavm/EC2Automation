@@ -5,4 +5,4 @@
   region: ca-central-1
   security_group: webserver
   imageID: ami-270e8b43
-  env: development
+  env: production
