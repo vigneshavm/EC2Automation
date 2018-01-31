@@ -117,10 +117,8 @@
 
 
   roles:
+      - instanceToReady
       - ec2
-      - database
-      - startProject
-      - nginx
 
 -
   hosts: DBInstance
