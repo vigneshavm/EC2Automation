@@ -39,6 +39,7 @@
         wait: true
         region: "{{ region }}"
         key_name: "{{ keypair }}"
+        private_ip: 172.31.30.100
         module: ec2
       name: "Create a Instance"
       register: ec2

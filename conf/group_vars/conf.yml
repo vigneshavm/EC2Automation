@@ -6,3 +6,8 @@
   security_group: webserver
   imageID: ami-270e8b43
   env: production
+  allInOne : true
+  allInDiff : false
+  DBAndNGINX : false
+  webAndDBInstance : false
+  webAndNGINXInstance : false
