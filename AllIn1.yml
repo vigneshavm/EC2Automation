@@ -43,17 +43,17 @@
         key_name: "{{ keypair }}"
         private_ip: 172.31.30.100
         module: ec2
-      name: "Create a Instance"
+      name: "Create a Instance (allInOne)"
       register: ec2
       when: allInOne == true
 
-    - name: Add new instance to host group
+    - name: Add new webInstance to host group(allInOne)
       add_host: hostname={{ item.public_ip }} groupname=webInstance
       with_items: ec2.instances
       when: allInOne == true
 
 
-    - name: Wait for SSH to come up
+    - name: Wait for SSH to come up in webInstance(allInOne)
       local_action: wait_for
                           host={{ item.public_ip }}
                           port=22
@@ -62,7 +62,7 @@
       when: allInOne == true
 
 
-    - name: Add tag to Instance(s)
+    - name: Add tag to (allInOne)
       local_action: ec2_tag
                          resource={{ item.id }}
                          region={{ region }}
@@ -86,17 +86,17 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a Instance"
+      name:  "Create a Instance (allInDiff)"
       register: ec2
       when: allInDiff == true
 
-    - name: Add new instance to host group
+    - name: Add new instance to host group(allInDiff)
       add_host: hostname={{ item.public_ip }} groupname=webInstance
       with_items: ec2.instances
       when: allInDiff == true
 
 
-    - name: Wait for SSH to come up
+    - name: Wait for SSH to come up (allInDiff)
       local_action: wait_for
                           host={{ item.public_ip }}
                           port=22
@@ -105,7 +105,7 @@
       when: allInDiff == true
 
 
-    - name: Add tag to Instance(s)
+    - name: Add tag to (allInDiff)
       local_action: ec2_tag
                          resource={{ item.id }}
                          region={{ region }}
