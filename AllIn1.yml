@@ -41,7 +41,6 @@
         wait: true
         region: "{{ region }}"
         key_name: "{{ keypair }}"
-        private_ip: 172.31.30.100
         module: ec2
       name: "Create a Instance (allInOne)"
       register: ec2
@@ -515,8 +514,6 @@
   roles:
 
       - { role: nginx, when: allInDiff == true }
-
-
 
 -
   hosts: webInstance
