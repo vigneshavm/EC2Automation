@@ -456,4 +456,75 @@
 
 
 
-#      webAndNGINXInstance end
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance - allInOne "
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+  when: allInOne == true
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+
+      - conf/group_vars/conf.yml
+      - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - instanceToReady
+      - ec2
+      - database
+      - startProject
+      - nginx
+
+
+-
+  hosts: DBInstance
+  name: "launched an EC2 Instance "
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+  when: webAndNGINXInstance == true
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  roles:
+
+      - instanceToReady
+      - database
+
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+  when: webAndNGINXInstance == true
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+    isDev: true
+    isStage: false
+    isProd: false
+
+  roles:
+      - ec2
+
+-
+  hosts: NGINXInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  roles:
+      - nginx
+
+
+
