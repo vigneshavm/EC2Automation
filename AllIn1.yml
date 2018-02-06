@@ -71,8 +71,9 @@
         tags:
           Name: webInstance
       when: allInOne == true
-
 #      allInOne end
+
+
 
 #      allInDifferenet started
     -
@@ -197,11 +198,13 @@
         tags:
           Name: NGINXInstance
       when: allInDiff == true
-
-
 #      allInDifferent end
-#      DB&&NGINXInstance started
 
+
+
+
+
+#      DB&&NGINXInstance started
     -
       local_action:
         count: "{{ count }}"
@@ -242,8 +245,6 @@
           Name: webInstance
       when: DBAndNGINX == true
 
-
-
     -
       local_action:
         count: "{{ count }}"
@@ -283,10 +284,9 @@
         tags:
           Name: DB&&NGINXInstance
       when: DBAndNGINX == true
-
-
-
 #      DBAndNGINX end
+
+
 
 #      web&&DBInstance started
     -
@@ -366,12 +366,12 @@
         tags:
           Name: NGINXInstance
       when: webAndDB == true
-
-
 #      webAndDB end
 
-#      webAndNGINX started
 
+
+
+#      webAndNGINX started
     -
       local_action:
         count: "{{ count }}"
@@ -452,6 +452,7 @@
         tags:
           Name: DBInstance
       when: webAndNGINX == true
+#      webAndNGINX End
 
 
 #connection allInOne start
