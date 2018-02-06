@@ -456,27 +456,6 @@
 
 
 
--
-  hosts: webInstance
-  name: "launched an EC2 Instance - allInOne "
-  remote_user: ubuntu
-  gather_facts: false
-  sudo: false
-
-  vars:
-    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-
-  vars_files:
-
-      - conf/group_vars/conf.yml
-      - environments/{{ env }}/group_vars/route53.yml
-
-  roles:
-      - { role: instanceToReady, when: allInOne == true }
-      - { role: ec2, when: allInOne == true }
-      - { role: database, when: allInOne == true }
-      - { role: startProject, when: allInOne == true }
-      - { role: nginx, when: allInOne == true }
 
 
 -
@@ -539,3 +518,24 @@
 
 
 
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance - allInOne "
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+
+      - conf/group_vars/conf.yml
+      - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: instanceToReady, when: allInOne == true }
+      - { role: ec2, when: allInOne == true }
+      - { role: database, when: allInOne == true }
+      - { role: startProject, when: allInOne == true }
+      - { role: nginx, when: allInOne == true }
