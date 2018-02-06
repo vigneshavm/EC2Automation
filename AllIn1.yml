@@ -462,7 +462,6 @@
   remote_user: ubuntu
   gather_facts: false
   sudo: false
-  when: allInOne == true
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -473,28 +472,31 @@
       - environments/{{ env }}/group_vars/route53.yml
 
   roles:
-      - instanceToReady
-      - ec2
-      - database
-      - startProject
-      - nginx
+      - { role: instanceToReady, when: allInOne == true }
+      - { role: ec2, when: allInOne == true }
+      - { role: database, when: allInOne == true }
+      - { role: startProject, when: allInOne == true }
+      - { role: nginx, when: allInOne == true }
 
 
 -
   hosts: DBInstance
-  name: "launched an EC2 Instance "
+  name: "launched an EC2 Instance - allInDiff"
   remote_user: ubuntu
   gather_facts: false
   sudo: false
-  when: webAndNGINXInstance == true
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 
+  vars_files:
+
+        - conf/group_vars/conf.yml
+
   roles:
 
-      - instanceToReady
-      - database
+      - { role: instanceToReady, when: allInDiff == true }
+      - { role: database, when: allInDiff == true }
 
 -
   hosts: webInstance
@@ -510,8 +512,13 @@
     isStage: false
     isProd: false
 
+  vars_files:
+
+        - conf/group_vars/conf.yml
+
   roles:
-      - ec2
+
+      - { role: ec2, when: allInDiff == true }
 
 -
   hosts: NGINXInstance
@@ -523,8 +530,13 @@
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 
+  vars_files:
+
+        - conf/group_vars/conf.yml
+
   roles:
-      - nginx
+
+      - { role: nginx, when: allInDiff == true }
 
 
 
