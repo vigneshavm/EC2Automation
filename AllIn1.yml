@@ -301,12 +301,12 @@
         module: ec2
       name: "Create a Instance"
       register: ec2
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
     - name: Add new instance to host group
       add_host: hostname={{ item.public_ip }} groupname=web&&DBInstance
       with_items: ec2.instances
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
     - name: Wait for SSH to come up
       local_action: wait_for
@@ -314,7 +314,7 @@
                           port=22
                           state=started
       with_items: ec2.instances
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
 
     - name: Add tag to Instance(s)
@@ -326,7 +326,7 @@
       args:
         tags:
           Name: web&&DBInstance
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
     -
       local_action:
@@ -340,12 +340,12 @@
         module: ec2
       name: "Create a Instance"
       register: ec2
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
     - name: Add new instance to host group
       add_host: hostname={{ item.public_ip }} groupname=NGINXInstance
       with_items: ec2.instances
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
 
     - name: Wait for SSH to come up
@@ -354,7 +354,7 @@
                               port=22
                               state=started
       with_items: ec2.instances
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
     - name: Add tag to Instance(s)
       local_action: ec2_tag
@@ -365,12 +365,12 @@
       args:
         tags:
           Name: NGINXInstance
-      when: webAndDBInstance == true
+      when: webAndDB == true
 
 
-#      webAndDBInstance end
+#      webAndDB end
 
-#      webAndNGINXInstance started
+#      webAndNGINX started
 
     -
       local_action:
@@ -384,12 +384,12 @@
         module: ec2
       name: "Create a web-NGINX Instance"
       register: ec2
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
     - name: Add new instance to host group
       add_host: hostname={{ item.public_ip }} groupname=web&&NGINXInstance
       with_items: ec2.instances
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
 
     - name: Wait for SSH to come up
@@ -398,7 +398,7 @@
                           port=22
                           state=started
       with_items: ec2.instances
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
 
     - name: Add tag to Instance(s)
@@ -410,7 +410,7 @@
       args:
         tags:
           Name: web&&DBInstance
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
     -
       local_action:
@@ -424,13 +424,13 @@
         module: ec2
       name: "Create a DBInstance"
       register: ec2
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
 
     - name: Add new instance to host group
       add_host: hostname={{ item.public_ip }} groupname=DBInstance
       with_items: ec2.instances
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
 
     - name: Wait for SSH to come up
@@ -439,7 +439,7 @@
                               port=22
                               state=started
       with_items: ec2.instances
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
 
     - name: Add tag to Instance(s)
@@ -451,69 +451,10 @@
       args:
         tags:
           Name: DBInstance
-      when: webAndNGINXInstance == true
+      when: webAndNGINX == true
 
 
-
-
-
--
-  hosts: DBInstance
-  name: "launched an EC2 Instance - allInDiff"
-  remote_user: ubuntu
-  gather_facts: false
-  sudo: false
-
-  vars:
-    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-
-  vars_files:
-
-        - conf/group_vars/conf.yml
-
-  roles:
-
-      - { role: instanceToReady, when: allInDiff == true }
-      - { role: database, when: allInDiff == true }
-
--
-  hosts: webInstance
-  name: "launched an EC2 Instance"
-  remote_user: ubuntu
-  gather_facts: false
-  sudo: false
-
-  vars:
-    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-    isDev: true
-    isStage: false
-    isProd: false
-
-  vars_files:
-
-        - conf/group_vars/conf.yml
-
-  roles:
-
-      - { role: ec2, when: allInDiff == true }
-
--
-  hosts: NGINXInstance
-  name: "launched an EC2 Instance"
-  remote_user: ubuntu
-  gather_facts: false
-  sudo: false
-
-  vars:
-    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-
-  vars_files:
-
-        - conf/group_vars/conf.yml
-
-  roles:
-
-      - { role: nginx, when: allInDiff == true }
+#connection allInOne start
 
 -
   hosts: webInstance
@@ -536,3 +477,203 @@
       - { role: database, when: allInOne == true }
       - { role: startProject, when: allInOne == true }
       - { role: nginx, when: allInOne == true }
+
+#connection allInOne end
+
+
+#connect allInDiff start
+-
+  hosts: DBInstance
+  name: "launched an EC2 Instance - allInDiff"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: instanceToReady, when: allInDiff == true }
+      - { role: database, when: allInDiff == true }
+
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance - allInDiff"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+    isDev: true
+    isStage: false
+    isProd: false
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: ec2, when: allInDiff == true }
+
+-
+  hosts: NGINXInstance
+  name: "launched an EC2 Instance - allInDiff"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: nginx, when: allInDiff == true }
+
+#connection allInDiff end
+
+
+
+#connection DBAndNGINX start
+-
+  hosts: DB&&NGINXInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+      - conf/group_vars/conf.yml
+
+  roles:
+      - { role: instanceToReady, when: DBAndNGINX == true }
+      - { role: database, when: DBAndNGINX == true }
+
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: ec2, when: DBAndNGINX == true }
+
+-
+  hosts: DB&&NGINXInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: startProject, when: DBAndNGINX == true }
+      - { role: nginx, when: DBAndNGINX == true }
+
+#connection DBAndNGINX end
+
+
+
+
+
+#connection webAndDB start
+-
+  hosts: web&&DBInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: instanceToReady, when: webAndDB == true }
+      - { role: database, when: webAndDB == true }
+      - { role: ec2, when: webAndDB == true }
+      - { role: startProject, when: webAndDB == true }
+-
+  hosts: NGINXInstance
+  name: "launched an EC2 Instance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: nginx, when: webAndDB == true }
+
+#connection webAndDB end
+
+
+
+#connection webAndNGINX start
+-
+  hosts: DBInstance
+  name: "launched an DBInstance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: database, when: webAndNGINX == true }
+      - { role: instanceToReady, when: webAndNGINX == true }
+           
+
+-
+  hosts: web&&NGINXInstance
+  name: "launched an web&&NGINXInstance"
+  remote_user: ubuntu
+  gather_facts: false
+  sudo: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: instanceToReady, when: webAndNGINX == true }
+      - { role: ec2, when: webAndNGINX == true }
+      - { role: startProject, when: webAndNGINX == true }
+      - { role: nginx, when: webAndNGINX == true }
+
+
+#connection webAndNGINX end

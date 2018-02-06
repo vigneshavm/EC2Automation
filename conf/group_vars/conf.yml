@@ -9,5 +9,5 @@
   allInOne : true
   allInDiff : false
   DBAndNGINX : false
-  webAndDBInstance : false
-  webAndNGINXInstance : false
+  webAndDB : false
+  webAndNGINX : false
