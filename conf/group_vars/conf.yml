@@ -24,3 +24,21 @@
 
 #  webAndNGINX : true
   webAndNGINX : false
+
+
+#project required
+  Student-WebApp : true
+#  Student-WebApp : false
+
+  Teacher-WebApp : true
+#  Teacher-WebApp : false
+
+  Student-WebApp : true
+#  Student-WebApp : false
+
+  Teacher-WebApp : true
+#  Teacher-WebApp : false
+
+  Student-WebApp : true
+#  Student-WebApp : false
+

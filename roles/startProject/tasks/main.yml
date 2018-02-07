@@ -1,14 +1,22 @@
-- name: "Start Board-WebApp"
+
+
+
+- name: "Start Student-WebApp"
   command: "forever start /home/ubuntu/Project/Student-WebApp/server.js"
+  when: Student-WebApp == true
 
 - name: "Start Teacher-WebApp"
   command: "forever start /home/ubuntu/Project/Teacher-WebApp/server.js"
+  when: Teacher-WebApp == true
  
 - name: "Start Principal-WebApp"
   command: "forever start /home/ubuntu/Project/Principal-WebApp/server.js"
+  when: Principal-WebApp == true
  
 - name: "Start Admin-WebApp"
   command: "forever start /home/ubuntu/Project/Admin-WebApp/server.js"
+  when: Admin-WebApp == true
  
 - name: "Start Board-WebApp"
   command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
+  when: Board-WebApp == true
