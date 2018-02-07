@@ -5,9 +5,22 @@
   region: ca-central-1
   security_group: webserver
   imageID: ami-270e8b43
-  env: production
+
+  env: development
+#  env: stage
+#  env: production
+
   allInOne : true
+#  allInOne : false
+
+#  allInDiff : true
   allInDiff : false
+
+#  DBAndNGINX : true
   DBAndNGINX : false
+
+#  webAndDB : true
   webAndDB : false
+
+#  webAndNGINX : true
   webAndNGINX : false

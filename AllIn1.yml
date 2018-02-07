@@ -653,7 +653,7 @@
   roles:
       - { role: database, when: webAndNGINX == true }
       - { role: instanceToReady, when: webAndNGINX == true }
-           
+
 
 -
   hosts: web&&NGINXInstance
