@@ -5,6 +5,9 @@
   name: "Provision an EC2 Instance"
   vars_files:
         - conf/group_vars/conf.yml
+  vars:
+      itemPublic: 127.0.0.1
+
   tasks:
     -
       local_action:
@@ -71,6 +74,7 @@
         tags:
           Name: webInstance
       when: allInOne == true
+
 
     - name: Change Tempalte content
       template:
@@ -484,9 +488,9 @@
 
   roles:
       - { role: instanceToReady, when: allInOne == true }
-      - { role: ec2, when: allInOne == true }
-      - { role: database, when: allInOne == true }
-      - { role: startProject, when: allInOne == true }
+#      - { role: ec2, when: allInOne == true }
+#      - { role: database, when: allInOne == true }
+#      - { role: startProject, when: allInOne == true }
       - { role: nginx, when: allInOne == true }
 
 #connection allInOne end

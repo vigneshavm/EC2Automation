@@ -17,7 +17,7 @@ server {
 
     location / {
             
-             proxy_pass http://{{ item.public_ip }}:8800/;
+             proxy_pass http://{{ itemPublic }}:8800/;
              proxy_http_version 1.1;
              proxy_set_header Upgrade $http_upgrade;
              proxy_set_header Connection 'upgrade';
@@ -34,7 +34,7 @@ server {
 
     location / {
         
-             proxy_pass http://{{ item.public_ip }}:8801/;
+             proxy_pass http://{{ itemPublic }}:8801/;
              proxy_http_version 1.1;
              proxy_set_header Upgrade $http_upgrade;
              proxy_set_header Connection 'upgrade';
@@ -51,7 +51,7 @@ server {
 
     location / {
             
-             proxy_pass http://{{ item.public_ip }}:8802/;
+             proxy_pass http://{{ itemPublic }}:8802/;
              proxy_http_version 1.1;
              proxy_set_header Upgrade $http_upgrade;
              proxy_set_header Connection 'upgrade';
@@ -68,7 +68,7 @@ server {
 
     location / {
         
-             proxy_pass http://{{ item.public_ip }}:8803/;
+             proxy_pass http://{{ itemPublic }}:8803/;
              proxy_http_version 1.1;
              proxy_set_header Upgrade $http_upgrade;
              proxy_set_header Connection 'upgrade';
@@ -85,7 +85,7 @@ server {
 
     location / {
             
-             proxy_pass http://{{ item.public_ip }}:8804/;
+             proxy_pass http://{{ itemPublic }}:8804/;
              proxy_http_version 1.1;
              proxy_set_header Upgrade $http_upgrade;
              proxy_set_header Connection 'upgrade';
