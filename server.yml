@@ -127,7 +127,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a Instance"
+      name: "Create a Instance (allInDiff)"
       register: ec2
       when: allInDiff == true
 
@@ -168,7 +168,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a Instance"
+      name: "Create a Instance (allInDiff)"
       register: ec2
       when: allInDiff == true
 
@@ -215,7 +215,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a Instance"
+      name: "Create a Instance (DBAndNGINX)"
       register: ec2
       when: DBAndNGINX == true
 
@@ -254,7 +254,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a Instance"
+      name: "Create a Instance (DBAndNGINX)"
       register: ec2
       when: DBAndNGINX == true
 
@@ -298,7 +298,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a Instance"
+      name: "Create a Instance (webAndDB)"
       register: ec2
       when: webAndDB == true
 
@@ -337,7 +337,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a Instance"
+      name: "Create a Instance (webAndDB)"
       register: ec2
       when: webAndDB == true
 
@@ -381,7 +381,7 @@
         region: "{{ region }}"
         key_name: "{{ keypair }}"
         module: ec2
-      name: "Create a web-NGINX Instance"
+      name: "Create a Instance (webAndNGINX)"
       register: ec2
       when: webAndNGINX == true
 
