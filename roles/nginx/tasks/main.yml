@@ -26,7 +26,7 @@
 
 - name: copy Nginx from template
   sudo: yes
-  template: src=environments/{{ env }}/group_vars/dev-nginx.yml
+  template: src=environments/{{ env }}/group_vars/dev-nginx.js
             dest=/etc/nginx/nginx.conf
   when: env == 'development'
 
