@@ -76,11 +76,7 @@
       when: allInOne == true
 
 
-    - name: Change Tempalte content
-      template:
-          src: environments/{{ env }}/group_vars/dev-nginx.yml
-      with_items: "{{item}}"
-      when: allInOne == true
+
 
 
 
