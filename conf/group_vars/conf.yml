@@ -6,10 +6,16 @@
   security_group: webserver
   imageID: ami-270e8b43
 
+
+
+#choose Environment
   env: development
 #  env: stage
 #  env: production
 
+
+
+#choose instance creation type
   allInOne : true
 #  allInOne : false
 
@@ -26,7 +32,9 @@
   webAndNGINX : false
 
 
-#project required
+
+#choose project required
+
 #  Student-WebApp : true
   StudentWebApp : false
 

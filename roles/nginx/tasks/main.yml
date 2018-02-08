@@ -18,9 +18,15 @@
   apt: name=nginx state=present
 
 
+#- name: copy Nginx from template
+#  sudo: yes
+#  template: src=dev-nginx.j2
+#            dest=/etc/nginx/nginx.conf
+#  when: env == 'development'
+
 - name: copy Nginx from template
   sudo: yes
-  template: src=dev-nginx.j2
+  template: src=environments/{{ env }}/group_vars/dev-nginx.yml
             dest=/etc/nginx/nginx.conf
   when: env == 'development'
 

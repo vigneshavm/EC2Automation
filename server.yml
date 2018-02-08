@@ -71,6 +71,20 @@
         tags:
           Name: webInstance
       when: allInOne == true
+
+    - name: Change Tempalte content
+      lineinfile:
+          state: present
+          dest: environments/{{ env }}/group_vars/dev-nginx.yml
+          backup: yes
+          insertafter: EOF
+          line: "{{ item }}"
+      when: allInOne == true
+
+
+
+
+
 #      allInOne end
 
 
