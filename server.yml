@@ -78,7 +78,9 @@
           dest: environments/{{ env }}/group_vars/dev-nginx.yml
           backup: yes
           insertafter: EOF
-          line: {{ item }}
+#          line: {{ item }}
+      with_items:
+          - "{{ item }}"
       when: allInOne == true
 
 
