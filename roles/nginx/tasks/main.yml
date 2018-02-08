@@ -18,12 +18,12 @@
   apt: name=nginx state=present
 
 
+
 - name: long form task does not
-  replace:
+  lineinfile:
     path: dev-nginx.j2
     regexp: '127.0.0.1'
-    replace: '0.0.0.0'
-
+    line: '0.0.0.0'
 
 - name: copy Nginx from template
   sudo: yes
