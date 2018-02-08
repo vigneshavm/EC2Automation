@@ -4,7 +4,7 @@
   keypair: stageNeols
   region: ca-central-1
   security_group: webserver
-  imageID: ami-270e8b43
+  imageID: ami-eaaf2b8e
 
 
 
