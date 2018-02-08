@@ -28,17 +28,17 @@
 
 #project required
 #  Student-WebApp : true
-  Student-WebApp : false
+  StudentWebApp : false
 
 #  Teacher-WebApp : true
-  Teacher-WebApp : false
+  TeacherWebApp : false
 
-  Principal-WebApp : true
+  PrincipalWebApp : true
 #  Principal-WebApp : false
 
-  Admin-WebApp : true
+  AdminWebApp : true
 #  Admin-WebApp : false
 
-  Board-WebApp : true
+  BoardWebApp : true
 #  Board-WebApp : false
 

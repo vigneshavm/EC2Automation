@@ -69,14 +69,14 @@
        dest=/home/ubuntu/Project/Student-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (Student-WebApp == true) and (env == 'stage' or env == 'development')
+  when: (StudentWebApp == true) and (env == 'stage' or env == 'development')
 
 - name: Clone Student-WebApp
   git: repo=git@github.com:neolearning/Student-WebApp.git
        dest=/home/ubuntu/Project/Student-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (Student-WebApp == true) and (env == 'production')
+  when: (StudentWebApp == true) and (env == 'production')
 
 
 - name: Clone Teacher-WebApp
@@ -84,14 +84,14 @@
        dest=/home/ubuntu/Project/Teacher-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (Teacher-WebApp == true) and (env == 'stage' or env == 'development')
+  when: (TeacherWebApp == true) and (env == 'stage' or env == 'development')
 
 - name: Clone Teacher-WebApp
   git: repo=git@github.com:neolearning/Teacher-WebApp.git
        dest=/home/ubuntu/Project/Teacher-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=master
-  when: (Teacher-WebApp == true) and (env == 'production')
+  when: (TeacherWebApp == true) and (env == 'production')
 
 
 - name: Clone Principal-WebApp
@@ -99,14 +99,14 @@
        dest=/home/ubuntu/Project/Principal-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (Principal-WebApp == true) and (env == 'stage' or env == 'development')
+  when: (PrincipalWebApp == true) and (env == 'stage' or env == 'development')
 
 - name: Clone Principal-WebApp
   git: repo=git@github.com:neolearning/Principal-WebApp.git
        dest=/home/ubuntu/Project/Principal-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=master
-  when: (Principal-WebApp == true) and (env == 'production')
+  when: (PrincipalWebApp == true) and (env == 'production')
 
 
 - name: Clone Admin-WebApp
@@ -114,14 +114,14 @@
        dest=/home/ubuntu/Project/Admin-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (Admin-WebApp == true) and (env == 'stage' or env == 'development')
+  when: (AdminWebApp == true) and (env == 'stage' or env == 'development')
 
 - name: Clone Admin-WebApp
   git: repo=git@github.com:neolearning/Admin-WebApp.git
        dest=/home/ubuntu/Project/Admin-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=master
-  when: (Admin-WebApp == true) and (env == 'production')
+  when: (AdminWebApp == true) and (env == 'production')
 
 
 - name: Clone Board-WebApp
@@ -129,38 +129,38 @@
        dest=/home/ubuntu/Project/Board-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (Board-WebApp == true) and (env == 'stage' or env == 'development')
+  when: (BoardWebApp == true) and (env == 'stage' or env == 'development')
 
 - name: Clone Board-WebApp
   git: repo=git@github.com:neolearning/Board-WebApp.git
        dest=/home/ubuntu/Project/Board-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=master
-  when: (Board-WebApp == true) and (env == 'production')
+  when: (BoardWebApp == true) and (env == 'production')
 
 - name: "Node: Student-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Student-WebApp"
   ignore_errors: yes
-  when: Student-WebApp == true
+  when: StudentWebApp == true
 
 - name: "Node: Teacher-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Teacher-WebApp"
   ignore_errors: yes
-  when: Teacher-WebApp == true
+  when: TeacherWebApp == true
 
 - name: "Node: Principal-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Principal-WebApp"
   ignore_errors: yes
-  when: Principal-WebApp == true
+  when: PrincipalWebApp == true
 
 - name: "Node: Admin-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Admin-WebApp"
   ignore_errors: yes
-  when: Admin-WebApp == true
+  when: AdminWebApp == true
 
 - name: "Node: Board-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Board-WebApp"
   ignore_errors: yes
-  when: Board-WebApp == true
+  when: BoardWebApp == true
 
 
