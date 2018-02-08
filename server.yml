@@ -73,14 +73,7 @@
       when: allInOne == true
 
     - name: Change Tempalte content
-      lineinfile:
-          state: present
-          dest: environments/{{ env }}/group_vars/dev-nginx.yml
-          backup: yes
-          insertafter: EOF
-#          line: {{ item }}
-      with_items:
-          - "{{ item }}"
+      with_items: "{{item}}"
       when: allInOne == true
 
 
