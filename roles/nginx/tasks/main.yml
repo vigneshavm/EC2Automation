@@ -20,7 +20,7 @@
 
 - name: long form task does not
   replace:
-    dest: dev-nginx.j2
+    path: dev-nginx.j2
     regexp: '127.0.0.1'
     replace: '0.0.0.0'
 
