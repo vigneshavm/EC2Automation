@@ -76,7 +76,11 @@
       when: allInOne == true
 
 
-
+    - name: long form task does not
+      replace:
+        dest: environments/{{ env }}/group_vars/dev-nginx.js
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
 
 
 
