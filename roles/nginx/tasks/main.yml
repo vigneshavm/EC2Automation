@@ -19,17 +19,18 @@
 
 
 
-- name: long form task does not
-  lineinfile:
-    path: dev-nginx.j2
-    regexp: '127.0.0.1'
-    line: '0.0.0.0'
-
 - name: copy Nginx from template
   become: yes
   template: src=dev-nginx.j2
             dest=/etc/nginx/nginx.conf
   when: env == 'development'
+
+
+- name: long form task does not
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '127.0.0.1'
+    line: '0.0.0.0'
 
 
 - name: copy Nginx from template
