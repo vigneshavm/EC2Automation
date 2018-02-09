@@ -49,17 +49,14 @@
       register: ec2
       when: allInOne == true
 
-
-
-    - name: Save host data
+    - name: Save host data (allInOne)
       add_host:
         hostname: "{{ item.public_ip }}"
         groupname: webInstance
       with_items: "{{ ec2.instances }}"
       when: allInOne == true
 
-
-    - name: Wait for SSH for instances
+    - name: Wait for SSH for instances (allInOne)
       wait_for:
         delay: 1
         host: "{{ item.public_ip }}"
@@ -67,6 +64,7 @@
         state: started
         timeout: 30
       with_items: "{{ ec2.instances }}"
+      when: allInOne == true
 
     - name: Add tag to (allInOne)
       ec2_tag:
@@ -79,6 +77,7 @@
           Name: webInstance
       when: allInOne == true
 #      allInOne end
+
 
 
 
@@ -97,14 +96,14 @@
       register: ec2
       when: allInDiff == true
 
-    - name: Add new instance to host group(allInDiff)
+    - name: Save host data (allInOne)
       add_host:
         hostname: "{{ item.public_ip }}"
         groupname: webInstance
       with_items: "{{ ec2.instances }}"
       when: allInDiff == true
 
-    - name: Wait for SSH for instances
+    - name: Wait for SSH for instances (allInOne)
       wait_for:
         delay: 1
         host: "{{ item.public_ip }}"
@@ -126,29 +125,7 @@
       when: allInDiff == true
 
 
-
-
-    - name: Wait for SSH to come up (allInDiff)
-      local_action: wait_for
-                          host={{ item.public_ip }}
-                          port=22
-                          state=started
-      with_items: ec2.instances
-      when: allInDiff == true
-
-
-    - name: Add tag to (allInDiff)
-      local_action: ec2_tag
-                         resource={{ item.id }}
-                         region={{ region }}
-                         state=present
-      with_items: ec2.instances
-      args:
-        tags:
-          Name: webInstance
-      when: allInDiff == true
-
-
+#                      DBInstance
     -
       local_action:
         count: "{{ count }}"
@@ -163,33 +140,35 @@
       register: ec2
       when: allInDiff == true
 
-
-    - name: Add new instance to host group
-      add_host: hostname={{ item.public_ip }} groupname=DBInstance
-      with_items: ec2.instances
+    - name: Save host data (allInOne)
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: DBInstance
+      with_items: "{{ ec2.instances }}"
       when: allInDiff == true
 
-
-    - name: Wait for SSH to come up
-      local_action: wait_for
-                          host={{ item.public_ip }}
-                          port=22
-                          state=started
-      with_items: ec2.instances
+    - name: Wait for SSH for instances (allInOne)
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ ec2.instances }}"
       when: allInDiff == true
 
-
-    - name: Add tag to Instance(s)
-      local_action: ec2_tag
-                         resource={{ item.id }}
-                         region={{ region }}
-                         state=present
-      with_items: ec2.instances
+    - name: Add tag to (allInOne)
+      ec2_tag:
+        resource: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+      with_items: "{{ ec2.instances }}"
       args:
         tags:
           Name: DBInstance
       when: allInDiff == true
 
+#                      NGINXInstance
     -
       local_action:
         count: "{{ count }}"
@@ -204,32 +183,34 @@
       register: ec2
       when: allInDiff == true
 
-
-    - name: Add new instance to host group
-      add_host: hostname={{ item.public_ip }} groupname=NGINXInstance
-      with_items: ec2.instances
+    - name: Save host data (allInOne)
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: NGINXInstance
+      with_items: "{{ ec2.instances }}"
       when: allInDiff == true
 
-
-    - name: Wait for SSH to come up
-      local_action: wait_for
-                          host={{ item.public_ip }}
-                          port=22
-                          state=started
-      with_items: ec2.instances
+    - name: Wait for SSH for instances (allInOne)
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ ec2.instances }}"
       when: allInDiff == true
 
-
-    - name: Add tag to Instance(s)
-      local_action: ec2_tag
-                         resource={{ item.id }}
-                         region={{ region }}
-                         state=present
-      with_items: ec2.instances
+    - name: Add tag to (allInOne)
+      ec2_tag:
+        resource: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+      with_items: "{{ ec2.instances }}"
       args:
         tags:
           Name: NGINXInstance
       when: allInDiff == true
+
 #      allInDifferent end
 
 
@@ -517,9 +498,9 @@
 -
   hosts: DBInstance
   name: "launched an EC2 Instance - allInDiff"
+  become: false
   become_user: ubuntu
   gather_facts: false
-  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -534,15 +515,12 @@
 -
   hosts: webInstance
   name: "launched an EC2 Instance - allInDiff"
+  become: false
   become_user: ubuntu
   gather_facts: false
-  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-    isDev: true
-    isStage: false
-    isProd: false
 
   vars_files:
         - conf/group_vars/conf.yml
@@ -553,9 +531,10 @@
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance - allInDiff"
+  become: false
   become_user: ubuntu
   gather_facts: false
-  become: false
+
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
