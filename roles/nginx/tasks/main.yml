@@ -40,7 +40,8 @@
   replace:
     dest: /etc/nginx/nginx.conf
     regexp: '127.0.0.1'
-    replace: "{{ webPublicIP.stdout }}"
+#    replace: "{{ webPublicIP.stdout }}"
+    replace: "{{ hostvars.webInstance.webPublicIP.stdout }}"
 #    replace: "{{ hostvars['webInstance']['webPublicIP']['stdout'] }}"
 
 
