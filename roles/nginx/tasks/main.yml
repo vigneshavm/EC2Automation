@@ -1,14 +1,14 @@
 
 - name: Update system
-  sudo: yes 
-  command: apt-get update
+  become: yes
+  command: apt update
 
 - name: Nginx Installation
-  sudo: yes 
+  become: yes
   command: apt-get --assume-yes install nginx
 
 - name: DEPENDENCIES
-  sudo: yes
+  become: yes
   apt: name={{ item }}
   with_items:
         - libpcre3 
@@ -26,20 +26,20 @@
     line: '0.0.0.0'
 
 - name: copy Nginx from template
-  sudo: yes
+  become: yes
   template: src=dev-nginx.j2
             dest=/etc/nginx/nginx.conf
   when: env == 'development'
 
 
 - name: copy Nginx from template
-  sudo: yes
+  become: yes
   template: src=stage-nginx.j2
             dest=/etc/nginx/nginx.conf
   when: env == 'stage'
 
 - name: copy Nginx from template
-  sudo: yes
+  become: yes
   template: src=production-nginx.j2
             dest=/etc/nginx/nginx.conf
   when: env == 'production'
@@ -49,7 +49,7 @@
 #  register: ec2_public_ip
 #
 #- name: Create DNS records | student
-#  sudo: yes
+#  become: yes
 #  route53:
 #    command: create
 #    record: "{{ student }}"
@@ -59,7 +59,7 @@
 #    zone: neols.com
 #
 #- name: Create DNS records | teacher
-#  sudo: yes
+#  become: yes
 #  route53:
 #    command: create
 #    record: "{{ teacher }}"
@@ -69,7 +69,7 @@
 #    zone: neols.com
 #
 #- name: Create DNS records | principal
-#  sudo: yes
+#  become: yes
 #  route53:
 #    command: create
 #    record: "{{ principal }}"
@@ -79,7 +79,7 @@
 #    zone: neols.com
 #
 #- name: Create DNS records | admin
-#  sudo: yes
+#  become: yes
 #  route53:
 #    command: create
 #    record: "{{ admin }}"
@@ -89,7 +89,7 @@
 #    zone: neols.com
 #
 #- name: Create DNS records | board
-#  sudo: yes
+#  become: yes
 #  route53:
 #    command: create
 #    record: "{{ board }}"
@@ -100,11 +100,11 @@
 
 
 - name: restart nginx
-  sudo: yes
+  become: yes
   service: name=nginx state=restarted
 
 - name: reload nginx
-  sudo: yes
+  become: yes
   service: name=nginx state=reloaded
 
 
