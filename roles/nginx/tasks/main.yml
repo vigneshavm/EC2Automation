@@ -1,7 +1,7 @@
 
 - name: Update system
   become: yes
-  command: apt update
+  command: apt-get update
 
 - name: Nginx Installation
   become: yes
