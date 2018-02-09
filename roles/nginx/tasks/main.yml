@@ -30,11 +30,6 @@
   template: src=dev-nginx.j2
             dest=/etc/nginx/nginx.conf
   when: env == 'development'
-  - replace:
-      dest: ./src
-      regexp: 'app_name:\s[A-Za-z0-9 ]*'
-      replace: 'app_name: {{ node }}'
-
 
 - name: change nginx file
   become: true
