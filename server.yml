@@ -57,7 +57,7 @@
       when: allInOne == true
 
     - debug: {{ item }}
-      with_items: ec2.instances
+      with_items: {{ ec2.instances }}
 
     - name: Wait for SSH to come up (allInDiff)
       local_action: wait_for
