@@ -37,7 +37,7 @@
   become_user: root
   lineinfile:
     path: /etc/nginx/nginx.conf
-    regexp: '127.0.0.1'
+    regexp: '^127.0.0.1'
     line: '0.0.0.0'
 
 

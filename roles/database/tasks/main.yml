@@ -1,36 +1,44 @@
 - name: Add MongoDB depenencey
-  become: yes
+  become: true
+  become_user: root
   command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
 
 - name: MongoDB | Add  repository 
-  become: yes
+  become: true
+  become_user: root
   shell:
     echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 - name: Update system
-  become: yes
+  become: true
+  become_user: root
   command: apt-get update
 
 - name: MongoDB Installation 
-  become: yes
+  become: true
+  become_user: root
   command: apt-get --assume-yes install -y mongodb-org
 
 - name: copy private file from template
-  become: yes
+  become: true
+  become_user: root
   template: src=mongoFile
             dest=/etc/systemd/system/mongodb.service
             mode=0600
 
 - name: mongodb start
-  become: yes
+  become: true
+  become_user: root
   command: systemctl start mongodb
 
 - name: mongodb enable
-  become: yes
+  become: true
+  become_user: root
   command: systemctl enable mongodb
 
 - name: GIT Installation
-  become: yes
+  become: true
+  become_user: root
   apt: name=git state=present
 
 - name: Creates directory

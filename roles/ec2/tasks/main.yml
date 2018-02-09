@@ -1,48 +1,62 @@
 - name: Node | Add  repository
-  become: yes
+  become: true
+  become_user: root
   shell:
     echo "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
 
 - name: Node Installation
-  become: yes
+  become: true
+  become_user: root
   command: apt-get --assume-yes install nodejs
 
 
 - name: npm Installation
-  become: yes
+  become: true
+  become_user: root
   command: apt-get --assume-yes install npm
 
 - name: npm Installation
-  become: yes
+  become: true
+  become_user: root
   command: apt-get --assume-yes install build-essential
 
 - name: nodejs-legacy Installation
-  become: yes
+  become: true
+  become_user: root
   command: apt-get --assume-yes install nodejs-legacy
 
 - name: Update system
-  become: yes
+  become: true
+  become_user: root
   command: apt-get update
 
 - name: GIT Installation
-  become: yes
+  become: true
+  become_user: root
   apt: name=git state=present
 
 - name: "Install forever (to run Node.js app)."
   npm: name=forever global=yes state=present
-  become: yes
+  become: true
+  become_user: root
 
 - name: copy private file from template
+  become: true
+  become_user: root
   template: src=private-key
             dest=/home/ubuntu/.ssh/id_rsa
             mode=0600
 
 - name: copy ssh file from template
+  become: true
+  become_user: root
   template: src=ssh-key
             dest=/home/ubuntu/.ssh/id_rsa.pub
             mode=0600
 
 - name: copy authorized_keys file from template
+  become: true
+  become_user: root
   template: src=authorized_keys
             dest=/home/ubuntu/.ssh/authorized_keys
             mode=0600
