@@ -1,0 +1,40 @@
+{"ec2.instances": [
+    {
+        "ami_launch_index": "0",
+        "architecture": "x86_64",
+        "block_device_mapping": {
+            "/dev/sda1": {
+                "delete_on_termination": true,
+                "status": "attached",
+                "volume_id": "vol-0fecf2d3d4536ec48"
+            }
+        },
+        "dns_name": "ec2-35-182-226-66.ca-central-1.compute.amazonaws.com",
+        "ebs_optimized": false,
+        "groups": {
+            "sg-9a0a88f2": "webserver"
+        },
+        "hypervisor": "xen",
+        "id": "i-0c4f008a5b928e0a3",
+        "image_id": "ami-eaaf2b8e",
+        "instance_type": "t2.micro",
+        "kernel": null,
+        "key_name": "stageNeols",
+        "launch_time": "2018-02-08T10:56:16.000Z",
+        "placement": "ca-central-1a",
+        "private_dns_name": "ip-172-31-22-245.ca-central-1.compute.internal",
+        "private_ip": "172.31.22.245",
+        "public_dns_name": "ec2-35-182-226-66.ca-central-1.compute.amazonaws.com",
+        "public_ip": "35.182.226.66",
+        "ramdisk": null,
+        "region": "ca-central-1",
+        "root_device_name": "/dev/sda1",
+        "root_device_type": "ebs",
+        "state": "running",
+        "state_code": 16,
+        "tags": {},
+        "tenancy": "default",
+        "virtualization_type": "hvm"
+    }
+]
+}
