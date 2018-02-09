@@ -1,20 +1,26 @@
 
-- name: copy Nginx from template
-  become: true
-  become_user: root
-  template: src=dev-nginx.j2
-            dest=/home/ubuntu/nginx.conf
-  when: env == 'development'
 
-- name: change nginx file
-  become: true
-  become_user: root
-  replace:
-    dest: /home/ubuntu/nginx.conf
-    regexp: '127.0.0.1'
-#    replace: "{{ webPublicIP.stdout }}"
-    replace: "{{ hostvars.webInstance.webPublicIP.stdout }}"
-#    replace: "{{ hostvars['webInstance']['webPublicIP']['stdout'] }}"
+
+
+- debug: msg="{{ hostvars['webInstance']['commandserver'] }}"
+
+
+#- name: copy Nginx from template
+#  become: true
+#  become_user: root
+#  template: src=dev-nginx.j2
+#            dest=/home/ubuntu/nginx.conf
+#  when: env == 'development'
+#
+#- name: change nginx file
+#  become: true
+#  become_user: root
+#  replace:
+#    dest: /home/ubuntu/nginx.conf
+#    regexp: '127.0.0.1'
+##    replace: "{{ webPublicIP.stdout }}"
+#    replace: "{{ hostvars.webInstance.webPublicIP.stdout }}"
+##    replace: "{{ hostvars['webInstance']['webPublicIP']['stdout'] }}"
 
 #
 #
