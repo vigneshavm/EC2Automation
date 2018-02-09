@@ -480,7 +480,7 @@
 
   roles:
       - { role: instanceToReady, when: allInOne == true }
-#      - { role: ec2, when: allInOne == true }
+      - { role: ec2, when: allInOne == true }
 #      - { role: database, when: allInOne == true }
 #      - { role: startProject, when: allInOne == true }
       - { role: nginx, when: allInOne == true }
