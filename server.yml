@@ -50,12 +50,11 @@
       when: allInOne == true
 
     - debug: var=ec2
-
-    - debug: var=ec2.instances
+    - debug: var=ec2.instances[0].public_ip
 
     - name: Add new webInstance to host group(allInOne)
       add_host: hostname={{ item.public_ip }} groupname=webInstance
-      with_items: "{{ ec2.instance_data }}"
+      with_items: ec2.instances
       when: allInOne == true
 
 
@@ -64,7 +63,7 @@
                           host={{ item.public_ip }}
                           port=22
                           state=started
-      with_items: "{{ ec2.instance_data }}"
+      with_items: ec2.instances
       when: allInOne == true
 
 
@@ -73,7 +72,7 @@
                          resource={{ item.id }}
                          region={{ region }}
                          state=present
-      with_items: "{{ ec2.instance_data }}"
+      with_items: ec2.instances
       args:
         tags:
           Name: webInstance
