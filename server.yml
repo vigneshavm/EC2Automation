@@ -466,9 +466,9 @@
 -
   hosts: webInstance
   name: "launched an EC2 Instance - allInOne "
-  remote_user: ubuntu
+  become: false
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -492,9 +492,9 @@
 -
   hosts: DBInstance
   name: "launched an EC2 Instance - allInDiff"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -509,9 +509,9 @@
 -
   hosts: webInstance
   name: "launched an EC2 Instance - allInDiff"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -528,9 +528,9 @@
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance - allInDiff"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -549,9 +549,9 @@
 -
   hosts: DB&&NGINXInstance
   name: "launched an EC2 Instance"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -566,9 +566,9 @@
 -
   hosts: webInstance
   name: "launched an EC2 Instance"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -582,9 +582,9 @@
 -
   hosts: DB&&NGINXInstance
   name: "launched an EC2 Instance"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -607,9 +607,9 @@
 -
   hosts: web&&DBInstance
   name: "launched an EC2 Instance"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -625,9 +625,9 @@
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -647,9 +647,9 @@
 -
   hosts: DBInstance
   name: "launched an DBInstance"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -665,9 +665,9 @@
 -
   hosts: web&&NGINXInstance
   name: "launched an web&&NGINXInstance"
-  remote_user: ubuntu
+  become_user: ubuntu
   gather_facts: false
-  sudo: false
+  become: false
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
