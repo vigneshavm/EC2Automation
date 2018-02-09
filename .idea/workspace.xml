@@ -99,8 +99,8 @@
       <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06036217" vertical-offset="840" max-vertical-offset="10470">
-              <caret line="58" column="25" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+            <state vertical-scroll-proportion="1.028169" vertical-offset="539" max-vertical-offset="10440">
+              <caret line="70" column="49" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -735,7 +735,15 @@
       <created>1518156763194</created>
       <updated>1518156763194</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="ami changed">
+      <created>1518156886095</created>
+      <updated>1518156886095</updated>
+    </task>
+    <task id="LOCAL-00068" summary="ami changed">
+      <created>1518157020848</created>
+      <updated>1518157020848</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1170,8 +1178,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06036217" vertical-offset="840" max-vertical-offset="10470">
-          <caret line="58" column="25" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+        <state vertical-scroll-proportion="1.028169" vertical-offset="539" max-vertical-offset="10440">
+          <caret line="70" column="49" selection-start-line="70" selection-start-column="49" selection-end-line="70" selection-end-column="49" />
           <folding />
         </state>
       </provider>

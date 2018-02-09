@@ -56,25 +56,23 @@
       with_items: ec2.instances
       when: allInOne == true
 
-    - debug: {{ item }}
-      with_items:
-            - "{{ ec2.instances }}"
-
 
     - name: Wait for SSH to come up (allInDiff)
       local_action: wait_for
-                          host={{ item.public_ip }}
+                          host= "{{ item.public_ip }}"
                           port=22
                           state=started
-      with_items: ec2.instances
+      with_items:
+            - "{{ ec2.instances }}"
       when: allInOne == true
 
     - name: Add tag to (allInOne)
       local_action: ec2_tag
-                         resource=ec2.instances[0].id
+                         resource="{{ item.id }}"
                          region={{ region }}
                          state=present
-      with_items: ec2.instances
+      with_items:
+            - "{{ ec2.instances }}"
       args:
         tags:
           Name: webInstance
