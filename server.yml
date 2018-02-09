@@ -49,13 +49,14 @@
       register: ec2
       when: allInOne == true
 
-    - debug: var=ec2
 
-    - name: Add new webInstance to host group(allInOne)
-      add_host: hostname=ec2.instances[0].public_ip groupname=webInstance
-      with_items: ec2.instances
+
+    - name: Save host data
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: webInstance
+      with_items: "{{ ec2.instance_data }}"
       when: allInOne == true
-
 
 
     - name: Wait for SSH for instances
