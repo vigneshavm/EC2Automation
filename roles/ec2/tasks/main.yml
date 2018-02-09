@@ -9,8 +9,6 @@
   set_fact: commandserver="{{ webPublicIP.stdout }}"
 
 
-
-
 - debug: msg="{{ commandserver }}"
 
 #- name: Node | Add  repository
