@@ -2,7 +2,7 @@
 - name: Update system
   become: true
   become_user: root
-  command: apt-get update
+  command: apt-get --assume-yes update
 
 - name: Nginx Installation
   become: true
