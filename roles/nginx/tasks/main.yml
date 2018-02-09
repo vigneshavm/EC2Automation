@@ -32,13 +32,12 @@
   when: env == 'development'
 
 
-- name: long form task does not
+- replace:
+  dest: /etc/nginx/nginx.conf
   become: true
   become_user: root
-  lineinfile:
-    path: /etc/nginx/nginx.conf
-    regexp: '^127.0.0.1'
-    line: '0.0.0.0'
+  regexp: '127.0.0.1'
+  replace: '0.0.0.0'
 
 
 - name: copy Nginx from template
