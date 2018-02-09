@@ -57,15 +57,24 @@
       with_items: ec2.instances
       when: allInOne == true
 
-
-    - name: Wait for SSH to come up in webInstance(allInOne)
+    - name: Wait for SSH to come up (allInOne)
       local_action: wait_for
-                          host=ec2.instances[0].public_ip
+                          host=ansible_connection
                           port=22
                           state=started
       with_items: ec2.instances
       when: allInOne == true
+      vars:
+        ansible_connection: ec2.instances[0].public_ip
 
+    - name: Wait 300 seconds for port 22 to become open and contain "OpenSSH"
+      wait_for:
+        port: 22
+        host: ansible_connection
+        search_regex: OpenSSH
+        delay: 10
+      vars:
+        ansible_connection: ec2.instances[0].public_ip
 
     - name: Add tag to (allInOne)
       local_action: ec2_tag
