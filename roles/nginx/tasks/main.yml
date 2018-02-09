@@ -1,52 +1,48 @@
 
+
+
+
 - name: Update system
   become: true
   become_user: root
-  command: echo ${webPublicIP.stdout}
+  command: apt-get --assume-yes update
+
+- name: Nginx Installation
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install nginx
+
+- name: DEPENDENCIES
+  become: true
+  become_user: root
+  apt: name={{ item }}
+  with_items:
+        - libpcre3
+        - libpcre3-dev
+
+- name: Install The Nginx
+  become: true
+  become_user: root
+  apt: name=nginx state=present
 
 
 
-#- name: Update system
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes update
-#
-#- name: Nginx Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install nginx
-#
-#- name: DEPENDENCIES
-#  become: true
-#  become_user: root
-#  apt: name={{ item }}
-#  with_items:
-#        - libpcre3
-#        - libpcre3-dev
-#
-#- name: Install The Nginx
-#  become: true
-#  become_user: root
-#  apt: name=nginx state=present
-#
-#
-#
-#- name: copy Nginx from template
-#  become: true
-#  become_user: root
-#  template: src=dev-nginx.j2
-#            dest=/etc/nginx/nginx.conf
-#  when: env == 'development'
-#
-#- name: change nginx file
-#  become: true
-#  become_user: root
-#  replace:
-#    dest: /etc/nginx/nginx.conf
-#    regexp: '127.0.0.1'
-#    replace: '0.0.0.0'
-#
-#
+- name: copy Nginx from template
+  become: true
+  become_user: root
+  template: src=dev-nginx.j2
+            dest=/etc/nginx/nginx.conf
+  when: env == 'development'
+
+- name: change nginx file
+  become: true
+  become_user: root
+  replace:
+    dest: /etc/nginx/nginx.conf
+    regexp: '127.0.0.1'
+    replace: ${webPublicIP.stdout}
+
+
 #- name: copy Nginx from template
 #  become: true
 #  become_user: root
@@ -115,15 +111,15 @@
 #    overwrite: yes
 #    zone: neols.com
 
-
-- name: restart nginx
-  become: true
-  become_user: root
-  service: name=nginx state=restarted
-
-- name: reload nginx
-  become: true
-  become_user: root
-  service: name=nginx state=reloaded
-
-
+#
+#- name: restart nginx
+#  become: true
+#  become_user: root
+#  service: name=nginx state=restarted
+#
+#- name: reload nginx
+#  become: true
+#  become_user: root
+#  service: name=nginx state=reloaded
+#
+#

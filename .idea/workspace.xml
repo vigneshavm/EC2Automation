@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99a1c592-4d4b-4017-8507-a761fe5cd376" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/ec2/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -30,8 +29,8 @@
       <file leaf-file-name="main.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.38833" vertical-offset="0" max-vertical-offset="2025">
-              <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.5734407" vertical-offset="360" max-vertical-offset="1965">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -50,8 +49,8 @@
       <file leaf-file-name="server.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="152.81482" vertical-offset="4531" max-vertical-offset="10365">
-              <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+            <state vertical-scroll-proportion="-10.518518" vertical-offset="6961" max-vertical-offset="10365">
+              <caret line="483" column="45" selection-start-line="483" selection-start-column="45" selection-end-line="483" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -170,9 +169,9 @@
         <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
         <option value="$PROJECT_DIR$/s.json" />
         <option value="$PROJECT_DIR$/roles/instanceToReady/tasks/main.yml" />
-        <option value="$PROJECT_DIR$/server.yml" />
         <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
+        <option value="$PROJECT_DIR$/server.yml" />
         <option value="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
       </list>
     </option>
@@ -835,7 +834,15 @@
       <created>1518162915700</created>
       <updated>1518162915700</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="getting data from diff roles">
+      <created>1518167292599</created>
+      <updated>1518167292599</updated>
+    </task>
+    <task id="LOCAL-00088" summary="getting data from diff roles">
+      <created>1518167484640</created>
+      <updated>1518167484640</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -879,7 +886,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Nginx added at last , alter" />
     <MESSAGE value="ssh file changes" />
     <MESSAGE value="project - Project - spelling" />
     <MESSAGE value="project - Project" />
@@ -904,7 +910,8 @@
     <MESSAGE value="apt-get" />
     <MESSAGE value="root privileges" />
     <MESSAGE value="nginx file edit&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="nginx file edit&#10;" />
+    <MESSAGE value="getting data from diff roles" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting data from diff roles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1262,8 +1269,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="152.81482" vertical-offset="4531" max-vertical-offset="10365">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        <state vertical-scroll-proportion="-10.518518" vertical-offset="6961" max-vertical-offset="10365">
+          <caret line="483" column="45" selection-start-line="483" selection-start-column="45" selection-end-line="483" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1278,8 +1285,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.38833" vertical-offset="0" max-vertical-offset="2025">
-          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.5734407" vertical-offset="360" max-vertical-offset="1965">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding />
         </state>
       </provider>
