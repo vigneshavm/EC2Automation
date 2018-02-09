@@ -1,36 +1,36 @@
 - name: Node | Add  repository
-  sudo: yes
+  become: yes
   shell:
     echo "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
 
 - name: Node Installation
-  sudo: yes
+  become: yes
   command: apt-get --assume-yes install nodejs
 
 
 - name: npm Installation
-  sudo: yes 
+  become: yes
   command: apt-get --assume-yes install npm
 
 - name: npm Installation
-  sudo: yes
+  become: yes
   command: apt-get --assume-yes install build-essential
 
 - name: nodejs-legacy Installation
-  sudo: yes
+  become: yes
   command: apt-get --assume-yes install nodejs-legacy
 
 - name: Update system
-  sudo: yes 
+  become: yes
   command: apt-get update
 
 - name: GIT Installation
-  sudo: yes
+  become: yes
   apt: name=git state=present
 
 - name: "Install forever (to run Node.js app)."
   npm: name=forever global=yes state=present
-  sudo: yes
+  become: yes
 
 - name: copy private file from template
   template: src=private-key

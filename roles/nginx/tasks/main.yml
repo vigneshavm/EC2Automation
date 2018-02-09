@@ -1,10 +1,10 @@
 
 - name: Update system
-  become: yes
+  become: true
   command: apt-get update
 
 - name: Nginx Installation
-  become: yes
+  become: true
   command: apt-get --assume-yes install nginx
 
 - name: DEPENDENCIES
