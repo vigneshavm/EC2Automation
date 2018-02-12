@@ -12,7 +12,7 @@
   tasks:
 
     - set_fact:
-         one_fact:  {{ webID }}
+         one_fact:  "{{ webID }}"
          cacheable: true
     - debug:
         msg: "{{ one_fact }}"
