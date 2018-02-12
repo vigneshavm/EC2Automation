@@ -529,8 +529,10 @@
       - { role: instanceToReady, when: allInDiff == true }
       - { role: ec2, when: allInDiff == true }
   tasks:
-      - name: register real root user to localhost facts
-      - set_fact: fact_for_host1="1"
+    -
+      local_action:
+        name: "register real root user to localhost facts"
+        set_fact: fact_for_host1="1"
 
 -
   hosts: NGINXInstance
