@@ -16,14 +16,14 @@
          cacheable: true
     - debug:
         msg: "{{ one_fact }}"
-#
-#    - name: change nginx file
-#      become: true
-#      become_user: root
-#      replace:
-#        dest: /home/ubuntu/nginx.conf
-#        regexp: '127.0.0.1'
-#        replace:  '{{ webID }}'
+
+    - name: change nginx file
+      become: true
+      become_user: root
+      replace:
+        dest: /home/ubuntu/nginx.conf
+        regexp: '127.0.0.1'
+        replace:  '{{ one_fact }}'
 #      allInOne started
 
 #  tasks:
