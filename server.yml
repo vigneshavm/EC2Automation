@@ -528,6 +528,9 @@
   roles:
       - { role: instanceToReady, when: allInDiff == true }
       - { role: ec2, when: allInDiff == true }
+  tasks:
+      - name: register real root user to localhost facts
+      - set_fact: fact_for_host1="1"
 
 -
   hosts: NGINXInstance
@@ -542,6 +545,9 @@
 
   vars_files:
         - conf/group_vars/conf.yml
+
+  tasks:
+          - debug: msg="{{ hostvars['webInstance']['fact_for_host1'] }}"
 
   roles:
       - { role: nginx, when: allInDiff == true }
