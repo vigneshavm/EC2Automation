@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99a1c592-4d4b-4017-8507-a761fe5cd376" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/group_vars/conf.yml" afterPath="$PROJECT_DIR$/conf/group_vars/conf.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.yml" afterPath="$PROJECT_DIR$/server.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -50,8 +49,8 @@
       <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.955414" vertical-offset="7830" max-vertical-offset="10590">
-              <caret line="552" column="33" selection-start-line="552" selection-start-column="33" selection-end-line="552" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.1910828" vertical-offset="7665" max-vertical-offset="10620">
+              <caret line="517" column="14" selection-start-line="517" selection-start-column="14" selection-end-line="517" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -172,8 +171,8 @@
         <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
-        <option value="$PROJECT_DIR$/server.yml" />
         <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
+        <option value="$PROJECT_DIR$/server.yml" />
       </list>
     </option>
   </component>
@@ -935,7 +934,15 @@
       <created>1518420006627</created>
       <updated>1518420006628</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="gathered  fact true">
+      <created>1518420551532</created>
+      <updated>1518420551532</updated>
+    </task>
+    <task id="LOCAL-00114" summary="gathered  fact true">
+      <created>1518421002842</created>
+      <updated>1518421002842</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1373,8 +1380,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.955414" vertical-offset="7830" max-vertical-offset="10590">
-          <caret line="552" column="33" selection-start-line="552" selection-start-column="33" selection-end-line="552" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.1910828" vertical-offset="7665" max-vertical-offset="10620">
+          <caret line="517" column="14" selection-start-line="517" selection-start-column="14" selection-end-line="517" selection-end-column="14" />
           <folding />
         </state>
       </provider>
