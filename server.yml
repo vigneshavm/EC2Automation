@@ -11,16 +11,8 @@
 
   tasks:
 
-
-    - name: Get osci content.
-      shell: cat conf/group_vars/conf.yml
-      register: data
-
-    - debug:
-        msg: "{{ data.stdout }}"
-
     - set_fact:
-         one_fact:  ${ webID }
+         one_fact:  {{ webID }}
          cacheable: true
     - debug:
         msg: "{{ one_fact }}"
