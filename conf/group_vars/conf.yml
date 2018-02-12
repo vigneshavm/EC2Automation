@@ -3,7 +3,7 @@
   instance_type: t2.micro
   keypair: stageNeols
   region: ca-central-1
-  security_group: webserver
+  security_group: webserverTest
   imageID: ami-eaaf2b8e
 
 

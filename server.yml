@@ -553,8 +553,8 @@
     command: echo ${webIP.stdout}
 
 
-  roles:
-      - { role: nginx, when: allInDiff == true }
+#  roles:
+#      - { role: nginx, when: allInDiff == true }
 
 #connection allInDiff end
 
