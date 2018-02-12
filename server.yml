@@ -550,7 +550,10 @@
 
   tasks:
   - name: echo the timestamp
-    command: echo ${webIP.stdout}
+    command: echo {{ webIP.stdout }}
+
+
+  - debug: var=ansible_all_ipv4_addresses
 
 
 #  roles:
