@@ -84,9 +84,6 @@
 
 
 #      allInDifferenet started
-
-
-
     -
       local_action:
         count: "{{ count }}"
