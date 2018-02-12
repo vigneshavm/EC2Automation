@@ -1,6 +1,9 @@
 
 
 
+- debug:
+    msg: "{{ data.stdout }} ::::::::::: {{ one_fact }}"
+
 - name: testing
   debug: msg={{ webID }}
 
@@ -18,7 +21,7 @@
   replace:
     dest: /home/ubuntu/nginx.conf
     regexp: '127.0.0.1'
-    replace:  '{{ nginxConfIP }}'
+    replace:  '{{ webID }}'
 
 #
 #- name: Update system
