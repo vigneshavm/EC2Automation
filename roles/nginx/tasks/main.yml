@@ -2,73 +2,48 @@
 
 
 
-- debug: msg="{{ hostvars['webInstance'].stdout }}"
 
 
 
 
-#- name: copy Nginx from template
-#  become: true
-#  become_user: root
-#  template: src=dev-nginx.j2
-#            dest=/home/ubuntu/nginx.conf
-#  when: env == 'development'
-#
-#- name: change nginx file
-#  become: true
-#  become_user: root
-#  replace:
-#    dest: /home/ubuntu/nginx.conf
-#    regexp: '127.0.0.1'
-##    replace: "{{ webPublicIP.stdout }}"
-#    replace: "{{ hostvars.webInstance.webPublicIP.stdout }}"
-##    replace: "{{ hostvars['webInstance']['webPublicIP']['stdout'] }}"
+- name: Update system
+  become: true
+  become_user: root
+  command: apt-get --assume-yes update
 
-#
-#
-#- name: Update system
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes update
-#
-#- name: Nginx Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install nginx
-#
-#- name: DEPENDENCIES
-#  become: true
-#  become_user: root
-#  apt: name={{ item }}
-#  with_items:
-#        - libpcre3
-#        - libpcre3-dev
-#
-#- name: Install The Nginx
-#  become: true
-#  become_user: root
-#  apt: name=nginx state=present
-#
-#
-#
-#- name: copy Nginx from template
-#  become: true
-#  become_user: root
-#  template: src=dev-nginx.j2
-#            dest=/etc/nginx/nginx.conf
-#  when: env == 'development'
-#
-#- name: change nginx file
-#  become: true
-#  become_user: root
-#  replace:
-#    dest: /etc/nginx/nginx.conf
-#    regexp: '127.0.0.1'
-##    replace: "{{ webPublicIP.stdout }}"
-#    replace: "{{ hostvars.webInstance.webPublicIP.stdout }}"
-##    replace: "{{ hostvars['webInstance']['webPublicIP']['stdout'] }}"
-#
-#
+- name: Nginx Installation
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install nginx
+
+- name: DEPENDENCIES
+  become: true
+  become_user: root
+  apt: name={{ item }}
+  with_items:
+        - libpcre3
+        - libpcre3-dev
+
+- name: Install The Nginx
+  become: true
+  become_user: root
+  apt: name=nginx state=present
+
+- name: copy Nginx from template
+  become: true
+  become_user: root
+  template: src=dev-nginx.j2
+            dest=/home/ubuntu/nginx.conf
+  when: env == 'development'
+
+- name: change nginx file
+  become: true
+  become_user: root
+  replace:
+    dest: /home/ubuntu/nginx.conf
+    regexp: '127.0.0.1'
+    replace: "{{ webID }}"
+
 #
 #- name: copy Nginx from template
 #  become: true
