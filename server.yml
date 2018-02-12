@@ -517,7 +517,7 @@
   name: "launched an EC2 Instance - allInDiff"
   become: false
   become_user: ubuntu
-  gather_facts: false
+  gather_facts: true
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -532,7 +532,7 @@
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance - allInDiff"
-  become: false
+  become: true
   become_user: ubuntu
   gather_facts: false
 
