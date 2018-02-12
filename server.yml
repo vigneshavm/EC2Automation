@@ -106,13 +106,20 @@
       with_items: "{{ ec2.instances }}"
       when: allInDiff == true
 
-      - name: Add the newly created EC2 instance(s) to the local host group (located inside the directory)
-        local_action: lineinfile
-                      dest="/etc/ansible/hosts"
-                      regexp={{ item.public_ip }}
-                      insertafter="[webserver]" line={{ item.public_ip }}
-        with_items: "{{ ec2.instances }}"
+    - lineinfile:
+        path: /etc/ansible/hosts
+        regexp: "{{ item.public_ip }}"
+        insertafter: "[webserver]"
+        line: "{{ item.public_ip }}"
+      with_items: "{{ ec2.instances }}"
 
+
+#      - lineinfile:
+#                      path=/etc/ansible/hosts
+#                      regexp="{{ item.public_ip }}"
+#                      insertafter="[webserver]"
+#                      line={{ item.public_ip }}
+#
     - name: Wait for SSH for webInstance (allInDiff)
       wait_for:
         delay: 1
