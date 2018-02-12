@@ -2,7 +2,7 @@
 
 
 
-- debug: msg="{{ hostvars['test-1'].ansible_host }}"
+- debug: msg="{{ hostvars['webInstance'].ansible_host }}"
 
 
 
