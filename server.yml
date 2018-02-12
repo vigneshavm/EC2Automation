@@ -7,8 +7,6 @@
   become_user: root
   vars_files:
         - conf/group_vars/conf.yml
-  vars:
-      itemPublic: 127.0.0.1
 
   tasks:
     -
@@ -552,10 +550,10 @@
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+    nginxConfIP: webID
 
   vars_files:
         - conf/group_vars/conf.yml
-  tasks:
 
   roles:
       - { role: nginx, when: allInDiff == true }
@@ -702,3 +700,48 @@
 
 
 #connection webAndNGINX end
+
+
+
+#
+##remove change in ansible code
+#-
+#  hosts: DBInstance
+#  name: "launched an DBInstance"
+#  become_user: ubuntu
+#  gather_facts: false
+#  become: false
+#
+#  vars:
+#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+#
+#  vars_files:
+#        - conf/group_vars/conf.yml
+#
+#  roles:
+#      - { role: database, when: webAndNGINX == true }
+#      - { role: instanceToReady, when: webAndNGINX == true }
+#
+#
+#-
+#  hosts: web&&NGINXInstance
+#  name: "launched an web&&NGINXInstance"
+#  become_user: ubuntu
+#  gather_facts: false
+#  become: false
+#
+#  vars:
+#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+#
+#  vars_files:
+#        - conf/group_vars/conf.yml
+#        - environments/{{ env }}/group_vars/route53.yml
+#
+#  roles:
+#      - { role: instanceToReady, when: webAndNGINX == true }
+#      - { role: ec2, when: webAndNGINX == true }
+#      - { role: startProject, when: webAndNGINX == true }
+#      - { role: nginx, when: webAndNGINX == true }
+#
+#
+##connection webAndNGINX end

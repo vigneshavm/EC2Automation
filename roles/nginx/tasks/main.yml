@@ -42,7 +42,7 @@
   replace:
     dest: /home/ubuntu/nginx.conf
     regexp: '127.0.0.1'
-    replace:  webID
+    replace:  '{{ nginxConfIP }}'
 
 #
 #- name: copy Nginx from template
