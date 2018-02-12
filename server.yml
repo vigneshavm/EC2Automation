@@ -82,6 +82,9 @@
 
 
 #      allInDifferenet started
+
+
+
     -
       local_action:
         count: "{{ count }}"
@@ -102,6 +105,10 @@
         groupname: webInstance
       with_items: "{{ ec2.instances }}"
       when: allInDiff == true
+
+    - name: Add instance to local host group
+      local_action: lineinfile dest=ansible_hosts regexp="{{ item.public_ip }}" insertafter="\[{{ application }}\]" line="{{ item.public_ip }} ansible_ssh_private_key_file=~/ec2-keys/{{ keypair }}.pem" state=present
+      with_items: "{{ ec2.instances }}"
 
     - name: Wait for SSH for webInstance (allInDiff)
       wait_for:
