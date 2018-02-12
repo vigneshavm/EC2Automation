@@ -3,6 +3,8 @@
   connection: local
   hosts: localhost
   name: "Provision an EC2 Instance"
+  become: true
+  become_user: root
   vars_files:
         - conf/group_vars/conf.yml
   vars:
