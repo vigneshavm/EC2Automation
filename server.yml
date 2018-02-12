@@ -550,7 +550,7 @@
 
   tasks:
   - name: echo the timestamp
-    command: echo ${hostvars.webInstance.webIP.stdout}
+    command: echo ${webIP.stdout}
 
 
   roles:
