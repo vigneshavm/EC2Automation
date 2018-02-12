@@ -1,23 +1,19 @@
 
+- set_fact:
+      one_fact:  "{{ webID }}"
+      cacheable: true
 
-- name: testing
-  debug: msg={{ webID }}
-
-
-- name: copy Nginx from template
-  become: true
-  become_user: root
-  template: src=dev-nginx.j2
-            dest=/home/ubuntu/nginx.conf
-  when: env == 'development'
+- debug:
+    msg: "{{ one_fact }}"
 
 - name: change nginx file
   become: true
   become_user: root
   replace:
-    dest: /home/ubuntu/nginx.conf
-    regexp: '127.0.0.1'
-    replace:  '{{ webID }}'
+     dest: /home/ubuntu/nginx.conf
+     regexp: '127.0.0.1'
+     replace:  '{{ one_fact }}'
+
 
 #
 #- name: Update system

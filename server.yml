@@ -11,48 +11,137 @@
 
   tasks:
 
-    - set_fact:
-         one_fact:  "{{ webID }}"
-         cacheable: true
-    - debug:
-        msg: "{{ one_fact }}"
+      allInOne started
 
-    - name: change nginx file
+  tasks:
+    -
+      local_action:
+        description: "Security Group for webserver Servers"
+        module: ec2_group
+        name: "{{ security_group }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 80
+            proto: tcp
+            to_port: 85
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: my_security_group
+
+
+#      allInOne started
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a Instance (allInOne)"
+      register: ec2
+      when: allInOne == true
+
+    - name: Save host data (allInOne)
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: webInstance
+      with_items: "{{ ec2.instances }}"
+      when: allInOne == true
+
+    - name: Wait for SSH for instances (allInOne)
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ ec2.instances }}"
+      when: allInOne == true
+
+    - name: Add tag to (allInOne)
+      ec2_tag:
+        resource: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+      with_items: "{{ ec2.instances }}"
+      args:
+        tags:
+          Name: webInstance
+      when: allInOne == true
+#      allInOne end
+
+
+
+
+#      allInDifferenet started
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name:  "Create a webInstance (allInDiff)"
+      register: ec2
+      when: allInDiff == true
+
+    - name: Save host to webInstance (allInDiff)
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: webInstance
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: change  webIP in conf file
       become: true
       become_user: root
       replace:
-        dest: /home/ubuntu/nginx.conf
-        regexp: '127.0.0.1'
-        replace:  '{{ one_fact }}'
-#      allInOne started
+        dest: /home/ubuntu/project/EC2Automation/conf/group_vars/conf.yml
+        regexp: 'webIP'
+        replace: "{{ item.public_ip }}"
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
 
-#  tasks:
-#    -
-#      local_action:
-#        description: "Security Group for webserver Servers"
-#        module: ec2_group
-#        name: "{{ security_group }}"
-#        region: "{{ region }}"
-#        rules:
-#          -
-#            cidr_ip: 0.0.0.0/0
-#            from_port: 80
-#            proto: tcp
-#            to_port: 85
-#          -
-#            cidr_ip: 0.0.0.0/0
-#            from_port: 22
-#            proto: tcp
-#            to_port: 22
-#        rules_egress:
-#          -
-#            cidr_ip: 0.0.0.0/0
-#            proto: all
-#      name: "Create a security group"
-#      register: my_security_group
-#
-#
-##      allInOne started
+
+    - name: Wait for SSH for webInstance (allInDiff)
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: Add tag to webInstance(allInDiff)
+      ec2_tag:
+        resource: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+      with_items: "{{ ec2.instances }}"
+      args:
+        tags:
+          Name: webInstance
+      when: allInDiff == true
+
+#                      DBInstance
+
 #    -
 #      local_action:
 #        count: "{{ count }}"
@@ -63,76 +152,18 @@
 #        region: "{{ region }}"
 #        key_name: "{{ keypair }}"
 #        module: ec2
-#      name: "Create a Instance (allInOne)"
-#      register: ec2
-#      when: allInOne == true
-#
-#    - name: Save host data (allInOne)
-#      add_host:
-#        hostname: "{{ item.public_ip }}"
-#        groupname: webInstance
-#      with_items: "{{ ec2.instances }}"
-#      when: allInOne == true
-#
-#    - name: Wait for SSH for instances (allInOne)
-#      wait_for:
-#        delay: 1
-#        host: "{{ item.public_ip }}"
-#        port: 22
-#        state: started
-#        timeout: 30
-#      with_items: "{{ ec2.instances }}"
-#      when: allInOne == true
-#
-#    - name: Add tag to (allInOne)
-#      ec2_tag:
-#        resource: "{{ item.id }}"
-#        region: "{{ region }}"
-#        state: present
-#      with_items: "{{ ec2.instances }}"
-#      args:
-#        tags:
-#          Name: webInstance
-#      when: allInOne == true
-##      allInOne end
-#
-#
-#
-#
-##      allInDifferenet started
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name:  "Create a webInstance (allInDiff)"
+#      name: "Create a DBInstance (allInDiff)"
 #      register: ec2
 #      when: allInDiff == true
 #
-#    - name: Save host to webInstance (allInDiff)
+#    - name: Save host data to DBInstance(allInDiff)
 #      add_host:
 #        hostname: "{{ item.public_ip }}"
-#        groupname: webInstance
+#        groupname: DBInstance
 #      with_items: "{{ ec2.instances }}"
 #      when: allInDiff == true
 #
-#    - name: change  webIP in conf file
-#      become: true
-#      become_user: root
-#      replace:
-#        dest: /home/ubuntu/project/EC2Automation/conf/group_vars/conf.yml
-#        regexp: 'webIP'
-#        replace: "{{ item.public_ip }}"
-#      with_items: "{{ ec2.instances }}"
-#      when: allInDiff == true
-#
-#
-#    - name: Wait for SSH for webInstance (allInDiff)
+#    - name: Wait for SSH for DBInstance (allInDiff)
 #      wait_for:
 #        delay: 1
 #        host: "{{ item.public_ip }}"
@@ -142,365 +173,347 @@
 #      with_items: "{{ ec2.instances }}"
 #      when: allInDiff == true
 #
-#    - name: Add tag to webInstance(allInDiff)
+#    - name: Add tag to DBInstance (allInDiff)
 #      ec2_tag:
 #        resource: "{{ item.id }}"
 #        region: "{{ region }}"
 #        state: present
 #      with_items: "{{ ec2.instances }}"
-#      args:
-#        tags:
-#          Name: webInstance
-#      when: allInDiff == true
-#
-##                      DBInstance
-#
-##    -
-##      local_action:
-##        count: "{{ count }}"
-##        group_id: "{{ my_security_group.group_id }}"
-##        instance_type: "{{ instance_type }}"
-##        image: "{{ imageID }}"
-##        wait: true
-##        region: "{{ region }}"
-##        key_name: "{{ keypair }}"
-##        module: ec2
-##      name: "Create a DBInstance (allInDiff)"
-##      register: ec2
-##      when: allInDiff == true
-##
-##    - name: Save host data to DBInstance(allInDiff)
-##      add_host:
-##        hostname: "{{ item.public_ip }}"
-##        groupname: DBInstance
-##      with_items: "{{ ec2.instances }}"
-##      when: allInDiff == true
-##
-##    - name: Wait for SSH for DBInstance (allInDiff)
-##      wait_for:
-##        delay: 1
-##        host: "{{ item.public_ip }}"
-##        port: 22
-##        state: started
-##        timeout: 30
-##      with_items: "{{ ec2.instances }}"
-##      when: allInDiff == true
-##
-##    - name: Add tag to DBInstance (allInDiff)
-##      ec2_tag:
-##        resource: "{{ item.id }}"
-##        region: "{{ region }}"
-##        state: present
-##      with_items: "{{ ec2.instances }}"
-##      args:
-##        tags:
-##          Name: DBInstance
-##      when: allInDiff == true
-#
-##                      NGINXInstance
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a NGINXInstance (allInDiff)"
-#      register: ec2
-#      when: allInDiff == true
-#
-#    - name: Save host data to NGINXInstance(allInOne)
-#      add_host:
-#        hostname: "{{ item.public_ip }}"
-#        groupname: NGINXInstance
-#      with_items: "{{ ec2.instances }}"
-#      when: allInDiff == true
-#
-#    - name: Wait for SSH for NGINXInstance (allInOne)
-#      wait_for:
-#        delay: 1
-#        host: "{{ item.public_ip }}"
-#        port: 22
-#        state: started
-#        timeout: 30
-#      with_items: "{{ ec2.instances }}"
-#      when: allInDiff == true
-#
-#    - name: Add tag to NGINXInstance (allInOne)
-#      ec2_tag:
-#        resource: "{{ item.id }}"
-#        region: "{{ region }}"
-#        state: present
-#      with_items: "{{ ec2.instances }}"
-#      args:
-#        tags:
-#          Name: NGINXInstance
-#      when: allInDiff == true
-#
-##      allInDifferent end
-#
-#
-#
-#
-#
-##      DB&&NGINXInstance started
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a Instance (DBAndNGINX)"
-#      register: ec2
-#      when: DBAndNGINX == true
-#
-#    - name: Add new instance to host group
-#      add_host: hostname={{ item.public_ip }} groupname=webInstance
-#      with_items: ec2.instances
-#      when: DBAndNGINX == true
-#
-#
-#    - name: Wait for SSH to come up
-#      local_action: wait_for
-#                          host={{ item.public_ip }}
-#                          port=22
-#                          state=started
-#      with_items: ec2.instances
-#      when: DBAndNGINX == true
-#
-#    - name: Add tag to Instance(s)
-#      local_action: ec2_tag
-#                         resource={{ item.id }}
-#                         region={{ region }}
-#                         state=present
-#      with_items: ec2.instances
-#      args:
-#        tags:
-#          Name: webInstance
-#      when: DBAndNGINX == true
-#
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a Instance (DBAndNGINX)"
-#      register: ec2
-#      when: DBAndNGINX == true
-#
-#    - name: Add new instance to host group
-#      add_host: hostname={{ item.public_ip }} groupname=DB&&NGINXInstance
-#      with_items: ec2.instances
-#      when: DBAndNGINX == true
-#
-#
-#    - name: Wait for SSH to come up
-#      local_action: wait_for
-#                              host={{ item.public_ip }}
-#                              port=22
-#                              state=started
-#      with_items: ec2.instances
-#      when: DBAndNGINX == true
-#
-#
-#    - name: Add tag to Instance(s)
-#      local_action: ec2_tag
-#                             resource={{ item.id }}
-#                             region={{ region }}
-#                             state=present
-#      with_items: ec2.instances
-#      args:
-#        tags:
-#          Name: DB&&NGINXInstance
-#      when: DBAndNGINX == true
-##      DBAndNGINX end
-#
-#
-#
-##      web&&DBInstance started
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a Instance (webAndDB)"
-#      register: ec2
-#      when: webAndDB == true
-#
-#    - name: Add new instance to host group
-#      add_host: hostname={{ item.public_ip }} groupname=web&&DBInstance
-#      with_items: ec2.instances
-#      when: webAndDB == true
-#
-#    - name: Wait for SSH to come up
-#      local_action: wait_for
-#                          host={{ item.public_ip }}
-#                          port=22
-#                          state=started
-#      with_items: ec2.instances
-#      when: webAndDB == true
-#
-#
-#    - name: Add tag to Instance(s)
-#      local_action: ec2_tag
-#                         resource={{ item.id }}
-#                         region={{ region }}
-#                         state=present
-#      with_items: ec2.instances
-#      args:
-#        tags:
-#          Name: web&&DBInstance
-#      when: webAndDB == true
-#
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a Instance (webAndDB)"
-#      register: ec2
-#      when: webAndDB == true
-#
-#    - name: Add new instance to host group
-#      add_host: hostname={{ item.public_ip }} groupname=NGINXInstance
-#      with_items: ec2.instances
-#      when: webAndDB == true
-#
-#
-#    - name: Wait for SSH to come up
-#      local_action: wait_for
-#                              host={{ item.public_ip }}
-#                              port=22
-#                              state=started
-#      with_items: ec2.instances
-#      when: webAndDB == true
-#
-#    - name: Add tag to Instance(s)
-#      local_action: ec2_tag
-#                             resource={{ item.id }}
-#                             region={{ region }}
-#                             state=present
-#      with_items: ec2.instances
-#      args:
-#        tags:
-#          Name: NGINXInstance
-#      when: webAndDB == true
-##      webAndDB end
-#
-#
-#
-#
-##      webAndNGINX started
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a Instance (webAndNGINX)"
-#      register: ec2
-#      when: webAndNGINX == true
-#
-#    - name: Add new instance to host group
-#      add_host: hostname={{ item.public_ip }} groupname=web&&NGINXInstance
-#      with_items: ec2.instances
-#      when: webAndNGINX == true
-#
-#
-#    - name: Wait for SSH to come up
-#      local_action: wait_for
-#                          host={{ item.public_ip }}
-#                          port=22
-#                          state=started
-#      with_items: ec2.instances
-#      when: webAndNGINX == true
-#
-#
-#    - name: Add tag to Instance(s)
-#      local_action: ec2_tag
-#                         resource={{ item.id }}
-#                         region={{ region }}
-#                         state=present
-#      with_items: ec2.instances
-#      args:
-#        tags:
-#          Name: web&&DBInstance
-#      when: webAndNGINX == true
-#
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a DBInstance"
-#      register: ec2
-#      when: webAndNGINX == true
-#
-#
-#    - name: Add new instance to host group
-#      add_host: hostname={{ item.public_ip }} groupname=DBInstance
-#      with_items: ec2.instances
-#      when: webAndNGINX == true
-#
-#
-#    - name: Wait for SSH to come up
-#      local_action: wait_for
-#                              host={{ item.public_ip }}
-#                              port=22
-#                              state=started
-#      with_items: ec2.instances
-#      when: webAndNGINX == true
-#
-#
-#    - name: Add tag to Instance(s)
-#      local_action: ec2_tag
-#                             resource={{ item.id }}
-#                             region={{ region }}
-#                             state=present
-#      with_items: ec2.instances
 #      args:
 #        tags:
 #          Name: DBInstance
-#      when: webAndNGINX == true
-##      webAndNGINX End
-#
-#
-##connection allInOne start
-#
+#      when: allInDiff == true
+
+#                      NGINXInstance
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a NGINXInstance (allInDiff)"
+      register: ec2
+      when: allInDiff == true
+
+    - name: Save host data to NGINXInstance(allInOne)
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: NGINXInstance
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: Wait for SSH for NGINXInstance (allInOne)
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: Add tag to NGINXInstance (allInOne)
+      ec2_tag:
+        resource: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+      with_items: "{{ ec2.instances }}"
+      args:
+        tags:
+          Name: NGINXInstance
+      when: allInDiff == true
+
+#      allInDifferent end
+
+
+
+
+
+#      DB&&NGINXInstance started
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a Instance (DBAndNGINX)"
+      register: ec2
+      when: DBAndNGINX == true
+
+    - name: Add new instance to host group
+      add_host: hostname={{ item.public_ip }} groupname=webInstance
+      with_items: ec2.instances
+      when: DBAndNGINX == true
+
+
+    - name: Wait for SSH to come up
+      local_action: wait_for
+                          host={{ item.public_ip }}
+                          port=22
+                          state=started
+      with_items: ec2.instances
+      when: DBAndNGINX == true
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag
+                         resource={{ item.id }}
+                         region={{ region }}
+                         state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: webInstance
+      when: DBAndNGINX == true
+
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a Instance (DBAndNGINX)"
+      register: ec2
+      when: DBAndNGINX == true
+
+    - name: Add new instance to host group
+      add_host: hostname={{ item.public_ip }} groupname=DB&&NGINXInstance
+      with_items: ec2.instances
+      when: DBAndNGINX == true
+
+
+    - name: Wait for SSH to come up
+      local_action: wait_for
+                              host={{ item.public_ip }}
+                              port=22
+                              state=started
+      with_items: ec2.instances
+      when: DBAndNGINX == true
+
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag
+                             resource={{ item.id }}
+                             region={{ region }}
+                             state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: DB&&NGINXInstance
+      when: DBAndNGINX == true
+#      DBAndNGINX end
+
+
+
+#      web&&DBInstance started
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a Instance (webAndDB)"
+      register: ec2
+      when: webAndDB == true
+
+    - name: Add new instance to host group
+      add_host: hostname={{ item.public_ip }} groupname=web&&DBInstance
+      with_items: ec2.instances
+      when: webAndDB == true
+
+    - name: Wait for SSH to come up
+      local_action: wait_for
+                          host={{ item.public_ip }}
+                          port=22
+                          state=started
+      with_items: ec2.instances
+      when: webAndDB == true
+
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag
+                         resource={{ item.id }}
+                         region={{ region }}
+                         state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: web&&DBInstance
+      when: webAndDB == true
+
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a Instance (webAndDB)"
+      register: ec2
+      when: webAndDB == true
+
+    - name: Add new instance to host group
+      add_host: hostname={{ item.public_ip }} groupname=NGINXInstance
+      with_items: ec2.instances
+      when: webAndDB == true
+
+
+    - name: Wait for SSH to come up
+      local_action: wait_for
+                              host={{ item.public_ip }}
+                              port=22
+                              state=started
+      with_items: ec2.instances
+      when: webAndDB == true
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag
+                             resource={{ item.id }}
+                             region={{ region }}
+                             state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: NGINXInstance
+      when: webAndDB == true
+#      webAndDB end
+
+
+
+
+#      webAndNGINX started
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a Instance (webAndNGINX)"
+      register: ec2
+      when: webAndNGINX == true
+
+    - name: Add new instance to host group
+      add_host: hostname={{ item.public_ip }} groupname=web&&NGINXInstance
+      with_items: ec2.instances
+      when: webAndNGINX == true
+
+
+    - name: Wait for SSH to come up
+      local_action: wait_for
+                          host={{ item.public_ip }}
+                          port=22
+                          state=started
+      with_items: ec2.instances
+      when: webAndNGINX == true
+
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag
+                         resource={{ item.id }}
+                         region={{ region }}
+                         state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: web&&DBInstance
+      when: webAndNGINX == true
+
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a DBInstance"
+      register: ec2
+      when: webAndNGINX == true
+
+
+    - name: Add new instance to host group
+      add_host: hostname={{ item.public_ip }} groupname=DBInstance
+      with_items: ec2.instances
+      when: webAndNGINX == true
+
+
+    - name: Wait for SSH to come up
+      local_action: wait_for
+                              host={{ item.public_ip }}
+                              port=22
+                              state=started
+      with_items: ec2.instances
+      when: webAndNGINX == true
+
+
+    - name: Add tag to Instance(s)
+      local_action: ec2_tag
+                             resource={{ item.id }}
+                             region={{ region }}
+                             state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: DBInstance
+      when: webAndNGINX == true
+#      webAndNGINX End
+
+
+#connection allInOne start
+
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance - allInOne "
+  become: false
+  become_user: ubuntu
+  gather_facts: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+
+      - conf/group_vars/conf.yml
+      - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: instanceToReady, when: allInOne == true }
+      - { role: ec2, when: allInOne == true }
+#      - { role: database, when: allInOne == true }
+#      - { role: startProject, when: allInOne == true }
+      - { role: nginx, when: allInOne == true }
+
+#connection allInOne end
+
+
+#connect allInDiff start
 #-
-#  hosts: webInstance
-#  name: "launched an EC2 Instance - allInOne "
+#  hosts: DBInstance
+#  name: "launched an EC2 Instance - allInDiff"
 #  become: false
 #  become_user: ubuntu
 #  gather_facts: false
@@ -509,185 +522,195 @@
 #    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 #
 #  vars_files:
-#
-#      - conf/group_vars/conf.yml
-#      - environments/{{ env }}/group_vars/route53.yml
-#
-#  roles:
-#      - { role: instanceToReady, when: allInOne == true }
-#      - { role: ec2, when: allInOne == true }
-##      - { role: database, when: allInOne == true }
-##      - { role: startProject, when: allInOne == true }
-#      - { role: nginx, when: allInOne == true }
-#
-##connection allInOne end
-#
-#
-##connect allInDiff start
-##-
-##  hosts: DBInstance
-##  name: "launched an EC2 Instance - allInDiff"
-##  become: false
-##  become_user: ubuntu
-##  gather_facts: false
-##
-##  vars:
-##    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-##
-##  vars_files:
-##        - conf/group_vars/conf.yml
-##
-##  roles:
-##      - { role: instanceToReady, when: allInDiff == true }
-##      - { role: database, when: allInDiff == true }
-#
-#
-#-
-#  hosts: webInstance
-#  name: "launched an EC2 Instance - allInDiff"
-#  become: true
-#  become_user: ubuntu
-#  gather_facts: true
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
 #        - conf/group_vars/conf.yml
+#
 #  roles:
 #      - { role: instanceToReady, when: allInDiff == true }
-#      - { role: ec2, when: allInDiff == true }
+#      - { role: database, when: allInDiff == true }
+
+
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance - allInDiff"
+  become: true
+  become_user: ubuntu
+  gather_facts: true
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+  roles:
+      - { role: instanceToReady, when: allInDiff == true }
+      - { role: ec2, when: allInDiff == true }
+
+
+-
+  hosts: NGINXInstance
+  name: "launched an EC2 Instance - allInDiff"
+  become: true
+  become_user: ubuntu
+  gather_facts: true
+
+
+  vars_files:
+        - conf/group_vars/conf.yml
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+
+
+  roles:
+      - { role: nginx, when: allInDiff == true }
+#connection allInDiff end
+
+
+
+#connection DBAndNGINX start
+-
+  hosts: DB&&NGINXInstance
+  name: "launched an EC2 Instance"
+  become_user: ubuntu
+  gather_facts: false
+  become: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+      - conf/group_vars/conf.yml
+
+  roles:
+      - { role: instanceToReady, when: DBAndNGINX == true }
+      - { role: database, when: DBAndNGINX == true }
+
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance"
+  become_user: ubuntu
+  gather_facts: false
+  become: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: ec2, when: DBAndNGINX == true }
+
+-
+  hosts: DB&&NGINXInstance
+  name: "launched an EC2 Instance"
+  become_user: ubuntu
+  gather_facts: false
+  become: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: startProject, when: DBAndNGINX == true }
+      - { role: nginx, when: DBAndNGINX == true }
+
+#connection DBAndNGINX end
+
+
+
+
+
+#connection webAndDB start
+-
+  hosts: web&&DBInstance
+  name: "launched an EC2 Instance"
+  become_user: ubuntu
+  gather_facts: false
+  become: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: instanceToReady, when: webAndDB == true }
+      - { role: database, when: webAndDB == true }
+      - { role: ec2, when: webAndDB == true }
+      - { role: startProject, when: webAndDB == true }
+-
+  hosts: NGINXInstance
+  name: "launched an EC2 Instance"
+  become_user: ubuntu
+  gather_facts: false
+  become: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: nginx, when: webAndDB == true }
+
+#connection webAndDB end
+
+
+
+#connection webAndNGINX start
+-
+  hosts: DBInstance
+  name: "launched an DBInstance"
+  become_user: ubuntu
+  gather_facts: false
+  become: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: database, when: webAndNGINX == true }
+      - { role: instanceToReady, when: webAndNGINX == true }
+
+
+-
+  hosts: web&&NGINXInstance
+  name: "launched an web&&NGINXInstance"
+  become_user: ubuntu
+  gather_facts: false
+  become: false
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+
+  roles:
+      - { role: instanceToReady, when: webAndNGINX == true }
+      - { role: ec2, when: webAndNGINX == true }
+      - { role: startProject, when: webAndNGINX == true }
+      - { role: nginx, when: webAndNGINX == true }
+
+
+#connection webAndNGINX end
+
+
+
 #
-#
-#-
-#  hosts: NGINXInstance
-#  name: "launched an EC2 Instance - allInDiff"
-#  become: true
-#  become_user: ubuntu
-#  gather_facts: true
-#
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  tasks:
-#      - name: Get osci content.
-#        shell: cat conf/group_vars/conf.yml
-#        register: data
-#
-#      - debug:
-#          msg: "{{ data.stdout }}"
-#
-#      - set_fact:
-#          one_fact: "{{ data.stdout }}"
-#          cacheable: true
-#  roles:
-#      - { role: nginx, when: allInDiff == true }
-##connection allInDiff end
-#
-#
-#
-##connection DBAndNGINX start
-#-
-#  hosts: DB&&NGINXInstance
-#  name: "launched an EC2 Instance"
-#  become_user: ubuntu
-#  gather_facts: false
-#  become: false
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
-#      - conf/group_vars/conf.yml
-#
-#  roles:
-#      - { role: instanceToReady, when: DBAndNGINX == true }
-#      - { role: database, when: DBAndNGINX == true }
-#
-#-
-#  hosts: webInstance
-#  name: "launched an EC2 Instance"
-#  become_user: ubuntu
-#  gather_facts: false
-#  become: false
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#
-#  roles:
-#      - { role: ec2, when: DBAndNGINX == true }
-#
-#-
-#  hosts: DB&&NGINXInstance
-#  name: "launched an EC2 Instance"
-#  become_user: ubuntu
-#  gather_facts: false
-#  become: false
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#        - environments/{{ env }}/group_vars/route53.yml
-#
-#  roles:
-#      - { role: startProject, when: DBAndNGINX == true }
-#      - { role: nginx, when: DBAndNGINX == true }
-#
-##connection DBAndNGINX end
-#
-#
-#
-#
-#
-##connection webAndDB start
-#-
-#  hosts: web&&DBInstance
-#  name: "launched an EC2 Instance"
-#  become_user: ubuntu
-#  gather_facts: false
-#  become: false
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#
-#  roles:
-#      - { role: instanceToReady, when: webAndDB == true }
-#      - { role: database, when: webAndDB == true }
-#      - { role: ec2, when: webAndDB == true }
-#      - { role: startProject, when: webAndDB == true }
-#-
-#  hosts: NGINXInstance
-#  name: "launched an EC2 Instance"
-#  become_user: ubuntu
-#  gather_facts: false
-#  become: false
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#        - environments/{{ env }}/group_vars/route53.yml
-#
-#  roles:
-#      - { role: nginx, when: webAndDB == true }
-#
-##connection webAndDB end
-#
-#
-#
-##connection webAndNGINX start
+##remove change in ansible code
 #-
 #  hosts: DBInstance
 #  name: "launched an DBInstance"
@@ -728,48 +751,3 @@
 #
 #
 ##connection webAndNGINX end
-#
-#
-#
-##
-###remove change in ansible code
-##-
-##  hosts: DBInstance
-##  name: "launched an DBInstance"
-##  become_user: ubuntu
-##  gather_facts: false
-##  become: false
-##
-##  vars:
-##    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-##
-##  vars_files:
-##        - conf/group_vars/conf.yml
-##
-##  roles:
-##      - { role: database, when: webAndNGINX == true }
-##      - { role: instanceToReady, when: webAndNGINX == true }
-##
-##
-##-
-##  hosts: web&&NGINXInstance
-##  name: "launched an web&&NGINXInstance"
-##  become_user: ubuntu
-##  gather_facts: false
-##  become: false
-##
-##  vars:
-##    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-##
-##  vars_files:
-##        - conf/group_vars/conf.yml
-##        - environments/{{ env }}/group_vars/route53.yml
-##
-##  roles:
-##      - { role: instanceToReady, when: webAndNGINX == true }
-##      - { role: ec2, when: webAndNGINX == true }
-##      - { role: startProject, when: webAndNGINX == true }
-##      - { role: nginx, when: webAndNGINX == true }
-##
-##
-###connection webAndNGINX end
