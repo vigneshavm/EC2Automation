@@ -17,7 +17,16 @@
         dest: /home/ubuntu/nginx.conf
         regexp: '127.0.0.1'
         replace:  '{{ webID }}'
+    - name: Get osci content.
+      shell: cat conf/group_vars/conf.yml
+      register: data
 
+    - debug:
+        msg: "{{ data.stdout }}"
+
+    - set_fact:
+         one_fact: "{{ data.stdout }}"
+         cacheable: true
 
 #      allInOne started
 
