@@ -548,12 +548,13 @@
   become_user: ubuntu
   gather_facts: true
 
+
+  vars_files:
+        - conf/group_vars/conf.yml
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
     nginxConfIP: {{ webID }}
 
-  vars_files:
-        - conf/group_vars/conf.yml
 
   roles:
       - { role: nginx, when: allInDiff == true }
