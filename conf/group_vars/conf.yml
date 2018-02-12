@@ -48,5 +48,7 @@
 #  Admin-WebApp : false
 
   BoardWebApp : true
+  BoardWebApp : true
 #  Board-WebApp : false
 
+  webID : 'webIP'
