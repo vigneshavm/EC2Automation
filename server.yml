@@ -550,10 +550,13 @@
 
   tasks:
 
-
   - debug: var=ansible_all_ipv4_addresses
 
-  - debug: var: "{{ hostvars['webInstance']['webIP']['stdout'] }}"
+  - debug: var = "{{ hostvars['webInstance']['webIP']['stdout'] }}"
+
+  - name: echo the timestamp
+    command: echo "{{ hostvars['webInstance']['webIP']['stdout'] }}"
+
 
 #  roles:
 #      - { role: nginx, when: allInDiff == true }
