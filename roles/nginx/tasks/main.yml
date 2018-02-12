@@ -1,9 +1,5 @@
 
 
-
-- debug:
-    msg: "{{ data.stdout }} ::::::::::: {{ one_fact }}"
-
 - name: testing
   debug: msg={{ webID }}
 
