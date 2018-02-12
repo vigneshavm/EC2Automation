@@ -531,8 +531,8 @@
 
   tasks:
   - name: get the current time for a timestamp
-    command: date +%Y%m%d-%H%M%S
-    register: time
+    command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+    register: webIP
 
 -
   hosts: NGINXInstance
@@ -550,7 +550,7 @@
 
   tasks:
   - name: echo the timestamp
-    command: echo ${hostvars.webInstance.time.stdout}
+    command: echo ${hostvars.webInstance.webIP.stdout}
 
 
   roles:
