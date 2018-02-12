@@ -530,7 +530,7 @@
       - { role: ec2, when: allInDiff == true }
   tasks:
       - name: "register real root user to localhost facts"
-        set_fact: "fact_for_host1" : "1"
+        set_fact: fact_for_host1 : '1'
 
 -
   hosts: NGINXInstance

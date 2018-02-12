@@ -49,10 +49,10 @@
       <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0191083" vertical-offset="855" max-vertical-offset="3630">
-              <caret line="549" column="9" selection-start-line="549" selection-start-column="9" selection-end-line="549" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.3821656" vertical-offset="7395" max-vertical-offset="10125">
+              <caret line="532" column="18" selection-start-line="532" selection-start-column="18" selection-end-line="532" selection-end-column="18" />
               <folding>
-                <element signature="e#169#12505#0" expanded="false" />
+                <element signature="e#12815#13524#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -900,7 +900,15 @@
       <created>1518415648783</created>
       <updated>1518415648783</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="getting data from diff roles">
+      <created>1518415885429</created>
+      <updated>1518415885429</updated>
+    </task>
+    <task id="LOCAL-00104" summary="set_facts">
+      <created>1518416064167</created>
+      <updated>1518416064167</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -944,7 +952,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="ssh file changes" />
     <MESSAGE value="project - Project - spelling" />
     <MESSAGE value="project - Project" />
     <MESSAGE value="ami-04c24660 IMA" />
@@ -969,7 +976,8 @@
     <MESSAGE value="root privileges" />
     <MESSAGE value="nginx file edit&#10;" />
     <MESSAGE value="getting data from diff roles" />
-    <option name="LAST_COMMIT_MESSAGE" value="getting data from diff roles" />
+    <MESSAGE value="set_facts" />
+    <option name="LAST_COMMIT_MESSAGE" value="set_facts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -980,7 +988,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="6045" max-vertical-offset="10230">
           <caret line="416" column="52" selection-start-line="416" selection-start-column="52" selection-end-line="416" selection-end-column="52" />
           <folding>
-            <element signature="e#169#12505#0" expanded="false" />
+            <element signature="e#12815#13524#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1340,10 +1348,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0191083" vertical-offset="855" max-vertical-offset="3630">
-          <caret line="549" column="9" selection-start-line="549" selection-start-column="9" selection-end-line="549" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.3821656" vertical-offset="7395" max-vertical-offset="10125">
+          <caret line="532" column="18" selection-start-line="532" selection-start-column="18" selection-end-line="532" selection-end-column="18" />
           <folding>
-            <element signature="e#169#12505#0" expanded="false" />
+            <element signature="e#12815#13524#0" expanded="false" />
           </folding>
         </state>
       </provider>
