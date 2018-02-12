@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99a1c592-4d4b-4017-8507-a761fe5cd376" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.yml" afterPath="$PROJECT_DIR$/server.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ansible-automatic-EC2.iws" />
@@ -26,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12048193" vertical-offset="0" max-vertical-offset="2370">
-              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2370">
+              <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -46,13 +46,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.yml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.8888888" vertical-offset="7215" max-vertical-offset="10035">
-              <caret line="515" column="20" selection-start-line="515" selection-start-column="9" selection-end-line="515" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.85562634" vertical-offset="737" max-vertical-offset="3690">
+              <caret line="536" column="1" selection-start-line="536" selection-start-column="1" selection-end-line="536" selection-end-column="1" />
               <folding>
-                <element signature="e#12815#13524#0" expanded="false" />
+                <element signature="e#169#12505#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -173,8 +173,8 @@
         <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
         <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
-        <option value="$PROJECT_DIR$/server.yml" />
         <option value="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
+        <option value="$PROJECT_DIR$/server.yml" />
       </list>
     </option>
   </component>
@@ -257,10 +257,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="nginx" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -916,7 +912,15 @@
       <created>1518417091926</created>
       <updated>1518417091926</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="set_facts rmeove">
+      <created>1518417738368</created>
+      <updated>1518417738368</updated>
+    </task>
+    <task id="LOCAL-00108" summary="gathered  fact true">
+      <created>1518418152983</created>
+      <updated>1518418152983</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -960,7 +964,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="project - Project" />
     <MESSAGE value="ami-04c24660 IMA" />
     <MESSAGE value="dynamic instance count" />
     <MESSAGE value="env based instance creation" />
@@ -985,7 +988,8 @@
     <MESSAGE value="getting data from diff roles" />
     <MESSAGE value="set_facts" />
     <MESSAGE value="set_facts rmeove" />
-    <option name="LAST_COMMIT_MESSAGE" value="set_facts rmeove" />
+    <MESSAGE value="gathered  fact true" />
+    <option name="LAST_COMMIT_MESSAGE" value="gathered  fact true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -996,7 +1000,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="6045" max-vertical-offset="10230">
           <caret line="416" column="52" selection-start-line="416" selection-start-column="52" selection-end-line="416" selection-end-column="52" />
           <folding>
-            <element signature="e#12815#13524#0" expanded="false" />
+            <element signature="e#169#12505#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1346,21 +1350,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.yml">
+    <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.8888888" vertical-offset="7215" max-vertical-offset="10035">
-          <caret line="515" column="20" selection-start-line="515" selection-start-column="9" selection-end-line="515" selection-end-column="20" />
-          <folding>
-            <element signature="e#12815#13524#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2370">
+          <caret line="13" column="25" selection-start-line="13" selection-start-column="25" selection-end-line="13" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
+    <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12048193" vertical-offset="0" max-vertical-offset="2370">
-          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-          <folding />
+        <state vertical-scroll-proportion="0.85562634" vertical-offset="737" max-vertical-offset="3690">
+          <caret line="536" column="1" selection-start-line="536" selection-start-column="1" selection-end-line="536" selection-end-column="1" />
+          <folding>
+            <element signature="e#169#12505#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

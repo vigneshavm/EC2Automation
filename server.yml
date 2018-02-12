@@ -529,6 +529,11 @@
       - { role: instanceToReady, when: allInDiff == true }
       - { role: ec2, when: allInDiff == true }
 
+  tasks:
+  - name: get the current time for a timestamp
+    command: date +%Y%m%d-%H%M%S
+    register: time
+
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance - allInDiff"
@@ -542,6 +547,11 @@
 
   vars_files:
         - conf/group_vars/conf.yml
+
+  tasks:
+  - name: echo the timestamp
+    command: echo ${hostvars.webInstance.time.stdout}
+
 
   roles:
       - { role: nginx, when: allInDiff == true }
