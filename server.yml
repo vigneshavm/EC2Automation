@@ -20,7 +20,7 @@
         msg: "{{ data.stdout }}"
 
     - set_fact:
-         one_fact: "{{ data.webID.stdout }}"
+         one_fact:  ${ webID }
          cacheable: true
     - debug:
         msg: "{{ one_fact }}"
