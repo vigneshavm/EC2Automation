@@ -2,7 +2,7 @@
 
 
 
-- debug: msg="{{ hostvars['webInstance'] }}"
+- debug: msg="{{ hostvars['webInstance'].stdout }}"
 
 
 
