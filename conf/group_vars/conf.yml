@@ -35,21 +35,20 @@
 
 #choose project required
 
-  Student-WebApp : true
+  StudentWebApp : true
 #  StudentWebApp : false
 
-  Teacher-WebApp : true
+  TeacherWebApp : true
 #  TeacherWebApp : false
 
   PrincipalWebApp : true
-#  Principal-WebApp : false
+#  PrincipalWebApp : false
 
   AdminWebApp : true
-#  Admin-WebApp : false
+#  AdminWebApp : false
 
   BoardWebApp : true
-  BoardWebApp : true
-#  Board-WebApp : false
+# BoardWebApp : false
 
   webID : 'webIP'
   DBID : 'DBIP'
