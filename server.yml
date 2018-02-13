@@ -558,8 +558,8 @@
 -
   hosts: webInstance
   name: "launched an EC2 Instance - allInDiff"
-  become: true
-  become_user: root
+  become: false
+  become_user: ubuntu
   gather_facts: true
 
   vars:
@@ -577,8 +577,8 @@
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance - allInDiff"
-  become: true
-  become_user: root
+  become: false
+  become_user: ubuntu
   gather_facts: true
 
 
