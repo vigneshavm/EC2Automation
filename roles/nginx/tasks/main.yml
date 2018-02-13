@@ -1,147 +1,109 @@
-
-- set_fact:
-      one_fact:  "{{ webID }}"
-      cacheable: true
-
-- debug:
-    msg: "{{ one_fact }}"
-
-
-- name: change nginx file
+- name: Update system
   become: true
   become_user: root
-  replace:
-     dest: /home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
-     regexp: '127.0.0.1'
-     replace:  '{{ one_fact }}'
+  command: apt-get --assume-yes update
 
+- name: Nginx Installation
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install nginx
+
+- name: DEPENDENCIES
+  become: true
+  become_user: root
+  apt: name={{ item }}
+  with_items:
+        - libpcre3
+        - libpcre3-dev
+
+- name: Install The Nginx
+  become: true
+  become_user: root
+  apt: name=nginx state=present
 
 - name: copy Nginx from template
   become: true
   become_user: root
-  template: src=/home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
+  template: src=dev-nginx.j2
             dest=/home/ubuntu/nginx.conf
   when: env == 'development'
 
+- name: copy Nginx from template
+  become: true
+  become_user: root
+  template: src=stage-nginx.j2
+            dest=/etc/nginx/nginx.conf
+  when: env == 'stage'
+
+- name: copy Nginx from template
+  become: true
+  become_user: root
+  template: src=production-nginx.j2
+            dest=/etc/nginx/nginx.conf
+  when: env == 'production'
+
+- name: "Curl AWS to get this instance's public IP address"
+  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: ec2_public_ip
+
+- name: Create DNS records | student
+  become: true
+  route53:
+    command: create
+    record: "{{ student }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | teacher
+  become: true
+  route53:
+    command: create
+    record: "{{ teacher }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | principal
+  become: true
+  route53:
+    command: create
+    record: "{{ principal }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | admin
+  become: true
+  route53:
+    command: create
+    record: "{{ admin }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: Create DNS records | board
+  become: true
+  route53:
+    command: create
+    record: "{{ board }}"
+    type: A
+    value: "{{ec2_public_ip.stdout}}"
+    overwrite: yes
+    zone: neols.com
+
+- name: restart nginx
+  become: true
+  become_user: root
+  service: name=nginx state=restarted
+
+- name: reload nginx
+  become: true
+  become_user: root
+  service: name=nginx state=reloaded
 
 
-#
-#- name: Update system
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes update
-#
-#- name: Nginx Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install nginx
-#
-#- name: DEPENDENCIES
-#  become: true
-#  become_user: root
-#  apt: name={{ item }}
-#  with_items:
-#        - libpcre3
-#        - libpcre3-dev
-#
-#- name: Install The Nginx
-#  become: true
-#  become_user: root
-#  apt: name=nginx state=present
-#
-#- name: copy Nginx from template
-#  become: true
-#  become_user: root
-#  template: src=dev-nginx.j2
-#            dest=/home/ubuntu/nginx.conf
-#  when: env == 'development'
-#
-#- name: change nginx file
-#  become: true
-#  become_user: root
-#  replace:
-#    dest: /home/ubuntu/nginx.conf
-#    regexp: '127.0.0.1'
-#    replace:  '{{ nginxConfIP }}'
-
-#
-#- name: copy Nginx from template
-#  become: true
-#  become_user: root
-#  template: src=stage-nginx.j2
-#            dest=/etc/nginx/nginx.conf
-#  when: env == 'stage'
-#
-#- name: copy Nginx from template
-#  become: true
-#  become_user: root
-#  template: src=production-nginx.j2
-#            dest=/etc/nginx/nginx.conf
-#  when: env == 'production'
-#
-#- name: "Curl AWS to get this instance's public IP address"
-#  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-#  register: ec2_public_ip
-#
-#- name: Create DNS records | student
-#  become: true
-#  route53:
-#    command: create
-#    record: "{{ student }}"
-#    type: A
-#    value: "{{ec2_public_ip.stdout}}"
-#    overwrite: yes
-#    zone: neols.com
-#
-#- name: Create DNS records | teacher
-#  become: true
-#  route53:
-#    command: create
-#    record: "{{ teacher }}"
-#    type: A
-#    value: "{{ec2_public_ip.stdout}}"
-#    overwrite: yes
-#    zone: neols.com
-#
-#- name: Create DNS records | principal
-#  become: true
-#  route53:
-#    command: create
-#    record: "{{ principal }}"
-#    type: A
-#    value: "{{ec2_public_ip.stdout}}"
-#    overwrite: yes
-#    zone: neols.com
-#
-#- name: Create DNS records | admin
-#  become: true
-#  route53:
-#    command: create
-#    record: "{{ admin }}"
-#    type: A
-#    value: "{{ec2_public_ip.stdout}}"
-#    overwrite: yes
-#    zone: neols.com
-#
-#- name: Create DNS records | board
-#  become: true
-#  route53:
-#    command: create
-#    record: "{{ board }}"
-#    type: A
-#    value: "{{ec2_public_ip.stdout}}"
-#    overwrite: yes
-#    zone: neols.com
-#
-#
-#- name: restart nginx
-#  become: true
-#  become_user: root
-#  service: name=nginx state=restarted
-#
-#- name: reload nginx
-#  become: true
-#  become_user: root
-#  service: name=nginx state=reloaded
-#
-#

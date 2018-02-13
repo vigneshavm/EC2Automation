@@ -1,193 +1,178 @@
+- name: Node | Add  repository
+  become: true
+  become_user: root
+  shell:
+    echo "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
+
+- name: Node Installation
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install nodejs
 
 
+- name: npm Installation
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install npm
 
-- name: "Curl AWS to get this instance's public IP address"
-  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-  register: webPublicIP
+- name: npm Installation
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install build-essential
 
-- name: "Set hostname of command server as fact"
-  set_fact: commandserver="{{ webPublicIP.stdout }}"
+- name: nodejs-legacy Installation
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install nodejs-legacy
+
+- name: Update system
+  become: true
+  become_user: root
+  command: apt-get update
+
+- name: GIT Installation
+  become: true
+  become_user: root
+  apt: name=git state=present
+
+- name: "Install forever (to run Node.js app)."
+  npm: name=forever global=yes state=present
+  become: true
+  become_user: root
+
+- name: copy private file from template
+  become: true
+  become_user: root
+  template: src=private-key
+            dest=/home/ubuntu/.ssh/id_rsa
+            mode=0600
+
+- name: copy ssh file from template
+  become: true
+  become_user: root
+  template: src=ssh-key
+            dest=/home/ubuntu/.ssh/id_rsa.pub
+            mode=0600
+
+- name: copy authorized_keys file from template
+  become: true
+  become_user: root
+  template: src=authorized_keys
+            dest=/home/ubuntu/.ssh/authorized_keys
+            mode=0600
+
+- name: Creates directory
+  file: path=/home/ubuntu/Project state=directory
+  file: path=/home/ubuntu/Project/Student-WebApp state=directory
+  file: path=/home/ubuntu/Project/Teacher-WebApp state=directory
+  file: path=/home/ubuntu/Project/Principal-WebApp state=directory
+  file: path=/home/ubuntu/Project/Admin-WebApp state=directory
+  file: path=/home/ubuntu/Project/Board-WebApp state=directory
+
+- name: ensure github.com is a known host
+  lineinfile:
+    dest: /home/ubuntu/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
 
 
-- debug: msg="{{ commandserver }}"
+- name: Clone Student-WebApp
+  git: repo=git@github.com:neolearning/Student-WebApp.git
+       dest=/home/ubuntu/Project/Student-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (StudentWebApp == true) and (env == 'stage' or env == 'development')
 
-#- name: Node | Add  repository
-#  become: true
-#  become_user: root
-#  shell:
-#    echo "curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -"
-#
-#- name: Node Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install nodejs
-#
-#
-#- name: npm Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install npm
-#
-#- name: npm Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install build-essential
-#
-#- name: nodejs-legacy Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install nodejs-legacy
-#
-#- name: Update system
-#  become: true
-#  become_user: root
-#  command: apt-get update
-#
-#- name: GIT Installation
-#  become: true
-#  become_user: root
-#  apt: name=git state=present
-#
-#- name: "Install forever (to run Node.js app)."
-#  npm: name=forever global=yes state=present
-#  become: true
-#  become_user: root
-#
-#- name: copy private file from template
-#  become: true
-#  become_user: root
-#  template: src=private-key
-#            dest=/home/ubuntu/.ssh/id_rsa
-#            mode=0600
-#
-#- name: copy ssh file from template
-#  become: true
-#  become_user: root
-#  template: src=ssh-key
-#            dest=/home/ubuntu/.ssh/id_rsa.pub
-#            mode=0600
-#
-#- name: copy authorized_keys file from template
-#  become: true
-#  become_user: root
-#  template: src=authorized_keys
-#            dest=/home/ubuntu/.ssh/authorized_keys
-#            mode=0600
-#
-#- name: Creates directory
-#  file: path=/home/ubuntu/Project state=directory
-#  file: path=/home/ubuntu/Project/Student-WebApp state=directory
-#  file: path=/home/ubuntu/Project/Teacher-WebApp state=directory
-#  file: path=/home/ubuntu/Project/Principal-WebApp state=directory
-#  file: path=/home/ubuntu/Project/Admin-WebApp state=directory
-#  file: path=/home/ubuntu/Project/Board-WebApp state=directory
-#
-#- name: ensure github.com is a known host
-#  lineinfile:
-#    dest: /home/ubuntu/.ssh/known_hosts
-#    create: yes
-#    state: present
-#    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
-#    regexp: "^github\\.com"
-#
-#
-#- name: Clone Student-WebApp
-#  git: repo=git@github.com:neolearning/Student-WebApp.git
-#       dest=/home/ubuntu/Project/Student-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (StudentWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Student-WebApp
-#  git: repo=git@github.com:neolearning/Student-WebApp.git
-#       dest=/home/ubuntu/Project/Student-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (StudentWebApp == true) and (env == 'production')
-#
-#
-#- name: Clone Teacher-WebApp
-#  git: repo=git@github.com:neolearning/Teacher-WebApp.git
-#       dest=/home/ubuntu/Project/Teacher-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (TeacherWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Teacher-WebApp
-#  git: repo=git@github.com:neolearning/Teacher-WebApp.git
-#       dest=/home/ubuntu/Project/Teacher-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (TeacherWebApp == true) and (env == 'production')
-#
-#
-#- name: Clone Principal-WebApp
-#  git: repo=git@github.com:neolearning/Principal-WebApp.git
-#       dest=/home/ubuntu/Project/Principal-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (PrincipalWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Principal-WebApp
-#  git: repo=git@github.com:neolearning/Principal-WebApp.git
-#       dest=/home/ubuntu/Project/Principal-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (PrincipalWebApp == true) and (env == 'production')
-#
-#
-#- name: Clone Admin-WebApp
-#  git: repo=git@github.com:neolearning/Admin-WebApp.git
-#       dest=/home/ubuntu/Project/Admin-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (AdminWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Admin-WebApp
-#  git: repo=git@github.com:neolearning/Admin-WebApp.git
-#       dest=/home/ubuntu/Project/Admin-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (AdminWebApp == true) and (env == 'production')
-#
-#
-#- name: Clone Board-WebApp
-#  git: repo=git@github.com:neolearning/Board-WebApp.git
-#       dest=/home/ubuntu/Project/Board-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (BoardWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Board-WebApp
-#  git: repo=git@github.com:neolearning/Board-WebApp.git
-#       dest=/home/ubuntu/Project/Board-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (BoardWebApp == true) and (env == 'production')
-#
-#- name: "Node: Student-WebApp app dependencies | package.json via npm."
-#  npm: path="/home/ubuntu/Project/Student-WebApp"
-#  ignore_errors: yes
-#  when: StudentWebApp == true
-#
-#- name: "Node: Teacher-WebApp app dependencies | package.json via npm."
-#  npm: path="/home/ubuntu/Project/Teacher-WebApp"
-#  ignore_errors: yes
-#  when: TeacherWebApp == true
-#
-#- name: "Node: Principal-WebApp app dependencies | package.json via npm."
-#  npm: path="/home/ubuntu/Project/Principal-WebApp"
-#  ignore_errors: yes
-#  when: PrincipalWebApp == true
-#
-#- name: "Node: Admin-WebApp app dependencies | package.json via npm."
-#  npm: path="/home/ubuntu/Project/Admin-WebApp"
-#  ignore_errors: yes
-#  when: AdminWebApp == true
-#
-#- name: "Node: Board-WebApp app dependencies | package.json via npm."
-#  npm: path="/home/ubuntu/Project/Board-WebApp"
-#  ignore_errors: yes
-#  when: BoardWebApp == true
-#
-#
+- name: Clone Student-WebApp
+  git: repo=git@github.com:neolearning/Student-WebApp.git
+       dest=/home/ubuntu/Project/Student-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (StudentWebApp == true) and (env == 'production')
+
+
+- name: Clone Teacher-WebApp
+  git: repo=git@github.com:neolearning/Teacher-WebApp.git
+       dest=/home/ubuntu/Project/Teacher-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (TeacherWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Teacher-WebApp
+  git: repo=git@github.com:neolearning/Teacher-WebApp.git
+       dest=/home/ubuntu/Project/Teacher-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (TeacherWebApp == true) and (env == 'production')
+
+
+- name: Clone Principal-WebApp
+  git: repo=git@github.com:neolearning/Principal-WebApp.git
+       dest=/home/ubuntu/Project/Principal-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (PrincipalWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Principal-WebApp
+  git: repo=git@github.com:neolearning/Principal-WebApp.git
+       dest=/home/ubuntu/Project/Principal-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (PrincipalWebApp == true) and (env == 'production')
+
+
+- name: Clone Admin-WebApp
+  git: repo=git@github.com:neolearning/Admin-WebApp.git
+       dest=/home/ubuntu/Project/Admin-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (AdminWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Admin-WebApp
+  git: repo=git@github.com:neolearning/Admin-WebApp.git
+       dest=/home/ubuntu/Project/Admin-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (AdminWebApp == true) and (env == 'production')
+
+
+- name: Clone Board-WebApp
+  git: repo=git@github.com:neolearning/Board-WebApp.git
+       dest=/home/ubuntu/Project/Board-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (BoardWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Board-WebApp
+  git: repo=git@github.com:neolearning/Board-WebApp.git
+       dest=/home/ubuntu/Project/Board-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (BoardWebApp == true) and (env == 'production')
+
+- name: "Node: Student-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Student-WebApp"
+  ignore_errors: yes
+  when: StudentWebApp == true
+
+- name: "Node: Teacher-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Teacher-WebApp"
+  ignore_errors: yes
+  when: TeacherWebApp == true
+
+- name: "Node: Principal-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Principal-WebApp"
+  ignore_errors: yes
+  when: PrincipalWebApp == true
+
+- name: "Node: Admin-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Admin-WebApp"
+  ignore_errors: yes
+  when: AdminWebApp == true
+
+- name: "Node: Board-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Board-WebApp"
+  ignore_errors: yes
+  when: BoardWebApp == true
