@@ -25,6 +25,10 @@
         regexp: 'webIP'
         replace: "{{ ec2_public_ip.stdout }}"
 
+    - name: sleep for a specified interval
+      become: true
+      command: sleep 30
+
     - set_fact:
           one_fact:  "{{ webID }}"
           cacheable: true
@@ -42,9 +46,7 @@
          regexp: '127.0.0.1'
          replace:  '{{ one_fact }}'
 
-    - name: sleep for a specified interval
-      become: true
-      command: sleep 30
+
 
     - name: copy Nginx from template
       become: true
