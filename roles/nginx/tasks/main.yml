@@ -11,7 +11,7 @@
   become: true
   become_user: root
   replace:
-     dest: dev-nginx.j2
+     dest: /home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
      regexp: '127.0.0.1'
      replace:  '{{ one_fact }}'
 
@@ -19,7 +19,7 @@
 - name: copy Nginx from template
   become: true
   become_user: root
-  template: src=dev-nginx.j2
+  template: src=/home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
             dest=/home/ubuntu/nginx.conf
   when: env == 'development'
 
