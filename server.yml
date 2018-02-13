@@ -515,7 +515,7 @@
   hosts: webInstance
   name: "launched an EC2 Instance - allInOne "
   become: true
-  become_user: root
+  become_user: ubuntu
   gather_facts: false
 
   vars:
