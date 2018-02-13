@@ -78,14 +78,14 @@
     regexp: "^github\\.com"
 
 
-- name: Clone Student-WebApp
+- name: Clone Student-WebApp development
   git: repo=git@github.com:neolearning/Student-WebApp.git
        dest=/home/ubuntu/Project/Student-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
   when: (StudentWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Student-WebApp
+- name: Clone Student-WebApp master
   git: repo=git@github.com:neolearning/Student-WebApp.git
        dest=/home/ubuntu/Project/Student-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
@@ -93,14 +93,14 @@
   when: (StudentWebApp == true) and (env == 'production')
 
 
-- name: Clone Teacher-WebApp
+- name: Clone Teacher-WebApp development
   git: repo=git@github.com:neolearning/Teacher-WebApp.git
        dest=/home/ubuntu/Project/Teacher-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
   when: (TeacherWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Teacher-WebApp
+- name: Clone Teacher-WebApp master
   git: repo=git@github.com:neolearning/Teacher-WebApp.git
        dest=/home/ubuntu/Project/Teacher-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
@@ -108,14 +108,14 @@
   when: (TeacherWebApp == true) and (env == 'production')
 
 
-- name: Clone Principal-WebApp
+- name: Clone Principal-WebApp development
   git: repo=git@github.com:neolearning/Principal-WebApp.git
        dest=/home/ubuntu/Project/Principal-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
   when: (PrincipalWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Principal-WebApp
+- name: Clone Principal-WebApp master
   git: repo=git@github.com:neolearning/Principal-WebApp.git
        dest=/home/ubuntu/Project/Principal-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
@@ -123,14 +123,14 @@
   when: (PrincipalWebApp == true) and (env == 'production')
 
 
-- name: Clone Admin-WebApp
+- name: Clone Admin-WebApp development
   git: repo=git@github.com:neolearning/Admin-WebApp.git
        dest=/home/ubuntu/Project/Admin-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
   when: (AdminWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Admin-WebApp
+- name: Clone Admin-WebApp master
   git: repo=git@github.com:neolearning/Admin-WebApp.git
        dest=/home/ubuntu/Project/Admin-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
@@ -138,14 +138,14 @@
   when: (AdminWebApp == true) and (env == 'production')
 
 
-- name: Clone Board-WebApp
+- name: Clone Board-WebApp development
   git: repo=git@github.com:neolearning/Board-WebApp.git
        dest=/home/ubuntu/Project/Board-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
   when: (BoardWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Board-WebApp
+- name: Clone Board-WebApp master
   git: repo=git@github.com:neolearning/Board-WebApp.git
        dest=/home/ubuntu/Project/Board-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa

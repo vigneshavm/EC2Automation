@@ -35,11 +35,11 @@
 
 #choose project required
 
-#  Student-WebApp : true
-  StudentWebApp : false
+  Student-WebApp : true
+#  StudentWebApp : false
 
-#  Teacher-WebApp : true
-  TeacherWebApp : false
+  Teacher-WebApp : true
+#  TeacherWebApp : false
 
   PrincipalWebApp : true
 #  Principal-WebApp : false
