@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99a1c592-4d4b-4017-8507-a761fe5cd376" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.yml" afterPath="$PROJECT_DIR$/server.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/ec2/templates/authorized_keys" afterPath="$PROJECT_DIR$/roles/ec2/templates/authorized_keys" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/ec2/templates/private-key" afterPath="$PROJECT_DIR$/roles/ec2/templates/private-key" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/ec2/templates/ssh-key" afterPath="$PROJECT_DIR$/roles/ec2/templates/ssh-key" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ansible-automatic-EC2.iws" />
@@ -36,31 +38,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dev-nginx.j2" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/conf/nginx/dev-nginx.j2">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dev-nginx.j2" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roles/nginx/templates/dev-nginx.j2">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="800" max-vertical-offset="1590">
-              <caret line="68" column="16" selection-start-line="68" selection-start-column="16" selection-end-line="68" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="server.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7556468" vertical-offset="8347" max-vertical-offset="11145">
-              <caret line="581" column="21" selection-start-line="581" selection-start-column="21" selection-end-line="581" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="8032" max-vertical-offset="11145">
+              <caret line="574" column="0" selection-start-line="574" selection-start-column="0" selection-end-line="574" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="authorized_keys" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roles/ec2/templates/authorized_keys">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+              <caret line="0" column="391" selection-start-line="0" selection-start-column="391" selection-end-line="0" selection-end-column="391" />
               <folding />
             </state>
           </provider>
@@ -86,16 +78,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="production-nginx.j2" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roles/nginx/templates/production-nginx.j2">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1590">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/roles/database/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
@@ -109,8 +91,28 @@
       <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/roles/ec2/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2100" max-vertical-offset="2760">
-              <caret line="140" column="38" selection-start-line="140" selection-start-column="38" selection-end-line="140" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="412" max-vertical-offset="2670">
+              <caret line="52" column="14" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="private-key" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/roles/ec2/templates/private-key">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8151951" vertical-offset="353" max-vertical-offset="840">
+              <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ssh-key" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roles/ec2/templates/ssh-key">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+              <caret line="0" column="749" selection-start-line="0" selection-start-column="749" selection-end-line="0" selection-end-column="749" />
               <folding />
             </state>
           </provider>
@@ -140,7 +142,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/roles/ec2/templates/authorized_keys" />
         <option value="$PROJECT_DIR$/roles/ec2/templates/mongoFile" />
         <option value="$PROJECT_DIR$/roles/ec2/templates/nginx.conf.j2" />
         <option value="$PROJECT_DIR$/site.yml" />
@@ -171,9 +172,12 @@
         <option value="$PROJECT_DIR$/s3Object.yml" />
         <option value="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
-        <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
         <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
         <option value="$PROJECT_DIR$/server.yml" />
+        <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
+        <option value="$PROJECT_DIR$/roles/ec2/templates/ssh-key" />
+        <option value="$PROJECT_DIR$/roles/ec2/templates/authorized_keys" />
+        <option value="$PROJECT_DIR$/roles/ec2/templates/private-key" />
       </list>
     </option>
   </component>
@@ -1109,7 +1113,15 @@
       <created>1518505140157</created>
       <updated>1518505140157</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="gather false">
+      <created>1518505184675</created>
+      <updated>1518505184675</updated>
+    </task>
+    <task id="LOCAL-00152" summary="remove root privaage">
+      <created>1518505721237</created>
+      <updated>1518505721237</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1153,8 +1165,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="file ordering" />
-    <MESSAGE value="dynamic pass data" />
     <MESSAGE value="multiple instance creation" />
     <MESSAGE value="sep files" />
     <MESSAGE value="remove var" />
@@ -1178,7 +1188,9 @@
     <MESSAGE value="nthg come" />
     <MESSAGE value="gather_facts: true" />
     <MESSAGE value="normal code" />
-    <option name="LAST_COMMIT_MESSAGE" value="normal code" />
+    <MESSAGE value="gather false" />
+    <MESSAGE value="remove root privaage" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove root privaage" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1381,27 +1393,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roles/ec2/templates/authorized_keys">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/roles/ec2/templates/private-key">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/roles/ec2/templates/ssh-key">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hosts">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105">
@@ -1528,14 +1519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roles/ec2/tasks/main.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1665" max-vertical-offset="2760">
-          <caret line="140" column="38" selection-start-line="140" selection-start-column="38" selection-end-line="140" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/conf/group_vars/conf.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-24.25926" vertical-offset="155" max-vertical-offset="900">
@@ -1546,8 +1529,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7556468" vertical-offset="8347" max-vertical-offset="11145">
-          <caret line="581" column="21" selection-start-line="581" selection-start-column="21" selection-end-line="581" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="8347" max-vertical-offset="11145">
+          <caret line="574" column="0" selection-start-line="574" selection-start-column="0" selection-end-line="574" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roles/ec2/tasks/main.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="412" max-vertical-offset="2670">
+          <caret line="52" column="14" selection-start-line="52" selection-start-column="14" selection-end-line="52" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roles/ec2/templates/ssh-key">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="474">
+          <caret line="0" column="749" selection-start-line="0" selection-start-column="749" selection-end-line="0" selection-end-column="749" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roles/ec2/templates/authorized_keys">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+          <caret line="0" column="391" selection-start-line="0" selection-start-column="391" selection-end-line="0" selection-end-column="391" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roles/ec2/templates/private-key">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8151951" vertical-offset="353" max-vertical-offset="840">
+          <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
           <folding />
         </state>
       </provider>
