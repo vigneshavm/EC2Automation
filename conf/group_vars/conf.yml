@@ -16,10 +16,10 @@
 
 
 #choose instance creation type
-#  allInOne : true
-  allInOne : false
+  allInOne : true
+#  allInOne : false
 
-  allInDiff : true
+#  allInDiff : true
 #  allInDiff : false
 
 #  DBAndNGINX : true
