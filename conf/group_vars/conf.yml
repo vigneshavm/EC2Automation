@@ -20,7 +20,7 @@
 #  allInOne : false
 
 #  allInDiff : true
-#  allInDiff : false
+  allInDiff : false
 
 #  DBAndNGINX : true
   DBAndNGINX : false

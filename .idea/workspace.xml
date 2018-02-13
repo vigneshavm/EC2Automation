@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99a1c592-4d4b-4017-8507-a761fe5cd376" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/roles/ec2/DBbackup/neoHome.tar.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/ec2/DBbackup/neo.tar.gz" afterPath="$PROJECT_DIR$/roles/ec2/DBbackup/neo.tar.gz" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/database/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/database/tasks/main.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/ec2/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.yml" afterPath="$PROJECT_DIR$/server.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/group_vars/conf.yml" afterPath="$PROJECT_DIR$/conf/group_vars/conf.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ansible-automatic-EC2.iws" />
@@ -61,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="server.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.25" vertical-offset="8190" max-vertical-offset="11145">
-              <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+            <state vertical-scroll-proportion="-36.11111" vertical-offset="7470" max-vertical-offset="11145">
+              <caret line="563" column="0" selection-start-line="563" selection-start-column="0" selection-end-line="563" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -81,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="conf.yml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="conf.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/conf/group_vars/conf.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="517" max-vertical-offset="915">
-              <caret line="53" column="16" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.523614" vertical-offset="90" max-vertical-offset="915">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -173,12 +168,12 @@
         <option value="$PROJECT_DIR$/environments/development/group_vars/dev-nginx.j2" />
         <option value="$PROJECT_DIR$/s.json" />
         <option value="$PROJECT_DIR$/roles/instanceToReady/tasks/main.yml" />
-        <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
         <option value="$PROJECT_DIR$/server.yml" />
         <option value="$PROJECT_DIR$/s3Object.yml" />
         <option value="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
+        <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
       </list>
     </option>
   </component>
@@ -1082,7 +1077,15 @@
       <created>1518493165585</created>
       <updated>1518493165585</updated>
     </task>
-    <option name="localTasksCounter" value="144" />
+    <task id="LOCAL-00144" summary="normal code">
+      <created>1518498629199</created>
+      <updated>1518498629199</updated>
+    </task>
+    <task id="LOCAL-00145" summary="normal code">
+      <created>1518498749409</created>
+      <updated>1518498749409</updated>
+    </task>
+    <option name="localTasksCounter" value="146" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1126,7 +1129,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="sep file for each operation" />
     <MESSAGE value="file ordering" />
     <MESSAGE value="dynamic pass data" />
     <MESSAGE value="multiple instance creation" />
@@ -1151,7 +1153,8 @@
     <MESSAGE value="trying copy ip" />
     <MESSAGE value="nthg come" />
     <MESSAGE value="gather_facts: true" />
-    <option name="LAST_COMMIT_MESSAGE" value="gather_facts: true" />
+    <MESSAGE value="normal code" />
+    <option name="LAST_COMMIT_MESSAGE" value="normal code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1471,14 +1474,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/group_vars/conf.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="517" max-vertical-offset="915">
-          <caret line="53" column="16" selection-start-line="53" selection-start-column="11" selection-end-line="53" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/s3Object.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
@@ -1521,8 +1516,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.25" vertical-offset="8190" max-vertical-offset="11145">
-          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+        <state vertical-scroll-proportion="-36.11111" vertical-offset="7470" max-vertical-offset="11145">
+          <caret line="563" column="0" selection-start-line="563" selection-start-column="0" selection-end-line="563" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/group_vars/conf.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.523614" vertical-offset="90" max-vertical-offset="915">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
