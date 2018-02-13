@@ -5,6 +5,7 @@
   name: "Provision an EC2 Instance"
   become: true
   become_user: root
+  gather_facts: true
 
   vars_files:
         - conf/group_vars/conf.yml
@@ -18,10 +19,11 @@
     - name: change  webIP in conf file
       become: true
       become_user: root
+      gather_facts: true
       replace:
         dest: /home/ubuntu/project/EC2Automation/conf/group_vars/conf.yml
         regexp: 'webIP'
-        replace: "{{ ec2_public_ip }}"
+        replace: "{{ ec2_public_ip.stdout }}"
 
     - set_fact:
           one_fact:  "{{ webID }}"
@@ -34,15 +36,20 @@
     - name: change nginx file
       become: true
       become_user: root
+      gather_facts: true
       replace:
          dest: /home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
          regexp: '127.0.0.1'
          replace:  '{{ one_fact }}'
 
+    - name: sleep for a specified interval
+      become: true
+      command: sleep 30
 
     - name: copy Nginx from template
       become: true
       become_user: root
+      gather_facts: true
       template: src=/home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
                 dest=/home/ubuntu/nginx.conf
       when: env == 'development'
