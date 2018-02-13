@@ -156,15 +156,6 @@
       with_items: "{{ ec2.instances }}"
       when: allInDiff == true
 
-    - name: change  webIP in conf file
-      become: true
-      become_user: root
-      replace:
-        dest: /home/ubuntu/project/EC2Automation/conf/group_vars/conf.yml
-        regexp: 'webIP'
-        replace: "{{ item.public_ip }}"
-      with_items: "{{ ec2.instances }}"
-      when: allInDiff == true
 
     - name: Wait for SSH for webInstance (allInDiff)
       wait_for:
@@ -577,7 +568,7 @@
   vars_files:
         - conf/group_vars/conf.yml
   tasks:
-  - add_host:  groups="NGINXInstance" tag= "dizWhat"
+    - add_host:  groups="NGINXInstance" tag= "dizWhat"
 
 #  roles:
 #      - { role: instanceToReady, when: allInDiff == true }
@@ -598,7 +589,7 @@
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 
   tasks:
-  - debug: var=tag
+    - debug: var=tag
 
 #  roles:
 #      - { role: nginx, when: allInDiff == true }
