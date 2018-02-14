@@ -63,6 +63,41 @@
   file: path=/home/ubuntu/Project/Admin-WebApp state=directory
   file: path=/home/ubuntu/Project/Board-WebApp state=directory
 
+
+
+- name: Creates directory for deploy script
+  file: path=/home/ubuntu/deployScript state=directory
+
+- name: copy Student-WebApp.sh file from template
+  template: src=Student-WebApp.sh
+            dest=/home/ubuntu/deployScript/Student-WebApp.sh
+            mode=0600
+
+- name: copy Teacher-WebApp.sh file from template
+  template: src=Teacher-WebApp.sh
+            dest=/home/ubuntu/deployScript/Teacher-WebApp.sh
+            mode=0600
+
+- name: copy Principal-WebApp.sh file from template
+  template: src=Principal-WebApp.sh
+            dest=/home/ubuntu/deployScript/Principal-WebApp.sh
+            mode=0600
+
+- name: copy Admin-WebApp.sh file from template
+  template: src=Admin-WebApp.sh
+            dest=/home/ubuntu/deployScript/Admin-WebApp.sh
+            mode=0600
+
+- name: copy Board-WebApp.sh file from template
+  template: src=Board-WebApp.sh
+            dest=/home/ubuntu/deployScript/Board-WebApp.sh
+            mode=0600
+
+- name: copy Home-WebApp.sh file from template
+  template: src=Home-WebApp.sh
+            dest=/home/ubuntu/deployScript/Home-WebApp.sh
+            mode=0600
+
 - name: ensure github.com is a known host
   lineinfile:
     dest: /home/ubuntu/.ssh/known_hosts
