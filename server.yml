@@ -570,9 +570,13 @@
         - conf/group_vars/conf.yml
   tasks:
 
+  - name: "Curl AWS to get this instance's public IP address"
+    command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+    register: ec2_public_ip
+
   - name: "Set fact on localhost"
     set_fact:
-      my_test_fact: "Hello"
+      my_test_fact: "{{ec2_public_ip.stdout}}"
 
   - name: "Copy fact to other servers"
     set_fact:
