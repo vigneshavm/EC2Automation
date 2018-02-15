@@ -1,65 +1,22 @@
-
-- name: "Show fact on webserver"
-  debug: var=launched_DBInstanceIP
-
-- name: "Curl AWS to get this instance's public IP address"
-  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-  register: WebInstanceIP
-
-- name: "Set fact on localhost"
-  set_fact:
-    launched_webInstanceIP: "{{WebInstanceIP.stdout}}"
-
-- name: "Copy fact to other servers"
-  set_fact:
-    launched_webInstanceIP: "{{ launched_webInstanceIP }}"
-  delegate_to: "{{ item }}"
-  delegate_facts: True
-  with_items: "{{ groups['all'] }}"
-  when: item != "localhost"
-
-- name: GIT Installation
-  become: true
-  become_user: root
-  apt: name=git state=present
-
-- name: copy private file from template
-  template: src=private-key
-            dest=/home/ubuntu/.ssh/id_rsa
-            mode=0600
-
-- name: copy ssh file from template
-  template: src=ssh-key
-            dest=/home/ubuntu/.ssh/id_rsa.pub
-            mode=0600
-
-- name: copy authorized_keys file from template
-  template: src=authorized_keys
-            dest=/home/ubuntu/.ssh/authorized_keys
-            mode=0600
-
-- name: Creates directory
-  file: path=/home/ubuntu/Project state=directory
-  file: path=/home/ubuntu/Project/Student-WebApp state=directory
-
-- name: ensure github.com is a known host
-  lineinfile:
-    dest: /home/ubuntu/.ssh/known_hosts
-    create: yes
-    state: present
-    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
-    regexp: "^github\\.com"
-
-
-- name: Clone Student-WebApp development
-  git: repo=git@github.com:neolearning/Student-WebApp.git
-       dest=/home/ubuntu/Project/Student-WebApp
-       key_file=/home/ubuntu/.ssh/id_rsa
-       version=development
-  when: (StudentWebApp == true) and (env == 'stage' or env == 'development')
-
-
 #
+#- name: "Show fact on webserver"
+#  debug: var=launched_DBInstanceIP
+#
+#- name: "Curl AWS to get this instance's public IP address"
+#  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+#  register: WebInstanceIP
+#
+#- name: "Set fact on localhost"
+#  set_fact:
+#    launched_webInstanceIP: "{{WebInstanceIP.stdout}}"
+#
+#- name: "Copy fact to other servers"
+#  set_fact:
+#    launched_webInstanceIP: "{{ launched_webInstanceIP }}"
+#  delegate_to: "{{ item }}"
+#  delegate_facts: True
+#  with_items: "{{ groups['all'] }}"
+#  when: item != "localhost"
 #
 #- name: Node | Add  repository
 #  become: true

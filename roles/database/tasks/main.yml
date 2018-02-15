@@ -1,20 +1,31 @@
-- name: "Get public IP address for Database"
-  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-  register: DBInstanceIP
-
-- name: "Set fact on localhost"
-  set_fact:
-    launched_DBInstanceIP: "{{ DBInstanceIP.stdout }}"
-
-- name: "Copy fact to other servers"
-  set_fact:
-    launched_DBInstanceIP: "{{ launched_DBInstanceIP }}"
-  delegate_to: "{{ item }}"
-  delegate_facts: True
-  with_items: "{{ groups['all'] }}"
-  when: item != "localhost"
 
 
+- name: copy Nginx from template
+  become: true
+  become_user: root
+  template: src=neo.tar.gz
+            dest=/home/ubuntu/neo.tar.gz
+
+
+
+
+#- name: "Get public IP address for Database"
+#  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+#  register: DBInstanceIP
+#
+#- name: "Set fact on localhost"
+#  set_fact:
+#    launched_DBInstanceIP: "{{ DBInstanceIP.stdout }}"
+#
+#- name: "Copy fact to other servers"
+#  set_fact:
+#    launched_DBInstanceIP: "{{ launched_DBInstanceIP }}"
+#  delegate_to: "{{ item }}"
+#  delegate_facts: True
+#  with_items: "{{ groups['all'] }}"
+#  when: item != "localhost"
+#
+#
 #- name: Add MongoDB depenencey
 #  become: true
 #  become_user: root

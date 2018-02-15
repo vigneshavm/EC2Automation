@@ -5,7 +5,7 @@
   name: "Provision an EC2 Instance"
   become: true
   become_user: root
-  gather_facts: true
+  gather_facts: True
 
   vars_files:
         - conf/group_vars/conf.yml
@@ -378,8 +378,6 @@
 #      webAndDB end
 
 
-
-
 #      webAndNGINX started
     -
       local_action:
@@ -464,9 +462,9 @@
 -
   hosts: webInstance
   name: "launched an EC2 Instance - allInOne "
-  become: true
+  become: false
   become_user: ubuntu
-  gather_facts: false
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -544,9 +542,9 @@
 -
   hosts: DB&&NGINXInstance
   name: "launched an EC2 Instance"
-  become_user: root
-  gather_facts: true
-  become: true
+  become: false
+  become_user: ubuntu
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -561,9 +559,9 @@
 -
   hosts: webInstance
   name: "launched an EC2 Instance"
-  become_user: root
-  gather_facts: true
-  become: true
+  become: false
+  become_user: ubuntu
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -577,9 +575,9 @@
 -
   hosts: DB&&NGINXInstance
   name: "launched an EC2 Instance"
-  become_user: root
-  gather_facts: true
-  become: true
+  become: false
+  become_user: ubuntu
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -602,9 +600,9 @@
 -
   hosts: web&&DBInstance
   name: "launched an EC2 Instance"
-  become_user: root
-  gather_facts: true
-  become: true
+  become: false
+  become_user: ubuntu
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -621,9 +619,9 @@
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance"
-  become_user: root
-  gather_facts: true
-  become: true
+  become: false
+  become_user: ubuntu
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -643,9 +641,9 @@
 -
   hosts: DBInstance
   name: "launched an DBInstance"
-  become_user: root
-  gather_facts: false
-  become: true
+  become: false
+  become_user: ubuntu
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
@@ -661,9 +659,9 @@
 -
   hosts: web&&NGINXInstance
   name: "launched an web&&NGINXInstance"
-  become_user: root
-  gather_facts: false
-  become: true
+  become: false
+  become_user: ubuntu
+  gather_facts: True
 
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
