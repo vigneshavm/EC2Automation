@@ -23,6 +23,25 @@
   become_user: root
   apt: name=git state=present
 
+- name: Creates directory
+  file: path=/home/ubuntu/Project state=directory
+  file: path=/home/ubuntu/Project/Student-WebApp state=directory
+
+- name: ensure github.com is a known host
+  lineinfile:
+    dest: /home/ubuntu/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+
+- name: Clone Student-WebApp development
+  git: repo=git@github.com:neolearning/Student-WebApp.git
+       dest=/home/ubuntu/Project/Student-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (StudentWebApp == true) and (env == 'stage' or env == 'development')
 
 
 #
