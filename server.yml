@@ -502,7 +502,7 @@
         - conf/group_vars/conf.yml
 
   roles:
-#      - { role: instanceToReady, when: allInDiff == true }
+      - { role: instanceToReady, when: allInDiff == true }
       - { role: database, when: allInDiff == true }
 
 

@@ -1,10 +1,10 @@
 - name: "Curl AWS to get this instance's public IP address"
   command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-  register: ec2_public_ip
+  register: DBInstanceIP
 
 - name: "Set fact on localhost"
   set_fact:
-    launched_DBInstanceIP: "{{ec2_public_ip.stdout}}"
+    launched_DBInstanceIP: "{{ DBInstanceIP.stdout }}"
 
 - name: "Copy fact to other servers"
   set_fact:
