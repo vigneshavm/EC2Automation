@@ -588,7 +588,7 @@
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 
   tasks:
-     - debug: msg='resp={{ hostvars["fubar"]["resp"] }}'
+     - debug: msg='resp={{ hostvars[webInstance]["resp"] }}'
 
 #connection allInDiff end
 

@@ -39,8 +39,8 @@
       <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.361419" vertical-offset="2250" max-vertical-offset="11160">
-              <caret line="221" column="30" selection-start-line="181" selection-start-column="4" selection-end-line="221" selection-end-column="30" />
+            <state vertical-scroll-proportion="1.0798227" vertical-offset="8363" max-vertical-offset="11160">
+              <caret line="590" column="47" selection-start-line="590" selection-start-column="47" selection-end-line="590" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -1123,7 +1123,11 @@
       <created>1518674572705</created>
       <updated>1518674572706</updated>
     </task>
-    <option name="localTasksCounter" value="158" />
+    <task id="LOCAL-00158" summary="hostvar - access vraible from different host - DB instance removed">
+      <created>1518674754708</created>
+      <updated>1518674754708</updated>
+    </task>
+    <option name="localTasksCounter" value="159" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1167,7 +1171,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="file ref" />
     <MESSAGE value="all files" />
     <MESSAGE value="conf based file" />
     <MESSAGE value="remove duplicate files" />
@@ -1192,7 +1195,8 @@
     <MESSAGE value="remove become from r53 creation" />
     <MESSAGE value="deployment script" />
     <MESSAGE value="hostvar - access vraible from different host" />
-    <option name="LAST_COMMIT_MESSAGE" value="hostvar - access vraible from different host" />
+    <MESSAGE value="hostvar - access vraible from different host - DB instance removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="hostvar - access vraible from different host - DB instance removed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1561,8 +1565,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.361419" vertical-offset="2250" max-vertical-offset="11160">
-          <caret line="221" column="30" selection-start-line="181" selection-start-column="4" selection-end-line="221" selection-end-column="30" />
+        <state vertical-scroll-proportion="1.0798227" vertical-offset="8363" max-vertical-offset="11160">
+          <caret line="590" column="47" selection-start-line="590" selection-start-column="47" selection-end-line="590" selection-end-column="47" />
           <folding />
         </state>
       </provider>
