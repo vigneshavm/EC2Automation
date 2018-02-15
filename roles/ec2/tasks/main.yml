@@ -2,14 +2,13 @@
 - name: "Show fact on webserver"
   debug: var=launched_DBInstanceIP
 
-
 - name: "Curl AWS to get this instance's public IP address"
   command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-  register: ec2_public_ip
+  register: WebInstanceIP
 
 - name: "Set fact on localhost"
   set_fact:
-    launched_webInstanceIP: "{{ec2_public_ip.stdout}}"
+    launched_webInstanceIP: "{{WebInstanceIP.stdout}}"
 
 - name: "Copy fact to other servers"
   set_fact:
@@ -18,6 +17,11 @@
   delegate_facts: True
   with_items: "{{ groups['all'] }}"
   when: item != "localhost"
+
+- name: GIT Installation
+  become: true
+  become_user: root
+  apt: name=git state=present
 
 
 

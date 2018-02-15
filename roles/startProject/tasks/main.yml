@@ -1,22 +1,56 @@
 
+- name: "Show fact on webserver"
+  debug: var=launched_DBInstanceIP
 
 
-- name: "Start Student-WebApp"
-  command: "forever start /home/ubuntu/Project/Student-WebApp/server.js"
-  when: StudentWebApp == true
+- name: Start Student-WebApp Conf - for dev
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-development.js
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'development'
 
-- name: "Start Teacher-WebApp"
-  command: "forever start /home/ubuntu/Project/Teacher-WebApp/server.js"
-  when: TeacherWebApp == true
- 
-- name: "Start Principal-WebApp"
-  command: "forever start /home/ubuntu/Project/Principal-WebApp/server.js"
-  when: PrincipalWebApp == true
- 
-- name: "Start Admin-WebApp"
-  command: "forever start /home/ubuntu/Project/Admin-WebApp/server.js"
-  when: AdminWebApp == true
- 
-- name: "Start Board-WebApp"
-  command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
-  when: BoardWebApp == true
+- name: Start Student-WebApp Conf - for stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-development.js
+     regexp: '10.0.2.26'
+     replace:  '{{ launched_webInstanceIP }}'
+  when: env == 'stage'
+
+- name: Start Student-WebApp Conf - for production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-development.js
+     regexp: '10.0.2.184'
+     replace:  '{{ launched_webInstanceIP }}'
+  when: env == 'production'
+
+
+
+#- name: "Start Student-WebApp"
+#  command: "forever start /home/ubuntu/Project/Student-WebApp/server.js"
+#  when: StudentWebApp == true
+#
+#- name: "Start Teacher-WebApp"
+#  command: "forever start /home/ubuntu/Project/Teacher-WebApp/server.js"
+#  when: TeacherWebApp == true
+#
+#- name: "Start Principal-WebApp"
+#  command: "forever start /home/ubuntu/Project/Principal-WebApp/server.js"
+#  when: PrincipalWebApp == true
+#
+#- name: "Start Admin-WebApp"
+#  command: "forever start /home/ubuntu/Project/Admin-WebApp/server.js"
+#  when: AdminWebApp == true
+#
+#- name: "Start Board-WebApp"
+#  command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
+#  when: BoardWebApp == true

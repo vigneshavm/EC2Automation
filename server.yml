@@ -12,7 +12,6 @@
 
 
 #      allInOne started
-
   tasks:
     -
       local_action:
@@ -127,8 +126,8 @@
         tags:
           Name: webInstance
       when: allInDiff == true
-#                      DBInstance
 
+          # DBInstance
     -
       local_action:
         count: "{{ count }}"
@@ -171,7 +170,7 @@
           Name: DBInstance
       when: allInDiff == true
 
-#                      NGINXInstance
+            # NGINXInstance
     -
       local_action:
         count: "{{ count }}"
@@ -213,6 +212,7 @@
         tags:
           Name: NGINXInstance
       when: allInDiff == true
+
 #      allInDifferent end
 
 
@@ -499,11 +499,9 @@
 
   vars_files:
         - conf/group_vars/conf.yml
-
   roles:
       - { role: instanceToReady, when: allInDiff == true }
       - { role: database, when: allInDiff == true }
-
 
 -
   hosts: webInstance
@@ -517,9 +515,10 @@
 
   vars_files:
         - conf/group_vars/conf.yml
+
   roles:
       - { role: ec2, when: allInDiff == true }
-
+      - { role: startProject, when: allInDiff == true }
 
 -
   hosts: NGINXInstance

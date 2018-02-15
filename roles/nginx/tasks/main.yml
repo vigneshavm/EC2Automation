@@ -1,13 +1,20 @@
+- name: copy Nginx from template
+  become: true
+  become_user: root
+  template: src=dev-nginx.j2
+            dest=/home/ubuntu/nginx.conf
+  when: env == 'development'
+
+- name: change nginx file
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/nginx.conf
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_webInstanceIP }}'
 
 
-#- name: change nginx file
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/nginx.conf
-#     regexp: '127.0.0.1'
-#     replace:  '{{ launched_webInstanceIP }}'
 
 
 #
@@ -39,7 +46,7 @@
 #  become: true
 #  become_user: root
 #  template: src=dev-nginx.j2
-#            dest=/home/ubuntu/nginx.conf
+#            dest=/etc/nginx/nginx.conf
 #  when: env == 'development'
 #
 #- name: copy Nginx from template
@@ -56,7 +63,17 @@
 #            dest=/etc/nginx/nginx.conf
 #  when: env == 'production'
 #
-
+#
+#- name: change nginx file
+#  become: true
+#  become_user: root
+#  gather_facts: true
+#  replace:
+#     dest: /etc/nginx/nginx.conf
+#     regexp: '127.0.0.1'
+#     replace:  '{{ launched_webInstanceIP }}'
+#
+#
 #
 #- name: "Curl AWS to get this instance's public IP address"
 #  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
