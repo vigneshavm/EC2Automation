@@ -9,53 +9,6 @@
 
   vars_files:
         - conf/group_vars/conf.yml
-#
-#  tasks:
-#    - name: "Curl AWS to get this instance's public IP address"
-#      command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-#      register: ec2_public_ip
-#
-#
-#    - name: change  webIP in conf file
-#      become: true
-#      become_user: root
-#      gather_facts: true
-#      replace:
-#        dest: /home/ubuntu/project/EC2Automation/conf/group_vars/conf.yml
-#        regexp: 'webIP'
-#        replace: "{{ ec2_public_ip.stdout }}"
-#
-#    - name: sleep for a specified interval
-#      become: true
-#      command: sleep 30
-#
-#    - set_fact:
-#          one_fact:  "{{ webID }}"
-#          cacheable: true
-#
-#    - debug:
-#        msg: "{{ one_fact }}"
-#
-#
-#    - name: change nginx file
-#      become: true
-#      become_user: root
-#      gather_facts: true
-#      replace:
-#         dest: /home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
-#         regexp: '127.0.0.1'
-#         replace:  '{{ one_fact }}'
-#
-#
-#
-#    - name: copy Nginx from template
-#      become: true
-#      become_user: root
-#      gather_facts: true
-#      template: src=/home/ubuntu/project/EC2Automation/conf/nginx/dev-nginx.j2
-#                dest=/home/ubuntu/nginx.conf
-#      when: env == 'development'
-
 
 
 #      allInOne started
@@ -151,11 +104,8 @@
       add_host:
         hostname: "{{ item.public_ip }}"
         groupname: webInstance
-        groups: "NGINXInstance"
-        tag: "{{ item }}"
       with_items: "{{ ec2.instances }}"
       when: allInDiff == true
-
 
     - name: Wait for SSH for webInstance (allInDiff)
       wait_for:
@@ -179,47 +129,47 @@
       when: allInDiff == true
 #                      DBInstance
 
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a DBInstance (allInDiff)"
-#      register: ec2
-#      when: allInDiff == true
-#
-#    - name: Save host data to DBInstance(allInDiff)
-#      add_host:
-#        hostname: "{{ item.public_ip }}"
-#        groupname: DBInstance
-#      with_items: "{{ ec2.instances }}"
-#      when: allInDiff == true
-#
-#    - name: Wait for SSH for DBInstance (allInDiff)
-#      wait_for:
-#        delay: 1
-#        host: "{{ item.public_ip }}"
-#        port: 22
-#        state: started
-#        timeout: 30
-#      with_items: "{{ ec2.instances }}"
-#      when: allInDiff == true
-#
-#    - name: Add tag to DBInstance (allInDiff)
-#      ec2_tag:
-#        resource: "{{ item.id }}"
-#        region: "{{ region }}"
-#        state: present
-#      with_items: "{{ ec2.instances }}"
-#      args:
-#        tags:
-#          Name: DBInstance
-#      when: allInDiff == true
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a DBInstance (allInDiff)"
+      register: ec2
+      when: allInDiff == true
+
+    - name: Save host data to DBInstance(allInDiff)
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: DBInstance
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: Wait for SSH for DBInstance (allInDiff)
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: Add tag to DBInstance (allInDiff)
+      ec2_tag:
+        resource: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+      with_items: "{{ ec2.instances }}"
+      args:
+        tags:
+          Name: DBInstance
+      when: allInDiff == true
 
 #                      NGINXInstance
     -
@@ -537,23 +487,23 @@
 
 
 #connect allInDiff start
-#-
-#  hosts: DBInstance
-#  name: "launched an EC2 Instance - allInDiff"
-#  become: false
-#  become_user: ubuntu
-#  gather_facts: false
-#  connection: local
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#
-#  roles:
+-
+  hosts: DBInstance
+  name: "launched an EC2 Instance - allInDiff"
+  become: false
+  become_user: ubuntu
+  gather_facts: false
+  connection: local
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
 #      - { role: instanceToReady, when: allInDiff == true }
-#      - { role: database, when: allInDiff == true }
+      - { role: database, when: allInDiff == true }
 
 
 -

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99a1c592-4d4b-4017-8507-a761fe5cd376" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/database/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/database/tasks/main.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/ec2/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" afterPath="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.yml" afterPath="$PROJECT_DIR$/server.yml" />
@@ -31,28 +32,48 @@
       <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.5555556" vertical-offset="0" max-vertical-offset="1725">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="1890">
+              <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.yml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="s3Object.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/s3Object.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.814815" vertical-offset="8273" max-vertical-offset="11145">
-              <caret line="571" column="19" selection-start-line="571" selection-start-column="19" selection-end-line="571" selection-end-column="19" />
+            <state vertical-scroll-proportion="0.22198732" vertical-offset="7470" max-vertical-offset="10395">
+              <caret line="505" column="51" selection-start-line="505" selection-start-column="51" selection-end-line="505" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roles/database/tasks/main.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/roles/ec2/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.28242677" vertical-offset="0" max-vertical-offset="3465">
-              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1530" max-vertical-offset="3570">
+              <caret line="2" column="34" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -78,31 +99,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home-WebApp.sh" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roles/ec2/templates/Home-WebApp.sh">
+      <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roles/instanceToReady/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="435">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Principal-WebApp.sh" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roles/ec2/templates/Principal-WebApp.sh">
+      <file leaf-file-name="main.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/roles/startProject/tasks/main.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="435">
-              <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Teacher-WebApp.sh" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roles/ec2/templates/Teacher-WebApp.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="435">
-              <caret line="18" column="7" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -113,16 +124,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="435">
               <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Board-WebApp.sh" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/roles/ec2/templates/Board-WebApp.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="435">
-              <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -170,7 +171,6 @@
         <option value="$PROJECT_DIR$/s.json" />
         <option value="$PROJECT_DIR$/roles/instanceToReady/tasks/main.yml" />
         <option value="$PROJECT_DIR$/s3Object.yml" />
-        <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/ec2/templates/ssh-key" />
         <option value="$PROJECT_DIR$/roles/ec2/templates/authorized_keys" />
         <option value="$PROJECT_DIR$/roles/ec2/templates/private-key" />
@@ -181,9 +181,10 @@
         <option value="$PROJECT_DIR$/roles/ec2/templates/Teacher-WebApp.sh" />
         <option value="$PROJECT_DIR$/roles/ec2/templates/Student-WebApp.sh" />
         <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
-        <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
-        <option value="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
         <option value="$PROJECT_DIR$/server.yml" />
+        <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
+        <option value="$PROJECT_DIR$/roles/nginx/tasks/main.yml" />
+        <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
       </list>
     </option>
   </component>
@@ -338,10 +339,6 @@
               <option name="myItemId" value="ec2" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -379,7 +376,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ec2" />
+              <option name="myItemId" value="database" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -394,6 +391,14 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="roles" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="database" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tasks" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1149,7 +1154,15 @@
       <created>1518678440970</created>
       <updated>1518678440970</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="hostvar - access vraible from different host - DB instance removed">
+      <created>1518678988099</created>
+      <updated>1518678988100</updated>
+    </task>
+    <task id="LOCAL-00165" summary="access varible betwwen host">
+      <created>1518679454467</created>
+      <updated>1518679454467</updated>
+    </task>
+    <option name="localTasksCounter" value="166" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1160,6 +1173,7 @@
       <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35495716" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3353733" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6487148" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24100327" sideWeight="0.49908593" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1169,7 +1183,6 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46634027" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.64956194" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1193,7 +1206,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="all files" />
     <MESSAGE value="conf based file" />
     <MESSAGE value="remove duplicate files" />
     <MESSAGE value="&#10;file name changed" />
@@ -1218,7 +1230,8 @@
     <MESSAGE value="deployment script" />
     <MESSAGE value="hostvar - access vraible from different host" />
     <MESSAGE value="hostvar - access vraible from different host - DB instance removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="hostvar - access vraible from different host - DB instance removed" />
+    <MESSAGE value="access varible betwwen host" />
+    <option name="LAST_COMMIT_MESSAGE" value="access varible betwwen host" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1434,13 +1447,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roles/startProject/tasks/main.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/roles/nginx/templates/stage-nginx.j2">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590">
@@ -1458,13 +1464,6 @@
     <entry file="file://$PROJECT_DIR$/conf/nginx/dev-nginx.j2">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/s3Object.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
@@ -1487,21 +1486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="840">
           <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/roles/database/tasks/main.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="233" max-vertical-offset="1005">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/roles/instanceToReady/tasks/main.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1569,26 +1553,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
+    <entry file="file://$PROJECT_DIR$/s3Object.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.5555556" vertical-offset="0" max-vertical-offset="1725">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.yml">
+    <entry file="file://$PROJECT_DIR$/roles/nginx/tasks/main.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.814815" vertical-offset="8273" max-vertical-offset="11145">
-          <caret line="571" column="19" selection-start-line="571" selection-start-column="19" selection-end-line="571" selection-end-column="19" />
+        <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="1890">
+          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roles/database/tasks/main.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/roles/ec2/tasks/main.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28242677" vertical-offset="0" max-vertical-offset="3465">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3570">
+          <caret line="2" column="34" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roles/instanceToReady/tasks/main.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roles/startProject/tasks/main.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22198732" vertical-offset="7470" max-vertical-offset="10395">
+          <caret line="505" column="51" selection-start-line="505" selection-start-column="51" selection-end-line="505" selection-end-column="51" />
           <folding />
         </state>
       </provider>
