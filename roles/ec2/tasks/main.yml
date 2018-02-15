@@ -23,6 +23,21 @@
   become_user: root
   apt: name=git state=present
 
+- name: copy private file from template
+  template: src=private-key
+            dest=/home/ubuntu/.ssh/id_rsa
+            mode=0600
+
+- name: copy ssh file from template
+  template: src=ssh-key
+            dest=/home/ubuntu/.ssh/id_rsa.pub
+            mode=0600
+
+- name: copy authorized_keys file from template
+  template: src=authorized_keys
+            dest=/home/ubuntu/.ssh/authorized_keys
+            mode=0600
+
 - name: Creates directory
   file: path=/home/ubuntu/Project state=directory
   file: path=/home/ubuntu/Project/Student-WebApp state=directory

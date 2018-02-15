@@ -527,7 +527,6 @@
   become_user: ubuntu
   gather_facts: True
 
-
   vars_files:
         - conf/group_vars/conf.yml
   vars:
@@ -618,6 +617,7 @@
       - { role: database, when: webAndDB == true }
       - { role: ec2, when: webAndDB == true }
       - { role: startProject, when: webAndDB == true }
+
 -
   hosts: NGINXInstance
   name: "launched an EC2 Instance"
@@ -654,8 +654,8 @@
         - conf/group_vars/conf.yml
 
   roles:
-      - { role: database, when: webAndNGINX == true }
       - { role: instanceToReady, when: webAndNGINX == true }
+      - { role: database, when: webAndNGINX == true }
 
 
 -
@@ -673,14 +673,9 @@
         - environments/{{ env }}/group_vars/route53.yml
 
   roles:
-      - { role: instanceToReady, when: webAndNGINX == true }
       - { role: ec2, when: webAndNGINX == true }
       - { role: startProject, when: webAndNGINX == true }
       - { role: nginx, when: webAndNGINX == true }
-
-
 #connection webAndNGINX end
 
 
-
-#
