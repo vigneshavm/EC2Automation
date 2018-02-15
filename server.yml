@@ -568,23 +568,9 @@
 
   vars_files:
         - conf/group_vars/conf.yml
-  tasks:
+  roles:
+      - { role: ec2, when: allInDiff == true }
 
-  - name: "Curl AWS to get this instance's public IP address"
-    command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-    register: ec2_public_ip
-
-  - name: "Set fact on localhost"
-    set_fact:
-      my_test_fact: "{{ec2_public_ip.stdout}}"
-
-  - name: "Copy fact to other servers"
-    set_fact:
-      my_test_fact: "{{ my_test_fact }}"
-    delegate_to: "{{ item }}"
-    delegate_facts: True
-    with_items: "{{ groups['all'] }}"
-    when: item != "localhost"
 
 -
   hosts: NGINXInstance
@@ -599,9 +585,10 @@
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 
-  tasks:
-  - name: "Show fact on server2"
-    debug: var=my_test_fact
+  roles:
+      - { role: nginx, when: allInDiff == true }
+
+
 #connection allInDiff end
 
 
