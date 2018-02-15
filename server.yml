@@ -579,7 +579,7 @@
   name: "launched an EC2 Instance - allInDiff"
   become: false
   become_user: ubuntu
-  gather_facts: false
+  gather_facts: true
 
 
   vars_files:

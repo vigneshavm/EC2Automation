@@ -39,8 +39,8 @@
       <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0798227" vertical-offset="8363" max-vertical-offset="11160">
-              <caret line="590" column="47" selection-start-line="590" selection-start-column="47" selection-end-line="590" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.7804878" vertical-offset="8363" max-vertical-offset="11160">
+              <caret line="581" column="20" selection-start-line="581" selection-start-column="20" selection-end-line="581" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -1127,7 +1127,11 @@
       <created>1518674754708</created>
       <updated>1518674754708</updated>
     </task>
-    <option name="localTasksCounter" value="159" />
+    <task id="LOCAL-00159" summary="hostvar - access vraible from different host - DB instance removed">
+      <created>1518674892566</created>
+      <updated>1518674892566</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1565,8 +1569,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0798227" vertical-offset="8363" max-vertical-offset="11160">
-          <caret line="590" column="47" selection-start-line="590" selection-start-column="47" selection-end-line="590" selection-end-column="47" />
+        <state vertical-scroll-proportion="0.7804878" vertical-offset="8363" max-vertical-offset="11160">
+          <caret line="581" column="20" selection-start-line="581" selection-start-column="20" selection-end-line="581" selection-end-column="20" />
           <folding />
         </state>
       </provider>
