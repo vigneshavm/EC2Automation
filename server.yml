@@ -475,7 +475,7 @@
       - environments/{{ env }}/group_vars/route53.yml
 
   roles:
-      - { role: instanceToReady, when: allInOne == true }
+#      - { role: instanceToReady, when: allInOne == true }
       - { role: ec2, when: allInOne == true }
       - { role: database, when: allInOne == true }
       - { role: startProject, when: allInOne == true }
