@@ -3,7 +3,7 @@
 - name: copy Nginx from template
   become: true
   become_user: root
-  template: src=neo.tar.gz
+  unarchive: src=neo.tar.gz
             dest=/home/ubuntu/neo.tar.gz
 
 
