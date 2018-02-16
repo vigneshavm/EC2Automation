@@ -8,7 +8,7 @@
 
 - name: "Set fact on localhost"
   set_fact:
-    launched_webInstanceIP: "{{WebInstanceIP.stdout}}"
+    launched_webInstanceIP: "{{ WebInstanceIP.stdout }}"
 
 - name: "Copy fact to other servers"
   set_fact:
