@@ -4,4 +4,3 @@
   principal: exampleprincipal.neols.com
   admin:  exampleadmin.neols.com
   board: exampleboard.neols.com
-  env: production

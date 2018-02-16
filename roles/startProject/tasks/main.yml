@@ -1,313 +1,313 @@
-#
-#- name: "Show fact on webserver"
-#  debug: var=launched_DBInstanceIP
-#
-#
-#
-##  ----------------------- DB HOST and URL IP change Start -----------------------
-#
-#  #****************StudentApp start****************
-#- name: Start Student-WebApp - Conf - IP Change - Dev
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-development.js
-#     regexp: '127.0.0.1'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'development'
-#
-#- name: Start Student-WebApp - Conf - IP Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-stage.js
-#     regexp: '10.0.2.26'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'stage'
-#
-#- name: Start Student-WebApp - Conf - IP Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-production.js
-#     regexp: '10.0.2.184'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'production'
-##****************StudentApp End****************
-#
-##****************TeacherApp Start****************
-#- name: Start Teacher-WebApp - Conf - IP Change - Dev
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-development.js
-#     regexp: '127.0.0.1'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'development'
-#
-#- name: Start Teacher-WebApp - Conf - IP Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-stage.js
-#     regexp: '10.0.2.26'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'stage'
-#
-#- name: Start Teacher-WebApp - Conf - IP Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-production.js
-#     regexp: '10.0.2.184'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'production'
-##****************TeacherApp Start****************
-#
-#
-##****************PrincipalApp Start****************
-#- name: Start Principal-WebApp - Conf - IP Change - Dev
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-development.js
-#     regexp: '127.0.0.1'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'development'
-#
-#- name: Start Principal-WebApp - Conf - IP Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-stage.js
-#     regexp: '10.0.2.26'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'stage'
-#
-#- name: Start Principal-WebApp - Conf - IP Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-production.js
-#     regexp: '10.0.2.184'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'production'
-##****************PrincipalApp End****************
-#
-#
-##****************BoardApp start****************
-#- name: Start Board-WebApp - Conf - IP Change - Dev
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-development.js
-#     regexp: '127.0.0.1'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'development'
-#
-#- name: Start Board-WebApp - Conf - IP Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-stage.js
-#     regexp: '10.0.2.26'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'stage'
-#
-#- name: Start Board-WebApp - Conf - IP Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-production.js
-#     regexp: '10.0.2.184'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'production'
-##****************BoardApp End****************
-#
-#
-##****************AdminApp start****************
-#- name: Start Admin-WebApp - Conf - IP Change - Dev
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-development.js
-#     regexp: '127.0.0.1'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'development'
-#
-#- name: Start Admin-WebApp - Conf - IP Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-stage.js
-#     regexp: '10.0.2.26'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'stage'
-#
-#- name: Start Admin-WebApp - Conf - IP Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-production.js
-#     regexp: '10.0.2.184'
-#     replace:  '{{ launched_DBInstanceIP }}'
-#  when: env == 'production'
-##****************AdminApp End****************
-#
-##  ----------------------- DB HOST and URL IP change End -----------------------
-#
-#
-#
-##  ----------------------- webAppication Port change Start -----------------------
-#  #****************StudentApp start****************
-#- name: Start Student-WebApp - Conf - Port Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-stage.js
-#     regexp: '81'
-#     replace:  '8800'
-#  when: env == 'stage'
-#
-#- name: Start Student-WebApp - Conf - Port Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-production.js
-#     regexp: '81'
-#     replace:  '8800'
-#  when: env == 'production'
-##****************StudentApp End****************
-#
-##****************TeacherApp Start****************
-#- name: Start Teacher-WebApp - Conf - Port Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-stage.js
-#     regexp: '82'
-#     replace:  '8801'
-#  when: env == 'stage'
-#
-#- name: Start Teacher-WebApp - Conf - Port Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-production.js
-#     regexp: '82'
-#     replace:  '8801'
-#  when: env == 'production'
-##****************TeacherApp Start****************
-#
-#
-##****************PrincipalApp Start****************
-#- name: Start Principal-WebApp - Conf - Port Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-stage.js
-#     regexp: '83'
-#     replace:  '8802'
-#  when: env == 'stage'
-#
-#- name: Start Principal-WebApp - Conf - Port Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-production.js
-#     regexp: '83'
-#     replace:  '8802'
-#  when: env == 'production'
-##****************PrincipalApp End****************
-#
-#
-#
-##****************AdminApp start****************
-#- name: Start Admin-WebApp - Conf - Port Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-stage.js
-#     regexp: '84'
-#     replace:  '8803'
-#  when: env == 'stage'
-#
-#- name: Start Admin-WebApp - Conf - Port Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-production.js
-#     regexp: '84'
-#     replace:  '8803'
-#  when: env == 'production'
-##****************AdminApp End****************
-#
-#
-##****************BoardApp start****************
-#- name: Start Board-WebApp - Conf - Port Change - Stage
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-stage.js
-#     regexp: '85'
-#     replace:  '8804'
-#  when: env == 'stage'
-#
-#- name: Start Board-WebApp - Conf - Port Change -  production
-#  become: true
-#  become_user: root
-#  gather_facts: true
-#  replace:
-#     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-production.js
-#     regexp: '85'
-#     replace:  '8804'
-#  when: env == 'production'
-##****************BoardApp End****************
-#
-##  ----------------------- webAppication Port change End -----------------------
-#
-#
-#
-#- name: "Start Student-WebApp"
-#  command: "forever start /home/ubuntu/Project/Student-WebApp/server.js"
-#  when: StudentWebApp == true
-#
-#- name: "Start Teacher-WebApp"
-#  command: "forever start /home/ubuntu/Project/Teacher-WebApp/server.js"
-#  when: TeacherWebApp == true
-#
-#- name: "Start Principal-WebApp"
-#  command: "forever start /home/ubuntu/Project/Principal-WebApp/server.js"
-#  when: PrincipalWebApp == true
-#
-#- name: "Start Admin-WebApp"
-#  command: "forever start /home/ubuntu/Project/Admin-WebApp/server.js"
-#  when: AdminWebApp == true
-#
-#- name: "Start Board-WebApp"
-#  command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
-#  when: BoardWebApp == true
+
+- name: "Show fact on webserver"
+  debug: var=launched_DBInstanceIP
+
+
+
+#  ----------------------- DB HOST and URL IP change Start -----------------------
+
+  #****************StudentApp start****************
+- name: Start Student-WebApp - Conf - IP Change - Dev
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-development.js
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'development'
+
+- name: Start Student-WebApp - Conf - IP Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-stage.js
+     regexp: '10.0.2.26'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'stage'
+
+- name: Start Student-WebApp - Conf - IP Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-production.js
+     regexp: '10.0.2.184'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'production'
+#****************StudentApp End****************
+
+#****************TeacherApp Start****************
+- name: Start Teacher-WebApp - Conf - IP Change - Dev
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-development.js
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'development'
+
+- name: Start Teacher-WebApp - Conf - IP Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-stage.js
+     regexp: '10.0.2.26'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'stage'
+
+- name: Start Teacher-WebApp - Conf - IP Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-production.js
+     regexp: '10.0.2.184'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'production'
+#****************TeacherApp Start****************
+
+
+#****************PrincipalApp Start****************
+- name: Start Principal-WebApp - Conf - IP Change - Dev
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-development.js
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'development'
+
+- name: Start Principal-WebApp - Conf - IP Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-stage.js
+     regexp: '10.0.2.26'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'stage'
+
+- name: Start Principal-WebApp - Conf - IP Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-production.js
+     regexp: '10.0.2.184'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'production'
+#****************PrincipalApp End****************
+
+
+#****************BoardApp start****************
+- name: Start Board-WebApp - Conf - IP Change - Dev
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-development.js
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'development'
+
+- name: Start Board-WebApp - Conf - IP Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-stage.js
+     regexp: '10.0.2.26'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'stage'
+
+- name: Start Board-WebApp - Conf - IP Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-production.js
+     regexp: '10.0.2.184'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'production'
+#****************BoardApp End****************
+
+
+#****************AdminApp start****************
+- name: Start Admin-WebApp - Conf - IP Change - Dev
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-development.js
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'development'
+
+- name: Start Admin-WebApp - Conf - IP Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-stage.js
+     regexp: '10.0.2.26'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'stage'
+
+- name: Start Admin-WebApp - Conf - IP Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-production.js
+     regexp: '10.0.2.184'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'production'
+#****************AdminApp End****************
+
+#  ----------------------- DB HOST and URL IP change End -----------------------
+
+
+
+#  ----------------------- webAppication Port change Start -----------------------
+  #****************StudentApp start****************
+- name: Start Student-WebApp - Conf - Port Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-stage.js
+     regexp: '81'
+     replace:  '8800'
+  when: env == 'stage'
+
+- name: Start Student-WebApp - Conf - Port Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Student-WebApp/conf/conf-production.js
+     regexp: '81'
+     replace:  '8800'
+  when: env == 'production'
+#****************StudentApp End****************
+
+#****************TeacherApp Start****************
+- name: Start Teacher-WebApp - Conf - Port Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-stage.js
+     regexp: '82'
+     replace:  '8801'
+  when: env == 'stage'
+
+- name: Start Teacher-WebApp - Conf - Port Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Teacher-WebApp/conf/conf-production.js
+     regexp: '82'
+     replace:  '8801'
+  when: env == 'production'
+#****************TeacherApp Start****************
+
+
+#****************PrincipalApp Start****************
+- name: Start Principal-WebApp - Conf - Port Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-stage.js
+     regexp: '83'
+     replace:  '8802'
+  when: env == 'stage'
+
+- name: Start Principal-WebApp - Conf - Port Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Principal-WebApp/conf/conf-production.js
+     regexp: '83'
+     replace:  '8802'
+  when: env == 'production'
+#****************PrincipalApp End****************
+
+
+
+#****************AdminApp start****************
+- name: Start Admin-WebApp - Conf - Port Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-stage.js
+     regexp: '84'
+     replace:  '8803'
+  when: env == 'stage'
+
+- name: Start Admin-WebApp - Conf - Port Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Admin-WebApp/conf/conf-production.js
+     regexp: '84'
+     replace:  '8803'
+  when: env == 'production'
+#****************AdminApp End****************
+
+
+#****************BoardApp start****************
+- name: Start Board-WebApp - Conf - Port Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-stage.js
+     regexp: '85'
+     replace:  '8804'
+  when: env == 'stage'
+
+- name: Start Board-WebApp - Conf - Port Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Board-WebApp/conf/conf-production.js
+     regexp: '85'
+     replace:  '8804'
+  when: env == 'production'
+#****************BoardApp End****************
+
+#  ----------------------- webAppication Port change End -----------------------
+
+
+
+- name: "Start Student-WebApp"
+  command: "forever start /home/ubuntu/Project/Student-WebApp/server.js"
+  when: StudentWebApp == true
+
+- name: "Start Teacher-WebApp"
+  command: "forever start /home/ubuntu/Project/Teacher-WebApp/server.js"
+  when: TeacherWebApp == true
+
+- name: "Start Principal-WebApp"
+  command: "forever start /home/ubuntu/Project/Principal-WebApp/server.js"
+  when: PrincipalWebApp == true
+
+- name: "Start Admin-WebApp"
+  command: "forever start /home/ubuntu/Project/Admin-WebApp/server.js"
+  when: AdminWebApp == true
+
+- name: "Start Board-WebApp"
+  command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
+  when: BoardWebApp == true

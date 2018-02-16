@@ -1,89 +1,77 @@
+- name: "Get public IP address for Database"
+  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: DBInstanceIP
+
+- name: "Set fact on localhost"
+  set_fact:
+    launched_DBInstanceIP: "{{ DBInstanceIP.stdout }}"
+
+- name: "Copy fact to other servers"
+  set_fact:
+    launched_DBInstanceIP: "{{ launched_DBInstanceIP }}"
+  delegate_to: "{{ item }}"
+  delegate_facts: True
+  with_items: "{{ groups['all'] }}"
+  when: item != "localhost"
+
+- name: "Add MongoDB depenencey"
+  become: true
+  become_user: root
+  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+
+- name: "MongoDB | Add  repository"
+  become: true
+  become_user: root
+  shell:
+    echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+- name: Update system
+  become: true
+  become_user: root
+  command: apt-get update
+
+- name: "MongoDB Installation"
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install -y mongodb-org
+
+- name: "copy private file from template"
+  become: true
+  become_user: root
+  template: src=mongoFile
+            dest=/etc/systemd/system/mongodb.service
+            mode=0600
+
+- name: "Copy fact to other servers"
+  become: true
+  become_user: root
+  command: systemctl start mongodb
+
+- name: "mongodb enable"
+  become: true
+  become_user: root
+  command: systemctl enable mongodb
 
 
-- name: copy Nginx from template
+- name: "Creates directory"
+  file: path=/home/ubuntu/neoData state=directory
+
+- name: "copy neo database file"
   become: true
   become_user: root
   unarchive: src=neo.tar.gz
-            dest=/home/ubuntu/
+            dest=/home/ubuntu/neoData
+
+- name: "copy neoHome database file"
+  become: true
+  become_user: root
+  unarchive: src=neoHome.tar.gz
+            dest=/home/ubuntu/neoData
+
+- name: "mongo restore neo database"
+  command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neo"
+
+- name: "mongo restore neoHome database"
+  command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neoHome"
 
 
-
-
-#- name: "Get public IP address for Database"
-#  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
-#  register: DBInstanceIP
-#
-#- name: "Set fact on localhost"
-#  set_fact:
-#    launched_DBInstanceIP: "{{ DBInstanceIP.stdout }}"
-#
-#- name: "Copy fact to other servers"
-#  set_fact:
-#    launched_DBInstanceIP: "{{ launched_DBInstanceIP }}"
-#  delegate_to: "{{ item }}"
-#  delegate_facts: True
-#  with_items: "{{ groups['all'] }}"
-#  when: item != "localhost"
-#
-#
-#- name: Add MongoDB depenencey
-#  become: true
-#  become_user: root
-#  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-#
-#- name: MongoDB | Add  repository
-#  become: true
-#  become_user: root
-#  shell:
-#    echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-#
-#- name: Update system
-#  become: true
-#  become_user: root
-#  command: apt-get update
-#
-#- name: MongoDB Installation
-#  become: true
-#  become_user: root
-#  command: apt-get --assume-yes install -y mongodb-org
-#
-#- name: copy private file from template
-#  become: true
-#  become_user: root
-#  template: src=mongoFile
-#            dest=/etc/systemd/system/mongodb.service
-#            mode=0600
-#
-#- name: mongodb start
-#  become: true
-#  become_user: root
-#  command: systemctl start mongodb
-#
-#- name: mongodb enable
-#  become: true
-#  become_user: root
-#  command: systemctl enable mongodb
-#
-#- name: GIT Installation
-#  become: true
-#  become_user: root
-#  apt: name=git state=present
-#
-#- name: Creates directory
-#  file: path=/home/ubuntu/Project state=directory
-#  file: path=/home/ubuntu/Project/EC2Automation state=directory
-#
-#- name: Clone EC2Automation
-#  git: repo=https://github.com/vigneshavm/EC2Automation.git
-#       dest=/home/ubuntu/Project/EC2Automation
-#
-#- name: Creates directory
-#  file: path=/home/ubuntu/neo state=directory
-#
-#- name: "mongo Extract "
-#  command: "tar -xzvf /home/ubuntu/Project/EC2Automation/roles/ec2/DBbackup/neo.tar.gz"
-#
-#- name: "mongo restore data"
-#  command: "mongorestore --port 27017 --db neo /home/ubuntu/neo"
-#
-#
