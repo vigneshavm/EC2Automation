@@ -3,24 +3,24 @@
   instance_type: t2.micro
   keypair: stageNeols
   region: ca-central-1
-  security_group: Testing
+  security_group: preProd
   imageID: ami-eaaf2b8e
 
 
 
 #choose Environment
-  env: development
-#  env: stage
+#  env: development
+  env: stage
 #  env: production
 
 
 
 #choose instance creation type
-  allInOne : true
-#  allInOne : false
+#  allInOne : true
+  allInOne : false
 
-#  allInDiff : true
-  allInDiff : false
+  allInDiff : true
+#  allInDiff : false
 
 #  DBAndNGINX : true
   DBAndNGINX : false
