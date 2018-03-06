@@ -60,7 +60,7 @@
   become: true
   become_user: root
   unarchive: src=neo.tar.gz
-            dest=/home/ubuntu/neo
+            dest=/home/ubuntu/neoData
 
 - name: "copy neoHome database file"
   become: true
