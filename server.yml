@@ -527,6 +527,7 @@
 
   vars_files:
         - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
   vars:
     ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
 
