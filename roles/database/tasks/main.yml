@@ -17,13 +17,13 @@
 - name: "Add MongoDB depenencey"
   become: true
   become_user: root
-  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
 
 - name: "MongoDB | Add  repository"
   become: true
   become_user: root
   shell:
-    echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list
 
 - name: Update system
   become: true
@@ -34,13 +34,6 @@
   become: true
   become_user: root
   command: apt-get --assume-yes install -y mongodb-org
-
-- name: "copy private file from template"
-  become: true
-  become_user: root
-  template: src=mongoFile
-            dest=/etc/systemd/system/mongodb.service
-            mode=0600
 
 - name: "Copy fact to other servers"
   become: true
