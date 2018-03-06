@@ -38,7 +38,7 @@
 - name: "MongoDB Installation"
   become: true
   become_user: root
-  command: apt-get install -y mongodb-org=3.6.0 mongodb-org-server=3.6.0 mongodb-org-shell=3.6.0 mongodb-org-mongos=3.6.0 mongodb-org-tools=3.6.0
+  command: apt-get --assume-yes install -y mongodb-org=3.6.0 mongodb-org-server=3.6.0 mongodb-org-shell=3.6.0 mongodb-org-mongos=3.6.0 mongodb-org-tools=3.6.0
 
 
 - name: "start service"
