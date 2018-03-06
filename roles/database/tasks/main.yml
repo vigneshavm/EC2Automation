@@ -35,16 +35,16 @@
   become_user: root
   command: apt-get --assume-yes install -y mongodb-org
 
-- name: "Copy fact to other servers"
+- name: "MongoDB Installation"
   become: true
   become_user: root
-  command: systemctl start mongodb
+  command: apt-get install -y mongodb-org=3.6.0 mongodb-org-server=3.6.0 mongodb-org-shell=3.6.0 mongodb-org-mongos=3.6.0 mongodb-org-tools=3.6.0
 
-- name: "mongodb enable"
+
+- name: "start service"
   become: true
   become_user: root
-  command: systemctl enable mongodb
-
+  command: service mongod start
 
 - name: "Creates directory"
   file: path=/home/ubuntu/neoData state=directory
