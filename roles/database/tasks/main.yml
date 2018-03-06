@@ -38,6 +38,14 @@
 - name: "copy private file from template"
   become: true
   become_user: root
+  template: src=mongoEnable
+            dest=/etc/mongod.conf
+            mode=0600
+
+
+- name: "copy private file from template"
+  become: true
+  become_user: root
   template: src=mongoFile
             dest=/etc/systemd/system/mongodb.service
             mode=0600
