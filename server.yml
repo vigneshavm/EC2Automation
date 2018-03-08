@@ -501,23 +501,23 @@
       - { role: instanceToReady, when: allInDiff == true }
       - { role: database, when: allInDiff == true }
 
-#-
-#  hosts: webInstance
-#  name: "launched an EC2 Instance - allInDiff"
-#  become: false
-#  become_user: ubuntu
-#  gather_facts: True
-#
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#
-#  roles:
-#      - { role: ec2, when: allInDiff == true }
-#      - { role: startProject, when: allInDiff == true }
-#
+-
+  hosts: webInstance
+  name: "launched an EC2 Instance - allInDiff"
+  become: false
+  become_user: ubuntu
+  gather_facts: True
+
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  vars_files:
+        - conf/group_vars/conf.yml
+
+  roles:
+      - { role: ec2, when: allInDiff == true }
+      - { role: startProject, when: allInDiff == true }
+
 #-
 #  hosts: NGINXInstance
 #  name: "launched an EC2 Instance - allInDiff"
