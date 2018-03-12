@@ -141,65 +141,65 @@
        version=development
   when: (StudentWebApp == true) and (env == 'production')
 
-#
-#- name: Clone Teacher-WebApp development
-#  git: repo=git@github.com:neolearning/Teacher-WebApp.git
-#       dest=/home/ubuntu/Project/Teacher-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (TeacherWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Teacher-WebApp master
-#  git: repo=git@github.com:neolearning/Teacher-WebApp.git
-#       dest=/home/ubuntu/Project/Teacher-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (TeacherWebApp == true) and (env == 'production')
-#
-#
-#- name: Clone Principal-WebApp development
-#  git: repo=git@github.com:neolearning/Principal-WebApp.git
-#       dest=/home/ubuntu/Project/Principal-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (PrincipalWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Principal-WebApp master
-#  git: repo=git@github.com:neolearning/Principal-WebApp.git
-#       dest=/home/ubuntu/Project/Principal-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (PrincipalWebApp == true) and (env == 'production')
-#
-#
-#- name: Clone Admin-WebApp development
-#  git: repo=git@github.com:neolearning/Admin-WebApp.git
-#       dest=/home/ubuntu/Project/Admin-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (AdminWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Admin-WebApp master
-#  git: repo=git@github.com:neolearning/Admin-WebApp.git
-#       dest=/home/ubuntu/Project/Admin-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (AdminWebApp == true) and (env == 'production')
-#
-#
-#- name: Clone Board-WebApp development
-#  git: repo=git@github.com:neolearning/Board-WebApp.git
-#       dest=/home/ubuntu/Project/Board-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=development
-#  when: (BoardWebApp == true) and (env == 'stage' or env == 'development')
-#
-#- name: Clone Board-WebApp master
-#  git: repo=git@github.com:neolearning/Board-WebApp.git
-#       dest=/home/ubuntu/Project/Board-WebApp
-#       key_file=/home/ubuntu/.ssh/id_rsa
-#       version=master
-#  when: (BoardWebApp == true) and (env == 'production')
+
+- name: Clone Teacher-WebApp development
+  git: repo=git@github.com:neolearning/Teacher-WebApp.git
+       dest=/home/ubuntu/Project/Teacher-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (TeacherWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Teacher-WebApp master
+  git: repo=git@github.com:neolearning/Teacher-WebApp.git
+       dest=/home/ubuntu/Project/Teacher-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (TeacherWebApp == true) and (env == 'production')
+
+
+- name: Clone Principal-WebApp development
+  git: repo=git@github.com:neolearning/Principal-WebApp.git
+       dest=/home/ubuntu/Project/Principal-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (PrincipalWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Principal-WebApp master
+  git: repo=git@github.com:neolearning/Principal-WebApp.git
+       dest=/home/ubuntu/Project/Principal-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (PrincipalWebApp == true) and (env == 'production')
+
+
+- name: Clone Admin-WebApp development
+  git: repo=git@github.com:neolearning/Admin-WebApp.git
+       dest=/home/ubuntu/Project/Admin-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (AdminWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Admin-WebApp master
+  git: repo=git@github.com:neolearning/Admin-WebApp.git
+       dest=/home/ubuntu/Project/Admin-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (AdminWebApp == true) and (env == 'production')
+
+
+- name: Clone Board-WebApp development
+  git: repo=git@github.com:neolearning/Board-WebApp.git
+       dest=/home/ubuntu/Project/Board-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (BoardWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Board-WebApp master
+  git: repo=git@github.com:neolearning/Board-WebApp.git
+       dest=/home/ubuntu/Project/Board-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (BoardWebApp == true) and (env == 'production')
 
 - name: "Node: Student-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Student-WebApp"
