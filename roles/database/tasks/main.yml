@@ -14,24 +14,53 @@
   with_items: "{{ groups['all'] }}"
   when: item != "localhost"
 
-- name: Add mongo ppa key
-  sudo: yes
-  apt_key: >
-    keyserver=hkp://keyserver.ubuntu.com:80
-    id=7F0CEB10
-    state=present
+- name: "Add MongoDB depenencey"
+  become: true
+  become_user: root
+  command: apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 
-- name: Add mongo sources list
-  sudo: yes
-  lineinfile: >
-    line="deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse"
-    dest=/etc/apt/sources.list.d/mongodb.list
-    state=present
-    create=yes
 
-- name: Install mongo
-  sudo: yes
-  apt: name=mongodb-org state=latest update_cache=yes
+- name: "MongoDB | Add  repository"
+  become: true
+  become_user: root
+  shell:
+    echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+
+- name: Update system
+  become: true
+  become_user: root
+  command: apt-get update
+
+- name: "MongoDB Installation"
+  become: true
+  become_user: root
+  command: apt-get --assume-yes install -y mongodb-org
+
+#- name: "copy private file from template"
+#  become: true
+#  become_user: root
+#  template: src=mongoEnable
+#            dest=/etc/mongod.conf
+#            mode=0600
+
+
+#- name: "copy private file from template"
+#  become: true
+#  become_user: root
+#  template: src=mongoFile
+#            dest=/etc/systemd/system/mongodb.service
+#            mode=0600
+
+- name: "Copy fact to other servers"
+  become: true
+  become_user: root
+  command: systemctl start mongodb
+
+- name: "mongodb enable"
+  become: true
+  become_user: root
+  command: systemctl enable mongodb
+
 
 - name: "Creates directory"
   file: path=/home/ubuntu/neoData state=directory
@@ -53,5 +82,3 @@
 
 - name: "mongo restore neoHome database"
   command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neoHome"
-
-
