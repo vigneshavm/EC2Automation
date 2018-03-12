@@ -185,47 +185,47 @@
       when: allInDiff == true
 
             # NGINXInstance
-#    -
-#      local_action:
-#        count: "{{ count }}"
-#        group_id: "{{ my_security_group.group_id }}"
-#        instance_type: "{{ instance_type }}"
-#        image: "{{ imageID }}"
-#        wait: true
-#        region: "{{ region }}"
-#        key_name: "{{ keypair }}"
-#        module: ec2
-#      name: "Create a NGINXInstance (allInDiff)"
-#      register: ec2
-#      when: allInDiff == true
-#
-#    - name: "Save host data to NGINXInstance(allInDiff)"
-#      add_host:
-#        hostname: "{{ item.public_ip }}"
-#        groupname: NGINXInstance
-#      with_items: "{{ ec2.instances }}"
-#      when: allInDiff == true
-#
-#    - name: "Wait for SSH for NGINXInstance (allInDiff)"
-#      wait_for:
-#        delay: 1
-#        host: "{{ item.public_ip }}"
-#        port: 22
-#        state: started
-#        timeout: 30
-#      with_items: "{{ ec2.instances }}"
-#      when: allInDiff == true
-#
-#    - name: "Add tag to NGINXInstance (allInDiff)"
-#      ec2_tag:
-#        resource: "{{ item.id }}"
-#        region: "{{ region }}"
-#        state: present
-#      with_items: "{{ ec2.instances }}"
-#      args:
-#        tags:
-#          Name: NGINXInstance
-#      when: allInDiff == true
+    -
+      local_action:
+        count: "{{ count }}"
+        group_id: "{{ my_security_group.group_id }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ imageID }}"
+        wait: true
+        region: "{{ region }}"
+        key_name: "{{ keypair }}"
+        module: ec2
+      name: "Create a NGINXInstance (allInDiff)"
+      register: ec2
+      when: allInDiff == true
+
+    - name: "Save host data to NGINXInstance(allInDiff)"
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: NGINXInstance
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: "Wait for SSH for NGINXInstance (allInDiff)"
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ ec2.instances }}"
+      when: allInDiff == true
+
+    - name: "Add tag to NGINXInstance (allInDiff)"
+      ec2_tag:
+        resource: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+      with_items: "{{ ec2.instances }}"
+      args:
+        tags:
+          Name: NGINXInstance
+      when: allInDiff == true
 
 #      allInDifferent end
 
@@ -532,22 +532,22 @@
       - { role: ec2, when: allInDiff == true }
       - { role: startProject, when: allInDiff == true }
 
-#-
-#  hosts: NGINXInstance
-#  name: "launched an EC2 Instance - allInDiff"
-#  become: false
-#  become_user: ubuntu
-#  gather_facts: True
-#
-#  vars_files:
-#        - conf/group_vars/conf.yml
-#        - environments/{{ env }}/group_vars/route53.yml
-#  vars:
-#    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
-#
-#  roles:
-#      - { role: nginx, when: allInDiff == true }
-#
+-
+  hosts: NGINXInstance
+  name: "launched an EC2 Instance - allInDiff"
+  become: false
+  become_user: ubuntu
+  gather_facts: True
+
+  vars_files:
+        - conf/group_vars/conf.yml
+        - environments/{{ env }}/group_vars/route53.yml
+  vars:
+    ansible_ssh_private_key_file: "/home/ubuntu/stageNeols.pem"
+
+  roles:
+      - { role: nginx, when: allInDiff == true }
+
 
 #connection allInDiff end
 
