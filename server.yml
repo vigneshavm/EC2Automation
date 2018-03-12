@@ -25,11 +25,25 @@
             from_port: 80
             proto: tcp
             to_port: 85
+
           -
             cidr_ip: 0.0.0.0/0
             from_port: 22
             proto: tcp
             to_port: 22
+
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 8800
+            proto: tcp
+            to_port: 8800
+
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 27017
+            proto: tcp
+            to_port: 27017
+
         rules_egress:
           -
             cidr_ip: 0.0.0.0/0
