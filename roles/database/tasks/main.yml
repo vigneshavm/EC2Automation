@@ -36,18 +36,10 @@
   become_user: root
   command: apt-get --assume-yes install -y mongodb-org
 
-- name: "copy private file from template"
-  become: true
-  become_user: root
-  template: src=mongoFile
-            dest=/etc/mongod.conf
-            mode=0600
-
-- name: "Copy fact to other servers"
+- name: "Mongo Service start"
   become: true
   become_user: root
   command: service mongod start
-
 
 
 - name: "Creates directory"
@@ -70,3 +62,14 @@
 
 - name: "mongo restore neoHome database"
   command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neoHome"
+
+- name: "change mongo BindIP"
+  become: true
+  become_user: root
+  template: src=mongoFile
+            dest=/etc/mongod.conf
+
+- name: "Restart mongo server"
+  become: true
+  become_user: root
+  command: service mongod restart
