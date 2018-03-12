@@ -63,13 +63,13 @@
 - name: "mongo restore neoHome database"
   command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neoHome"
 
-- name: "change mongo BindIP"
-  become: true
-  become_user: root
-  template: src=mongoFile
-            dest=/etc/mongod.conf
-
-- name: "Restart mongo server"
-  become: true
-  become_user: root
-  command: service mongod restart
+#- name: "change mongo BindIP"
+#  become: true
+#  become_user: root
+#  template: src=mongoFile
+#            dest=/etc/mongod.conf
+#
+#- name: "Restart mongo server"
+#  become: true
+#  become_user: root
+#  command: service mongod restart
