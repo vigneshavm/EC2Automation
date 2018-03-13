@@ -169,6 +169,39 @@
   when: env == 'production'
 #****************AdminApp End****************
 
+#****************AdminApp start****************
+- name: Start Home-WebApp  - Conf - IP Change - Dev
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Home-WebApp/conf/conf-development.js
+     regexp: '127.0.0.1'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'development'
+
+- name: Start Home-WebApp - Conf - IP Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Home-WebApp/conf/conf-stage.js
+     regexp: '10.0.2.26'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'stage'
+
+- name: Start Home-WebApp - Conf - IP Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Home-WebApp/conf/conf-production.js
+     regexp: '10.0.2.184'
+     replace:  '{{ launched_DBInstanceIP }}'
+  when: env == 'production'
+#****************AdminApp End****************
+
+
 #  ----------------------- DB HOST and URL IP change End -----------------------
 
 
@@ -288,6 +321,28 @@
   when: env == 'production'
 #****************BoardApp End****************
 
+#****************BoardApp start****************
+- name: Start Home-WebApp - Conf - Port Change - Stage
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Home-WebApp/conf/conf-stage.js
+     regexp: '86'
+     replace:  '8805'
+  when: env == 'stage'
+
+- name: Start Home-WebApp - Conf - Port Change -  production
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /home/ubuntu/Project/Home-WebApp/conf/conf-production.js
+     regexp: '86'
+     replace:  '8805'
+  when: env == 'production'
+#****************BoardApp End****************
+
 #  ----------------------- webAppication Port change End -----------------------
 
 
@@ -311,3 +366,7 @@
 - name: "Start Board-WebApp"
   command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
   when: BoardWebApp == true
+
+- name: "Start Home-WebApp"
+  command: "forever start /home/ubuntu/Project/Home-WebApp/server.js"
+  when: HomeWebApp == true

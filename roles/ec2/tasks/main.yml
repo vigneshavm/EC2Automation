@@ -82,6 +82,7 @@
   file: path=/home/ubuntu/Project/Principal-WebApp state=directory
   file: path=/home/ubuntu/Project/Admin-WebApp state=directory
   file: path=/home/ubuntu/Project/Board-WebApp state=directory
+  file: path=/home/ubuntu/Project/Home-WebApp state=directory
 
 
 
@@ -201,6 +202,20 @@
        version=master
   when: (BoardWebApp == true) and (env == 'production')
 
+- name: Clone Home-WebApp development
+  git: repo=git@github.com:neolearning/Home-WebApp.git
+       dest=/home/ubuntu/Project/Home-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=development
+  when: (HomeWebApp == true) and (env == 'stage' or env == 'development')
+
+- name: Clone Home-WebApp master
+  git: repo=git@github.com:neolearning/Home-WebApp.git
+       dest=/home/ubuntu/Project/Home-WebApp
+       key_file=/home/ubuntu/.ssh/id_rsa
+       version=master
+  when: (HomeWebApp == true) and (env == 'production')
+
 - name: "Node: Student-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Student-WebApp"
   ignore_errors: yes
@@ -225,3 +240,8 @@
   npm: path="/home/ubuntu/Project/Board-WebApp"
   ignore_errors: yes
   when: BoardWebApp == true
+
+- name: "Node: Home-WebApp app dependencies | package.json via npm."
+  npm: path="/home/ubuntu/Project/Home-WebApp"
+  ignore_errors: yes
+  when: HomeWebApp == true

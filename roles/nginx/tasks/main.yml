@@ -83,6 +83,15 @@
      regexp: 'exampledevboard.neols.com'
      replace:  '{{ board }}'
 
+- name: "change nginx file - Home Domain name"
+  become: true
+  become_user: root
+  gather_facts: true
+  replace:
+     dest: /etc/nginx/nginx.conf
+     regexp: 'exampledevhome.neols.com'
+     replace:  '{{ home }}'
+
 - name: "Curl AWS to get this instance's public IP address"
   command: curl http://169.254.169.254/latest/meta-data/public-ipv4
   register: ec2_public_ip

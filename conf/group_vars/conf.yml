@@ -50,3 +50,6 @@
   BoardWebApp : true
 # BoardWebApp : false
 
+  HomeWebApp : true
+# HomeWebApp : false
+
