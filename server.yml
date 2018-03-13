@@ -15,16 +15,16 @@
   tasks:
     -
       local_action:
-        description: "Security Group for webserver Servers"
+        description: "Security Group for allInOne Servers"
         module: ec2_group
-        name: "{{ security_group }}"
+        name: "{{ security_group_all }}"
         region: "{{ region }}"
         rules:
           -
             cidr_ip: 0.0.0.0/0
             from_port: 80
             proto: tcp
-            to_port: 85
+            to_port: 80
 
           -
             cidr_ip: 0.0.0.0/0
@@ -34,10 +34,36 @@
 
           -
             cidr_ip: 0.0.0.0/0
+            from_port: 27017
+            proto: tcp
+            to_port: 27017
+            
+          -
+            cidr_ip: 0.0.0.0/0
             from_port: 8800
             proto: tcp
-            to_port: 8800
+            to_port: 8806
 
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: allInOne_security_group
+      when: allInOne == true
+
+    -
+      local_action:
+        description: "Security Group for DB Servers"
+        module: ec2_group
+        name: "{{ security_group_DB }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
           -
             cidr_ip: 0.0.0.0/0
             from_port: 27017
@@ -49,13 +75,160 @@
             cidr_ip: 0.0.0.0/0
             proto: all
       name: "Create a security group"
-      register: my_security_group
+      register: DB_security_group
+      when: (allInDiff == true) or (webAndNGINX == true)
+      
+    -
+      local_action:
+        description: "Security Group for Web Servers"
+        module: ec2_group
+        name: "{{ security_group_web }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 8800
+            proto: tcp
+            to_port: 8806
+
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: WEB_security_group
+      when: (allInDiff == true) or (DBAndNGINX == true)
+      
+    -
+      local_action:
+        description: "Security Group for NGINX Servers"
+        module: ec2_group
+        name: "{{ security_group_nginx }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 80
+            proto: tcp
+            to_port: 80            
+          
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: NGINX_security_group
+      when: (allInDiff == true) or (webAndDB == true)
+      
+    -
+      local_action:
+        description: "Security Group for DB_nginx Servers"
+        module: ec2_group
+        name: "{{ security_group_DB_nginx }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 80
+            proto: tcp
+            to_port: 80            
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 27017
+            proto: tcp
+            to_port: 27017
+          
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: DB_NGINX_security_group
+      when: (allInDiff == true) or (DBAndNGINX == true)      
+      
+    -
+      local_action:
+        description: "Security Group for web_nginx Servers"
+        module: ec2_group
+        name: "{{ security_group_web_nginx }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 80
+            proto: tcp
+            to_port: 80            
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 8800
+            proto: tcp
+            to_port: 8806
+          
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: WEB_NGINX_security_group
+      when: (allInDiff == true) or (webAndNGINX == true)
+        
+    -
+      local_action:
+        description: "Security Group for DB_web Servers"
+        module: ec2_group
+        name: "{{ security_group_DB_web }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 27017
+            proto: tcp
+            to_port: 27017            
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 8800
+            proto: tcp
+            to_port: 8806
+          
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: DB_WEB_security_group
+      when: (allInDiff == true) or (webAndDB == true)
+    
 
 #      allInOne started
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ allInOne_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -102,7 +275,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ WEB_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -145,7 +318,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ DB_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -188,7 +361,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ NGINX_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -237,7 +410,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ WEB_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -275,7 +448,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ DB_NGINX_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -317,7 +490,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ DB_WEB_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -355,7 +528,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ NGINX_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -396,7 +569,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ WEB_NGINX_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
@@ -428,13 +601,13 @@
       with_items: ec2.instances
       args:
         tags:
-          Name: web&&DBInstance
+          Name: web&&NGINXInstance
       when: webAndNGINX == true
 
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ my_security_group.group_id }}"
+        group_id: "{{ DB_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
