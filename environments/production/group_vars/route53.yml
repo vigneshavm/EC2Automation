@@ -1,6 +1,7 @@
 ---
-  student: examplestudents.neols.com
-  teacher: exampleteachers.neols.com
-  principal: exampleprincipal.neols.com
-  admin:  exampleadmin.neols.com
-  board: exampleboard.neols.com
+  student: prestudents.neols.com
+  teacher: preteachers.neols.com
+  principal: preprincipal.neols.com
+  admin:  preadmin.neols.com
+  board: preboard.neols.com
+  home: prehome.neols.com

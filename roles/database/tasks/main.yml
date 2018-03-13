@@ -61,7 +61,7 @@
   command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neo"
 
 - name: "mongo restore neoHome database"
-  command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neoHome"
+  command: "mongorestore --port 27017 --db neoHome /home/ubuntu/neoData/neoHome"
 
 - name: "change mongo BindIP"
   become: true

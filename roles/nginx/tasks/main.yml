@@ -95,51 +95,51 @@
 - name: "Curl AWS to get this instance's public IP address"
   command: curl http://169.254.169.254/latest/meta-data/public-ipv4
   register: ec2_public_ip
-
-- name: "Create DNS records | student"
-  route53:
-    command: create
-    record: "{{ student }}"
-    type: A
-    value: "{{ec2_public_ip.stdout}}"
-    overwrite: yes
-    zone: neols.com
-
-- name: "Create DNS records | teacher"
-  route53:
-    command: create
-    record: "{{ teacher }}"
-    type: A
-    value: "{{ec2_public_ip.stdout}}"
-    overwrite: yes
-    zone: neols.com
-
-- name: "Create DNS records | principal"
-  route53:
-    command: create
-    record: "{{ principal }}"
-    type: A
-    value: "{{ec2_public_ip.stdout}}"
-    overwrite: yes
-    zone: neols.com
-
-- name: "Create DNS records | admin"
-  route53:
-    command: create
-    record: "{{ admin }}"
-    type: A
-    value: "{{ec2_public_ip.stdout}}"
-    overwrite: yes
-    zone: neols.com
-
-- name: "Create DNS records | board"
-  route53:
-    command: create
-    record: "{{ board }}"
-    type: A
-    value: "{{ec2_public_ip.stdout}}"
-    overwrite: yes
-    zone: neols.com
+#
+#- name: "Create DNS records | student"
+#  route53:
+#    command: create
+#    record: "{{ student }}"
+#    type: A
+#    value: "{{ec2_public_ip.stdout}}"
+#    overwrite: yes
+#    zone: neols.com
+#
+#- name: "Create DNS records | teacher"
+#  route53:
+#    command: create
+#    record: "{{ teacher }}"
+#    type: A
+#    value: "{{ec2_public_ip.stdout}}"
+#    overwrite: yes
+#    zone: neols.com
+#
+#- name: "Create DNS records | principal"
+#  route53:
+#    command: create
+#    record: "{{ principal }}"
+#    type: A
+#    value: "{{ec2_public_ip.stdout}}"
+#    overwrite: yes
+#    zone: neols.com
+#
+#- name: "Create DNS records | admin"
+#  route53:
+#    command: create
+#    record: "{{ admin }}"
+#    type: A
+#    value: "{{ec2_public_ip.stdout}}"
+#    overwrite: yes
+#    zone: neols.com
+#
+#- name: "Create DNS records | board"
+#  route53:
+#    command: create
+#    record: "{{ board }}"
+#    type: A
+#    value: "{{ec2_public_ip.stdout}}"
+#    overwrite: yes
+#    zone: neols.com
 
 - name: "restart nginx"
   become: true
