@@ -18,8 +18,8 @@
 
 
 #choose Environment
-#  env: development
-  env: stage
+  env: development
+#  env: stage
 #  env: production
 
 
