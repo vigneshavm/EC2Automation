@@ -52,31 +52,31 @@
       register: allInOne_security_group
       when: allInOne == true
 
-#    -
-#      local_action:
-#        description: "Security Group for DB Servers"
-#        module: ec2_group
-#        name: "{{ security_group_DB }}"
-#        region: "{{ region }}"
-#        rules:
-#          -
-#            cidr_ip: 0.0.0.0/0
-#            from_port: 22
-#            proto: tcp
-#            to_port: 22
-#          -
-#            cidr_ip: 0.0.0.0/0
-#            from_port: 27017
-#            proto: tcp
-#            to_port: 27017
-#
-#        rules_egress:
-#          -
-#            cidr_ip: 0.0.0.0/0
-#            proto: all
-#      name: "Create a security group"
-#      register: DB_security_group
-#      when: (allInDiff == true) or (webAndNGINX == true)
+    -
+      local_action:
+        description: "Security Group for DB Servers"
+        module: ec2_group
+        name: "{{ security_group_DB }}"
+        region: "{{ region }}"
+        rules:
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 22
+            proto: tcp
+            to_port: 22
+          -
+            cidr_ip: 0.0.0.0/0
+            from_port: 27017
+            proto: tcp
+            to_port: 27017
+
+        rules_egress:
+          -
+            cidr_ip: 0.0.0.0/0
+            proto: all
+      name: "Create a security group"
+      register: DB_security_group
+      when: (allInDiff == true) or (webAndNGINX == true)
       
     -
       local_action:
@@ -95,11 +95,6 @@
             from_port: 8800
             proto: tcp
             to_port: 8806
-          -
-            cidr_ip: 0.0.0.0/0
-            from_port: 27017
-            proto: tcp
-            to_port: 27017
 
         rules_egress:
           -
@@ -323,7 +318,7 @@
     -
       local_action:
         count: "{{ count }}"
-        group_id: "{{ WEB_security_group.group_id }}"
+        group_id: "{{ DB_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         image: "{{ imageID }}"
         wait: true
