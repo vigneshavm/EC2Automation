@@ -57,9 +57,9 @@
         count: "{{ count }}"
         group_id: "{{ allInOne_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
-        image: ami-eaaf2b8e
-        wait: true
         region: "{{ region }}"
+        image: "ami-eaaf2b8e"
+        wait: true
         key_name: "{{ keypair }}"
         module: ec2
       name: "Create a Instance (allInOne)"
