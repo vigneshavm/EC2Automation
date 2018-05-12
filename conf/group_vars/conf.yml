@@ -5,14 +5,6 @@
   region: ca-central-1
   security_group_all: preProd
 
-  security_group_DB: preProdDB
-  security_group_nginx: preProdNginx
-  security_group_web: preProdWeb
-
-  security_group_DB_nginx: preProd_DB_nginx
-  security_group_web_nginx: preProd_web_nginx
-  security_group_DB_web: preProd_DB_web
-
   imageID: ami-eaaf2b8e
 
 
@@ -25,11 +17,11 @@
 
 
 #choose instance creation type
-#  allInOne : true
-  allInOne : false
+  allInOne : true
+#  allInOne : false
 
-  allInDiff : true
-#  allInDiff : false
+#  allInDiff : true
+  allInDiff : false
 
 #  DBAndNGINX : true
   DBAndNGINX : false
