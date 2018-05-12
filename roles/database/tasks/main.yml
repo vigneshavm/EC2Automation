@@ -1,4 +1,18 @@
+- name: "Get public IP address for Database"
+  command: curl http://169.254.169.254/latest/meta-data/public-ipv4
+  register: DBInstanceIP
 
+- name: "Set fact on localhost"
+  set_fact:
+    launched_DBInstanceIP: "{{ DBInstanceIP.stdout }}"
+
+- name: "Copy fact to other servers"
+  set_fact:
+    launched_DBInstanceIP: "{{ launched_DBInstanceIP }}"
+  delegate_to: "{{ item }}"
+  delegate_facts: True
+  with_items: "{{ groups['all'] }}"
+  when: item != "localhost"
 
 - name: "Add MongoDB depenencey"
   become: true
@@ -27,6 +41,27 @@
   become_user: root
   command: service mongod start
 
+
+- name: "Creates directory"
+  file: path=/home/ubuntu/neoData state=directory
+
+- name: "copy neo database file"
+  become: true
+  become_user: root
+  unarchive: src=neo.tar.gz
+            dest=/home/ubuntu/neoData
+
+- name: "copy neoHome database file"
+  become: true
+  become_user: root
+  unarchive: src=neoHome.tar.gz
+            dest=/home/ubuntu/neoData
+
+- name: "mongo restore neo database"
+  command: "mongorestore --port 27017 --db neo /home/ubuntu/neoData/neo"
+
+- name: "mongo restore neoHome database"
+  command: "mongorestore --port 27017 --db neoHome /home/ubuntu/neoData/neoHome"
 
 - name: "change mongo BindIP"
   become: true
