@@ -193,7 +193,7 @@
   app_name_1_secgroup:
   app_name_1_IP:
   app_name_1_port: 9000
-  app_name_1_db_port:8080
+  app_name_1_db_port: 8080
   app_name_1_db_server_port:
   app_name_1_instance:
 
