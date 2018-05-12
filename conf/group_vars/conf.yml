@@ -1,57 +1,231 @@
 ---
+
+#Start of System Software required for your Project
+
+
+
   count: 1
   instance_type: t2.micro
   keypair: stageNeols
   region: ca-central-1
   security_group_all: preProd
 
-  imageID: ami-eaaf2b8e
 
 
 
-#choose Environment
-  env: development
-#  env: stage
-#  env: production
+  ansible: Yes                     // Enter your Prefer [Yes,No]
+  ansible_version:                 // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  apache: Yes                      // Enter your Prefer [Yes,No]
+  apache_version:                  // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  git: Yes                         // Enter your Prefer [Yes,No]
+  git_version:                     // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  java: Yes                        // Enter your Prefer [Yes,No]
+  java_version:                    // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  jenkins: Yes                     // Enter your Prefer [Yes,No]
+  jenkins_version:                 // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  mongoDB: Yes                     // Enter your Prefer [Yes,No]
+  mongoDB_version:                 // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  mysql: No                        // Enter your Prefer [Yes,No]
+  mysql_version:                   // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  nginx: Yes                       // Enter your Prefer [Yes,No]
+  nginx_version:                   // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  nodejs: Yes                      // Enter your Prefer [Yes,No]
+  nodejs_version:                  // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  php: No                          // Enter your Prefer [Yes,No]
+  php_version:                     // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  python: No                       // Enter your Preference [Yes,No]
+  python_version:                  // Enter if you prefer any specific version,leave blank if you not sure about version
+
+  redis: Yes                      // Enter your Prefer [Yes,No]
+  redis_version:                  // Enter prefer specific version otherwise we install latestone
+
+#End of System Software
+
+# Start of Source Code Management
+
+  git_id_rsa: "-----BEGIN RSA PRIVATE KEY-----
+                     MIIJKQIBAAKCAgEAsF9X3ahOCcCKVkUhnxdpoI6dQy8qya1VrdIScHv3nbK7Usvy
+                     H4WOx1ClLtCUe5JElAoBYy/q3drlDmCuA/wHdHjHP9KuAlJrLm5uy908rYwYstLU
+                     Pu/s+AEuAEzet3YGtHT33X8kSqRFyt7B+GYxphwDA/L3P7Bwi+Mw98wqw9OZkBtg
+                     b1EXt6Q9aP83prBy3BlkbGUlhgGRdLmwxylXs0LTC4OluNmebrBGBjFVhzqueNLr
+                     n56bfWf7hxyJPvfJIzAKwr8xKSbPzDEe0vffVBwTNXhFG9sn6N0qfqNmwwioI/yY
+                     /ZlNR/RcMO54kZDnOg0n22hsNJ5Cyli1EOjy6VaHKlbpbjBCGKIK71dkA7QWut84
+                     olHTZqYO2k5D/bNh7znebKNAWx3F04EBxAFIFfmsHZu7k04fO9Z9dPCp3yLYq1jd
+                     CgyUm5fzc5dowSBfyVbCv4PMbUCM8jRYkUNAEwylximEg0QgwGLE0DlZGBc8b8xZ
+                     PPhCAe1CdiXmBJpNhopuAsemE4Ugfk+vNzDcmcx+ZaQQApexZIcYUvINApQdrOZN
+                     YA0+ihe7ixJ7GyKHlVRT8iBsTUR8IfiLTw+dm0ENL2gpn8m9kPT1AVFOox9JmQVN
+                     eTNx7lQTlUyh6g0W5Sp750KcSp04+3NpHJ4NsIUAQT2OyhBiI9hsLetLUjsCAwEA
+                     AQKCAgB8WVxbvRP4MDXYiTkhL6KbPrGF8rVaJ8lmmdvCTsTP/Hmx8HSu4L0/rY4o
+                     qYpmbUPIlB1STzBqZrBkKKnHyWOALL9eMi3ZGT7UJ6waM8taGJI5Ugeur/4FBN/n
+                     +kp0UtR7WpR/J+rwbU1/sPpVJcgPc2R03lKQJtfS6MVXkCz+kCuOvJ6LHUN5iGR7
+                     qKUV8wWoRIbXHaENEAH7qAgJAw8AJjchwRmQcG4RYFqedx30D91+9kaF7Y93JV7j
+                     ba0eJhk7o92SXLZOazzKnD89QuHELV8lrbwb3bIPrg8N5irHi0zwwmEjO3iPKKvv
+                     G9MJ3n4IIcpeGQthNculWlGesH7B9P0IIUBsQIuRfX0H05H3uXyFcBFO2R1OLuia
+                     Je9N37nHMZua62XXvU24vLy+M1H5M4AEO1wuGI4oHe1lcvw4RXjVUkL/9Plt9xoq
+                     lsQ9R4+/sxQRtSaPiBzGWd/cEyr8bXCFe59MvvkmrChs+qngmAdnVQ3ljKZpqxk3
+                     9SuhLCM5IvembTB0S3xhgwTa0ngjmH4HvBLIaj1KwLR7qKg72ehlpH00CRBiZMQb
+                     iJOEJBJXq4FOdBE81YZNOB/922EIhNjRYQcVBbdc02JozRdwTfGYyEO5Mp8NMKGF
+                     l959V3QIvanm2QmVo1HuBefSFouZcyVT9n/+qDupLR5NnwhscQKCAQEA3mS+wpR3
+                     5MTeiQWyGbn3nX7lGc5SAKiLEr89beJgZnq9499q9L1DOpx9w1UUwhiPmi6O4TS5
+                     YDYA9GKhbjSikw56qBycQIxYLJbJVWhbE2Dme+CBL3VT60TB57Mc5JXPtZpy+ClN
+                     klLV4H6a9uH9az/+QdvztHj9TULyb7+mr+5zJHiQBT8Z0YoeKlxaco39qdZmmUJg
+                     lpAssXEi1xnBHFlyJaDW+P9K7QPGLdvJ0SjA0oeMazyTvY5YHvkZyN8ftyOMVwQ+
+                     QC9JJo0WSFRP9l1fS61MuctHxpW9dZVlJuq22h0m/f0G6pUb9K8fyr60gDHbezSF
+                     Vn1sy+zFMMBY5wKCAQEAywZHpI0W0qG6GPCkz1VwI9J94s79Kg/37hd7jbMGt7DY
+                     6hkLJnUojsA2BmxHFjrhPRPqIGmcrn6ByfOJf62yinFXAHcbH4pp0pFjqCPQCjKV
+                     DVMsvMlWngxIgeNw36akUSIGQgdQm7thO4c8KwN1NrIbG6yqFf0KbEdvJ4rHfqno
+                     lLn9869QVOXrUCNN54W5uo3YIwuSZZ+OV633pGiFaiLAVoaz4f5FmTOsT+D3rSZu
+                     Idr4At1YT5XCJXfNeYtvD/jT2HcRh4l1FA2WF6LsOPfjukmoYQGA0wUMyZt/zWCP
+                     D+ups8skBhprUEmmfid7O8NEJuwbkhyN9PQviIBtjQKCAQEAvpH4AUc2Yfvtcd9G
+                     mdMJA5X8fhuVm2jSG9NysVm+H7LoS39k6KnSFUSKZDrhGd3wGD/zQbpra617Le/i
+                     w0wpT/ilVK+Hmaxp1nOzvRM6kCWF+/sK2H8i1UVLH+AVTy+tGMJr6ImEJnIDQmdb
+                     JVnMTf49Q3RWpnzTGkTW+Lly/elIE6WYTFahKjS/2q7e9rEEAGhv7L67g+mx0q/P
+                     GiHAoClpriLgc+hX7ThBt4RSsX/Jk96BjlcPhuyWSJxO4xmH1OiKVvqU2W1rsrRN
+                     ttdA2i1y/qdXSxKNw/cGrd7CGhIhdFBs3FLZfWUe2pLCnHrEs+GFYVNFOzMpaqnO
+                     5BK/WwKCAQBzXHsjBkR8pQbwmvSbFyokQLvlP8Zcuzwe3tsG1j4v7F4lDtvmG1ZT
+                     XuaT2by+5fAMW5+CkWBFSn8HOMndcd5siiBslEEmN+kPjCt7Y/YXhUxqiON31lPQ
+                     dJxSqeD+RFtD+rhhlnR4OQ3z3FEVA977mFKM9BylZ+YfRqvjZRkcYQFWWSTy7aAQ
+                     zaBbJeRjdPnnBihVKYMjGXmxWpnHotiESYDO6bWW6Xu0pMb5kJRLn/WeaSTZw9ol
+                     RqxNy/hGYzNVeQcvDeE5CaMsJNgvUBU3/as5tBboIAmKXmk4uZHyKjbATiFcl0Y9
+                     7Y8izOa88kQ03iyAjVLRQEZtdL75qjgVAoIBAQCZEVw/rUTKfrgY/wJPi/MVzWA9
+                     38FubTcqQpBAYZTjlloR6wFm5/2iNZWfUHBQ7MKTHmvbatWulVfED/WvVRUHpeQP
+                     UjOwVhdgBp+p1q41oExWqfBT6R09AUotyoa39XWcgMMxTMWM8EaRzvpezIWO0lqW
+                     xjMbbKKZbwgcdQAHHjJjVRUo96VUg775p6Sgemmae64J1ocFLoa82iUVxfzFXJBH
+                     51k1JzvAFyH7l0QWluKLg2s4tVIB9oO3XEe2YObWpE42dyYYC/1Xcfw5TNgliHuN
+                     dVpyIlm2HAe7vmUe27sEwu88EG3DJ0k+JJaMcq+4T9RRta9RSyCeVfPkk7Bo
+                     -----END RSA PRIVATE KEY-----"
+
+  git_id_rsa_pub: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwX1fdqE4JwIpWRSGfF2mgjp1DLyrJrVWt0hJwe/edsrtSy/IfhY7HUKUu0JR7kkSUCgFjL+rd2uUOYK4D/Ad0eMc/0q4CUmsubm7L3TytjBiy0tQ+7+z4AS4ATN63dga0dPfdfyRKpEXK3sH4ZjGmHAMD8vc/sHCL4zD3zCrD05mQG2BvURe3pD1o/zemsHLcGWRsZSWGAZF0ubDHKVezQtMLg6W42Z5usEYGMVWHOq540uufnpt9Z/uHHIk+98kjMArCvzEpJs/MMR7S999UHBM1eEUb2yfo3Sp+o2bDCKgj/Jj9mU1H9Fww7niRkOc6DSfbaGw0nkLKWLUQ6PLpVocqVuluMEIYogrvV2QDtBa63ziiUdNmpg7aTkP9s2HvOd5so0BbHcXTgQHEAUgV+awdm7uTTh871n108KnfItirWN0KDJSbl/Nzl2jBIF/JVsK/g8xtQIzyNFiRQ0ATDKXGKYSDRCDAYsTQOVkYFzxvzFk8+EIB7UJ2JeYEmk2Gim4Cx6YThSB+T683MNyZzH5lpBACl7FkhxhS8g0ClB2s5k1gDT6KF7uLEnsbIoeVVFPyIGxNRHwh+ItPD52bQQ0vaCmfyb2Q9PUBUU6jH0mZBU15M3HuVBOVTKHqDRblKnvnQpxKnTj7c2kcng2whQBBPY7KEGIj2Gwt60tSOw== avmvignesh0207@gmail.com"
 
 
 
-#choose instance creation type
-  allInOne : true
-#  allInOne : false
+  app_name_1: StudentWebApp			 // Please enter app_name eg: [teachers]
+  app_domain_1: 			 // Specifies the domainname eg:  [stage.teachers.com]
+  repo_url_1:                      // Please enter repository path eg:  [XXX]
+  repo_branch_1:                   // Please enter branch name (Default - master) eg:[ master or development]
 
-#  allInDiff : true
-  allInDiff : false
+  app_name_2: TeacherWebApp			 // Please enter app_name eg: [students]
+  app_domain_2:			 // Specifies the domainname eg:  [stage.students.com]
+  repo_url_2:                      // Please enter repository path eg:  [XXX or YYY]
+  repo_branch_2:                   // Please enter branch name (Default - master) eg:[ master or development]
 
-#  DBAndNGINX : true
-  DBAndNGINX : false
-
-#  webAndDB : true
-  webAndDB : false
-#    DB_web_security_group
-
-#  webAndNGINX : true
-  webAndNGINX : false
+# End of Source Code Management
 
 
 
-#choose project required
+# Start of Database Management
 
-  StudentWebApp : true
-#  StudentWebApp : false
+  db_username:
+  db_password:
+  db_backup_preference:             // Yes or No - eg:[ Yes ]
+  db_backup:                        // Where to store backup github or local path or S3 - eg:[ github ]
+  db_backup_path:		         // Mention Path of Github or Local or S3 - eg:[ https://s3/projectData ]
+  db_backup_time:		 	 // 24:00 or 12:00 - eg:[ 8:00pm or 20:00 ]
+  db_backup_frequency:		 // Days / Week / Month - eg:[ Week ]
+  db_mgmtGUI:			 // Yes or No
 
-  TeacherWebApp : true
-#  TeacherWebApp : false
+  app_name_1_db_name:	      	 // Specifies a database - eg:[ testDB or productionDB]
+  app_name_1_db_create:	 	 // creation of database by shell script file or backup [script or backup] - eg:[ backup ]
+  app_name_1_db_create_path:       // Path for database creation script or database backup to create collections - eg:[ http:/github/filename ]
 
-  PrincipalWebApp : true
-#  PrincipalWebApp : false
+  app_name_2_db_name:	      	 // Specifies a database
+  app_name_2_db_create:	 	 // creation of database by shell script file or backup [script or backup]  - eg:[ script ]
+  app_name_2_db_create_path:       // Path for database creation script or database back up to create collections - eg:[ http:/github/filename ]
 
-  AdminWebApp : true
-#  AdminWebApp : false
+# End of Database Management
 
-  BoardWebApp : true
-# BoardWebApp : false
+# Start of Build Management (need to understand more - not clear)
 
-  HomeWebApp : true
-# HomeWebApp : false
+  buildTool: gradle                // Please enter tool (maven / gradle)
+  buildCommand: NEOLSBuild.java    // Please enter command if applicable
 
+# End of Build Management
+
+# Start of Test Management
+
+# Installation
+  test_systemsoftware :            // Yes or No - eg:[ Yes ]
+  test_appsoftware:		 // Yes or No - eg:[ No ]
+  test_database:			 // Yes or No - eg:[ Yes ]
+
+#Monitoring
+  monitor_CPU:			 // Yes or No - eg:[ Yes ]
+  monitor_memory:			 // Yes or No - eg:[ Yes ]
+  monitor_systemsoftware:		 // Yes or No - eg:[ Yes ]
+  monitor_appsoftware:		 // Yes or No - eg:[ Yes ]
+  auto_recovery:			 // Yes or No - eg:[ Yes ]
+  monitor_reporting:		 // Email or phone number - eg:[ abc@gmail.com]
+
+# end of Test Management
+
+
+# start of Infrastructure Management
+
+## Cloud credentials
+
+  cloud_type: 			// Please public or private cloud to be deployed - eg:[ AWS ]
+  access_key:                  	// Enter AWS access key if you want to create in your account - eg:[ AKIAJUBKMDSALBPN4D2A ]
+  secret_key:                  	// Enter AWS secret key if you want to create in your account - eg:[ 63854V2315XzPDYG1IN32Wd6OVgVrHccXFP92 ]
+  region:              		// Enter region - eg:[ ca-central-1 ]
+  instance_backup_preference      // Yes or No - eg:[ Yes ]
+  instance_backup                 // Where to store backup github or local path or S3 - eg:[ github ]
+  instance_backup_path:		// Mention Path of Github or Local or S3 - eg:[ https://s3/projectData]
+  instance_backup_time:		// 24:00 or 12:00 - eg:[ 8:00pm or 20:00 ]
+  instance_backup_frequency:      // Days / Week / Month - eg:[ Week ]
+
+
+# Application details
+
+  app_name_1_instancetype:        // Type of instance you want - eg:[ t2.micro ]
+  app_name_1_keypair:		// Enter keypair name - eg:[ web ]
+  app_name_1_volume_size: 	// Enter system volume size - explain clearly what mount...additional memory
+  app_name_sslkey_path:           // Enter HTTP ssl file path
+  app_name_1_os: 		        // Selete Operating System you want - eg:[ Ubuntu,Windows,Centos]
+  app_name_1_osversion:           // Selete Operating System version - eg:[ Ubuntu(14,16),Windows(7,10)]
+  app_name_1_secgroup:            // Enter name for security group - eg:[webserver1,default]
+  app_name_1_IP:                  // Enter IP address anyof one Elastic or Private or Port - eg:[Elastic]
+  app_name_1_port: 9000               // one or more ports for listening - eg:[8800,9900,8080]
+  app_name_1_db_port:8080	        // Specifies the port on which the Database client requests - eg:[27017,3306]
+  app_name_1_db_server_port:  	//Specifies the port on which the MongoDB instance listens for client connections- eg:[Each DB have default port - you can change that port for security reasons]
+  app_name_1_instance:            // Common or Independent - eg:[ Common ]
+
+
+  app_name_2_instancetype:         // Type of instance you want - eg:[ t2.micro ]
+  app_name_2_keypair:		 // Enter keypair name - eg:[ web.pem ]
+  app_name_2_username:             // Enter Instance username name  - eg:[webuser or dbuser]
+  app_name_2_volume_size: 	 // Enter system volume size - explain clearly what mount...additional memory
+  app_name_2_sslkey_path:            // Enter Http ssl file path
+  app_name_2_os: 		         // Selete Operating System you want - eg:[ Ubuntu,Windows,Centos]
+  app_name_2_osversion:            // Selete Operating System version - eg:[ Ubuntu(14,16),Centos,Windows(7,10)]
+  app_name_2_secgroup:             // Enter name for security group - eg:[webserver2,default]
+  app_name_2_IP:                   // Enter IP address type (Elastic or Public or Private ) - eg:[Elastic]
+  app_name_2_port:           	 // one or more ports for listening - eg:[8800,9900,8080]
+  app_name_2_db_port:		 // Specifies the port on which the Database client requests - eg:[27017,3306]
+  app_name_2_db_server_port:   	 //Specifies the port on which the MongoDB instance listens for client connections- eg:[Each DB have default port - you can change that port for security reasons]
+  app_name_2_instance: 		 // Common or Independent - eg:[ Independent]
+
+
+  db_instance: 		        // Common or Independent - eg:[ Common ]
+  db_IP:			        // If independent - Enter IP address type (Elastic or Public or Private ) - eg:[ Elastic ]
+
+  lb_instance:		        // Common or Independent instance for nginx or Apache - eg:[ Common ]
+  lb_IP:			        // If independent - Enter IP address type (Elastic or Public or Private ) - eg:[ Public ]
+
+  mgmt_instance:                  // Common or Independent instance for nginx or Apache - eg:[ Common ]
+  mgmt_IP:	                // If independent - Enter IP address type (Elastic or Public or Private ) - eg:[ Elastic ]
+
+  app_name_1_instancename: webTesting
+
+# end of Infrastructure Management
+
+# end of Configuration

@@ -349,24 +349,18 @@
 
 - name: "Start Student-WebApp"
   command: "forever start /home/ubuntu/Project/Student-WebApp/server.js"
-  when: StudentWebApp == true
 
 - name: "Start Teacher-WebApp"
   command: "forever start /home/ubuntu/Project/Teacher-WebApp/server.js"
-  when: TeacherWebApp == true
 
 - name: "Start Principal-WebApp"
   command: "forever start /home/ubuntu/Project/Principal-WebApp/server.js"
-  when: PrincipalWebApp == true
 
 - name: "Start Admin-WebApp"
   command: "forever start /home/ubuntu/Project/Admin-WebApp/server.js"
-  when: AdminWebApp == true
 
 - name: "Start Board-WebApp"
   command: "forever start /home/ubuntu/Project/Board-WebApp/server.js"
-  when: BoardWebApp == true
 
 - name: "Start Home-WebApp"
   command: "forever start /home/ubuntu/Project/Home-WebApp/server.js"
-  when: HomeWebApp == true

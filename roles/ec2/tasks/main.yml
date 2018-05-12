@@ -133,29 +133,13 @@
        dest=/home/ubuntu/Project/Student-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (StudentWebApp == true) and (env == 'stage' or env == 'development')
-
-- name: Clone Student-WebApp master
-  git: repo=git@github.com:neolearning/Student-WebApp.git
-       dest=/home/ubuntu/Project/Student-WebApp
-       key_file=/home/ubuntu/.ssh/id_rsa
-       version=development
-  when: (StudentWebApp == true) and (env == 'production')
-
 
 - name: Clone Teacher-WebApp development
   git: repo=git@github.com:neolearning/Teacher-WebApp.git
        dest=/home/ubuntu/Project/Teacher-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (TeacherWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Teacher-WebApp master
-  git: repo=git@github.com:neolearning/Teacher-WebApp.git
-       dest=/home/ubuntu/Project/Teacher-WebApp
-       key_file=/home/ubuntu/.ssh/id_rsa
-       version=master
-  when: (TeacherWebApp == true) and (env == 'production')
 
 
 - name: Clone Principal-WebApp development
@@ -163,14 +147,6 @@
        dest=/home/ubuntu/Project/Principal-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (PrincipalWebApp == true) and (env == 'stage' or env == 'development')
-
-- name: Clone Principal-WebApp master
-  git: repo=git@github.com:neolearning/Principal-WebApp.git
-       dest=/home/ubuntu/Project/Principal-WebApp
-       key_file=/home/ubuntu/.ssh/id_rsa
-       version=master
-  when: (PrincipalWebApp == true) and (env == 'production')
 
 
 - name: Clone Admin-WebApp development
@@ -178,14 +154,7 @@
        dest=/home/ubuntu/Project/Admin-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (AdminWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Admin-WebApp master
-  git: repo=git@github.com:neolearning/Admin-WebApp.git
-       dest=/home/ubuntu/Project/Admin-WebApp
-       key_file=/home/ubuntu/.ssh/id_rsa
-       version=master
-  when: (AdminWebApp == true) and (env == 'production')
 
 
 - name: Clone Board-WebApp development
@@ -193,55 +162,35 @@
        dest=/home/ubuntu/Project/Board-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (BoardWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Board-WebApp master
-  git: repo=git@github.com:neolearning/Board-WebApp.git
-       dest=/home/ubuntu/Project/Board-WebApp
-       key_file=/home/ubuntu/.ssh/id_rsa
-       version=master
-  when: (BoardWebApp == true) and (env == 'production')
 
 - name: Clone Home-WebApp development
   git: repo=git@github.com:neolearning/Home-WebApp.git
        dest=/home/ubuntu/Project/Home-WebApp
        key_file=/home/ubuntu/.ssh/id_rsa
        version=development
-  when: (HomeWebApp == true) and (env == 'stage' or env == 'development')
 
-- name: Clone Home-WebApp master
-  git: repo=git@github.com:neolearning/Home-WebApp.git
-       dest=/home/ubuntu/Project/Home-WebApp
-       key_file=/home/ubuntu/.ssh/id_rsa
-       version=master
-  when: (HomeWebApp == true) and (env == 'production')
 
 - name: "Node: Student-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Student-WebApp"
   ignore_errors: yes
-  when: StudentWebApp == true
 
 - name: "Node: Teacher-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Teacher-WebApp"
   ignore_errors: yes
-  when: TeacherWebApp == true
 
 - name: "Node: Principal-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Principal-WebApp"
   ignore_errors: yes
-  when: PrincipalWebApp == true
 
 - name: "Node: Admin-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Admin-WebApp"
   ignore_errors: yes
-  when: AdminWebApp == true
 
 - name: "Node: Board-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Board-WebApp"
   ignore_errors: yes
-  when: BoardWebApp == true
 
 - name: "Node: Home-WebApp app dependencies | package.json via npm."
   npm: path="/home/ubuntu/Project/Home-WebApp"
   ignore_errors: yes
-  when: HomeWebApp == true
