@@ -109,15 +109,15 @@
 
 
 
-  app_name_1: StudentWebApp			 // Please enter app_name eg: [teachers]
-  app_domain_1: 			 // Specifies the domainname eg:  [stage.teachers.com]
-  repo_url_1:                      // Please enter repository path eg:  [XXX]
-  repo_branch_1:                   // Please enter branch name (Default - master) eg:[ master or development]
+  app_name_1: StudentWebApp
+  app_domain_1:
+  repo_url_1:
+  repo_branch_1:
 
-  app_name_2: TeacherWebApp			 // Please enter app_name eg: [students]
-  app_domain_2:			 // Specifies the domainname eg:  [stage.students.com]
-  repo_url_2:                      // Please enter repository path eg:  [XXX or YYY]
-  repo_branch_2:                   // Please enter branch name (Default - master) eg:[ master or development]
+  app_name_2: TeacherWebApp
+  app_domain_2:
+  repo_url_2:
+  repo_branch_2:
 
 # End of Source Code Management
 
@@ -127,44 +127,43 @@
 
   db_username:
   db_password:
-  db_backup_preference:             // Yes or No - eg:[ Yes ]
-  db_backup:                        // Where to store backup github or local path or S3 - eg:[ github ]
-  db_backup_path:		         // Mention Path of Github or Local or S3 - eg:[ https://s3/projectData ]
-  db_backup_time:		 	 // 24:00 or 12:00 - eg:[ 8:00pm or 20:00 ]
-  db_backup_frequency:		 // Days / Week / Month - eg:[ Week ]
-  db_mgmtGUI:			 // Yes or No
+  db_backup_preference:
+  db_backup:
+  db_backup_path:
+  db_backup_time:
+  db_backup_frequency:
+  db_mgmtGUI:
 
-  app_name_1_db_name:	      	 // Specifies a database - eg:[ testDB or productionDB]
-  app_name_1_db_create:	 	 // creation of database by shell script file or backup [script or backup] - eg:[ backup ]
-  app_name_1_db_create_path:       // Path for database creation script or database backup to create collections - eg:[ http:/github/filename ]
-
-  app_name_2_db_name:	      	 // Specifies a database
-  app_name_2_db_create:	 	 // creation of database by shell script file or backup [script or backup]  - eg:[ script ]
-  app_name_2_db_create_path:       // Path for database creation script or database back up to create collections - eg:[ http:/github/filename ]
+  app_name_1_db_name:
+  app_name_1_db_create:
+  app_name_1_db_create_path:
+  app_name_2_db_name:
+  app_name_2_db_create:
+  app_name_2_db_create_path:
 
 # End of Database Management
 
 # Start of Build Management (need to understand more - not clear)
 
-  buildTool: gradle                // Please enter tool (maven / gradle)
-  buildCommand: NEOLSBuild.java    // Please enter command if applicable
+  buildTool: gradle
+  buildCommand: NEOLSBuild.java
 
 # End of Build Management
 
 # Start of Test Management
 
 # Installation
-  test_systemsoftware :            // Yes or No - eg:[ Yes ]
-  test_appsoftware:		 // Yes or No - eg:[ No ]
-  test_database:			 // Yes or No - eg:[ Yes ]
+  test_systemsoftware :
+  test_appsoftware:
+  test_database:
 
 #Monitoring
-  monitor_CPU:			 // Yes or No - eg:[ Yes ]
-  monitor_memory:			 // Yes or No - eg:[ Yes ]
-  monitor_systemsoftware:		 // Yes or No - eg:[ Yes ]
-  monitor_appsoftware:		 // Yes or No - eg:[ Yes ]
-  auto_recovery:			 // Yes or No - eg:[ Yes ]
-  monitor_reporting:		 // Email or phone number - eg:[ abc@gmail.com]
+  monitor_CPU:
+  monitor_memory:
+  monitor_systemsoftware:
+  monitor_appsoftware:
+  auto_recovery:
+  monitor_reporting:
 
 # end of Test Management
 
@@ -173,56 +172,55 @@
 
 ## Cloud credentials
 
-  cloud_type: 			// Please public or private cloud to be deployed - eg:[ AWS ]
-  access_key:                  	// Enter AWS access key if you want to create in your account - eg:[ AKIAJUBKMDSALBPN4D2A ]
-  secret_key:                  	// Enter AWS secret key if you want to create in your account - eg:[ 63854V2315XzPDYG1IN32Wd6OVgVrHccXFP92 ]
-  region:              		// Enter region - eg:[ ca-central-1 ]
-  instance_backup_preference      // Yes or No - eg:[ Yes ]
-  instance_backup                 // Where to store backup github or local path or S3 - eg:[ github ]
-  instance_backup_path:		// Mention Path of Github or Local or S3 - eg:[ https://s3/projectData]
-  instance_backup_time:		// 24:00 or 12:00 - eg:[ 8:00pm or 20:00 ]
-  instance_backup_frequency:      // Days / Week / Month - eg:[ Week ]
-
+  cloud_type:
+  access_key:
+  secret_key:
+  region:
+  instance_backup_preference:
+  instance_backup:
+  instance_backup_path:
+  instance_backup_time:
+  instance_backup_frequency:
 
 # Application details
 
-  app_name_1_instancetype:        // Type of instance you want - eg:[ t2.micro ]
-  app_name_1_keypair:		// Enter keypair name - eg:[ web ]
-  app_name_1_volume_size: 	// Enter system volume size - explain clearly what mount...additional memory
-  app_name_sslkey_path:           // Enter HTTP ssl file path
-  app_name_1_os: 		        // Selete Operating System you want - eg:[ Ubuntu,Windows,Centos]
-  app_name_1_osversion:           // Selete Operating System version - eg:[ Ubuntu(14,16),Windows(7,10)]
-  app_name_1_secgroup:            // Enter name for security group - eg:[webserver1,default]
-  app_name_1_IP:                  // Enter IP address anyof one Elastic or Private or Port - eg:[Elastic]
-  app_name_1_port: 9000               // one or more ports for listening - eg:[8800,9900,8080]
-  app_name_1_db_port:8080	        // Specifies the port on which the Database client requests - eg:[27017,3306]
-  app_name_1_db_server_port:  	//Specifies the port on which the MongoDB instance listens for client connections- eg:[Each DB have default port - you can change that port for security reasons]
-  app_name_1_instance:            // Common or Independent - eg:[ Common ]
+  app_name_1_instancetype:
+  app_name_1_keypair:
+  app_name_1_volume_size:
+  app_name_sslkey_path:
+  app_name_1_os:
+  app_name_1_osversion:
+  app_name_1_secgroup:
+  app_name_1_IP:
+  app_name_1_port: 9000
+  app_name_1_db_port:8080
+  app_name_1_db_server_port:
+  app_name_1_instance:
 
 
-  app_name_2_instancetype:         // Type of instance you want - eg:[ t2.micro ]
-  app_name_2_keypair:		 // Enter keypair name - eg:[ web.pem ]
-  app_name_2_username:             // Enter Instance username name  - eg:[webuser or dbuser]
-  app_name_2_volume_size: 	 // Enter system volume size - explain clearly what mount...additional memory
-  app_name_2_sslkey_path:            // Enter Http ssl file path
-  app_name_2_os: 		         // Selete Operating System you want - eg:[ Ubuntu,Windows,Centos]
-  app_name_2_osversion:            // Selete Operating System version - eg:[ Ubuntu(14,16),Centos,Windows(7,10)]
-  app_name_2_secgroup:             // Enter name for security group - eg:[webserver2,default]
-  app_name_2_IP:                   // Enter IP address type (Elastic or Public or Private ) - eg:[Elastic]
-  app_name_2_port:           	 // one or more ports for listening - eg:[8800,9900,8080]
-  app_name_2_db_port:		 // Specifies the port on which the Database client requests - eg:[27017,3306]
-  app_name_2_db_server_port:   	 //Specifies the port on which the MongoDB instance listens for client connections- eg:[Each DB have default port - you can change that port for security reasons]
-  app_name_2_instance: 		 // Common or Independent - eg:[ Independent]
+  app_name_2_instancetype:
+  app_name_2_keypair:
+  app_name_2_username:
+  app_name_2_volume_size:
+  app_name_2_sslkey_path:
+  app_name_2_os:
+  app_name_2_osversion:
+  app_name_2_secgroup:
+  app_name_2_IP:
+  app_name_2_port:
+  app_name_2_db_port:
+  app_name_2_db_server_port:
+  app_name_2_instance:
 
 
-  db_instance: 		        // Common or Independent - eg:[ Common ]
-  db_IP:			        // If independent - Enter IP address type (Elastic or Public or Private ) - eg:[ Elastic ]
+  db_instance:
+  db_IP:
 
-  lb_instance:		        // Common or Independent instance for nginx or Apache - eg:[ Common ]
-  lb_IP:			        // If independent - Enter IP address type (Elastic or Public or Private ) - eg:[ Public ]
+  lb_instance:
+  lb_IP:
 
-  mgmt_instance:                  // Common or Independent instance for nginx or Apache - eg:[ Common ]
-  mgmt_IP:	                // If independent - Enter IP address type (Elastic or Public or Private ) - eg:[ Elastic ]
+  mgmt_instance:
+  mgmt_IP:
 
   app_name_1_instancename: webTesting
 
