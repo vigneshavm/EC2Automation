@@ -5,6 +5,7 @@
 
 
   count: 1
+  image: ami-eaaf2b8e
   instance_type: t2.micro
   keypair: stageNeols
   region: ca-central-1

@@ -58,7 +58,7 @@
         group_id: "{{ allInOne_security_group.group_id }}"
         instance_type: "{{ instance_type }}"
         region: "{{ region }}"
-        image: "ami-eaaf2b8e"
+        image: "{{ image }}"
         wait: true
         key_name: "{{ keypair }}"
         module: ec2

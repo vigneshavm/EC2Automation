@@ -37,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.yml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="server.yml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-39.925926" vertical-offset="662" max-vertical-offset="1875">
-              <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.20977597" vertical-offset="797" max-vertical-offset="1875">
+              <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -77,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="conf.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="conf.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/conf/group_vars/conf.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.52871287" vertical-offset="2658" max-vertical-offset="3525">
-              <caret line="195" column="22" selection-start-line="195" selection-start-column="22" selection-end-line="195" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2658" max-vertical-offset="3525">
+              <caret line="202" column="22" selection-start-line="202" selection-start-column="22" selection-end-line="202" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -183,9 +183,9 @@
         <option value="$PROJECT_DIR$/roles/ec2/templates/authorized_keys" />
         <option value="$PROJECT_DIR$/roles/database/tasks/main.yml" />
         <option value="$PROJECT_DIR$/roles/startProject/tasks/main.yml" />
-        <option value="$PROJECT_DIR$/server.yml" />
         <option value="$PROJECT_DIR$/roles/ec2/tasks/main.yml" />
         <option value="$PROJECT_DIR$/conf/group_vars/conf.yml" />
+        <option value="$PROJECT_DIR$/server.yml" />
       </list>
     </option>
   </component>
@@ -1814,18 +1814,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.yml">
+    <entry file="file://$PROJECT_DIR$/conf/group_vars/conf.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-39.925926" vertical-offset="662" max-vertical-offset="1875">
-          <caret line="116" column="21" selection-start-line="116" selection-start-column="21" selection-end-line="116" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2658" max-vertical-offset="3525">
+          <caret line="202" column="22" selection-start-line="202" selection-start-column="22" selection-end-line="202" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf/group_vars/conf.yml">
+    <entry file="file://$PROJECT_DIR$/server.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52871287" vertical-offset="2658" max-vertical-offset="3525">
-          <caret line="195" column="22" selection-start-line="195" selection-start-column="22" selection-end-line="195" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.20977597" vertical-offset="797" max-vertical-offset="1875">
+          <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
           <folding />
         </state>
       </provider>
